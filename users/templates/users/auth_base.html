@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    {% load static %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% if title%}
+        <title>{{title}}</title>
+    {% else %}
+        <title>Мой мир - мои возможности</title>
+    {% endif%}
+    <meta property="og:title" content="" />
+    <meta property="og:description" content="" />
+    <meta name="og:locale" content="ru_RU">
+    <meta property="og:image" content="{% static 'web/img/meta-logo.png' %}" />
+
+    <link rel="canonical" href="" />
+    <link rel="shortcut icon" href="{% static 'web/img/favicon.ico' %}" type="image/x-icon">
+
+    <link rel="stylesheet" type="text/css" href="{% static 'web/css/main.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'web/css/include.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'web/css/mobile.css' %}">
+
+    <link rel="stylesheet" type="text/css" href="{% static 'web/fonts/roboto.css' %}">
+</head>
+<body>
+    
+        <div class="auth_base">
+            <div class="auth_base_card">
+                <a href="/" class="auth_base_back">
+                    <img src="{% static 'web/img/icons/x.svg' %}">
+                </a>
+                <h1>
+                    <b>МОЙ МИР</b><br>
+                    МОИ ВОЗМОЖНОСТИ
+                </h1>
+                {% block content %}{% endblock %}
+            </div>
+
+        </div>
+        
+        
+    
+
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    <script>
+    /*Ставим пользователь изначально*/
+    $("#id_account_type_0").closest("div").find("label").addClass("account_type__selected")
+    $("#id_account_type_0").closest("form").find(".auth_form__employer").addClass("disabled")
+
+    /*Пользователь*/
+    $("#id_account_type_0").click(function() {
+        $(this).closest("#id_account_type").find("label").removeClass("account_type__selected")
+        $(this).closest("div").find("label").addClass("account_type__selected")
+
+        $(this).closest("form").find(".disabled").removeClass("disabled")
+        $(this).closest("form").find(".auth_form__employer").addClass("disabled")
+    });
+    /*Ребенок*/
+    $("#id_account_type_1").click(function() {
+        $(this).closest("#id_account_type").find("label").removeClass("account_type__selected")
+        $(this).closest("div").find("label").addClass("account_type__selected")
+
+        $(this).closest("form").find(".auth_form__user").addClass("disabled")
+        $(this).closest("form").find(".auth_form__employer").addClass("disabled")
+    });
+    /*Работодатель*/
+    $("#id_account_type_2").click(function() {
+        $(this).closest("#id_account_type").find("label").removeClass("account_type__selected")
+        $(this).closest("div").find("label").addClass("account_type__selected")
+
+        $(this).closest("form").find(".disabled").removeClass("disabled")
+        $(this).closest("form").find(".auth_form__user").addClass("disabled")
+    });
+        
+    </script>
+
+</body>
+</html>

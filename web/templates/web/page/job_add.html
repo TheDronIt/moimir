@@ -1,0 +1,13 @@
+{% extends 'web/base.html' %}
+{% load static %}
+{% block content %}
+	<section class="service_add">
+		<form method="POST" class="service_add_form">
+            {% csrf_token %}
+
+			{{form}}
+
+			<button type="submit" class="button">Опубликовать</button>
+		</form>
+	</section>
+{% endblock content %}

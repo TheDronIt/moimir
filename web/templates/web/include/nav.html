@@ -1,0 +1,73 @@
+{% load static %}
+<nav>
+	<div class="nav">
+		<div class="nav_top">
+			<div class="nav_top_logo">
+				<a href="/">
+					<b>Мой мир</b><br>
+					Мои возможности
+				</a>
+			</div>
+			<div class="nav_top_link">
+				<a href="/contacts" class="link">Контакты</a>
+				{% if user.is_authenticated %}
+					{% if user.profile.account_type == "Пользователь" %}
+						<a href="{% url 'profile' %}" class="nav_top_link_profile">
+							{{user.profile.name}} {{user.profile.surname}}
+							<div class="nav_top_link_profile_image">
+								<img src="{{user.profile.image.url}}">
+							</div>
+						</a>
+					{% elif user.profile.account_type == "Работодатель" %}
+						<a href="{% url 'profile' %}" class="nav_top_link_profile">
+							{{user.profile.employer}}
+							<div class="nav_top_link_profile_image">
+								<img src="{{user.profile.image.url}}">
+							</div>
+						</a>
+					{% else %}
+					<a href="{% url 'profile' %}" class="nav_top_link_profile">
+						{{user.username}}
+						<div class="nav_top_link_profile_image">
+							<img src="{{user.profile.image.url}}">
+						</div>
+					</a>
+					{% endif %}
+				{% else %}
+					<a href="{% url 'register' %}" class="button">Регистрация</a>
+					<a href="{% url 'login' %}" class="button">Войти</a>
+				{% endif %}
+			</div>
+		</div>
+		<div class="nav_menu">
+			<a href="/job" class="nav_menu_button">
+				<img src="{% static 'web/img/icons/work_found.svg' %}" class="nav_menu_button_icon">
+				<span class="nav_menu_button_name">Поиск работы</span>
+			</a>
+			<a href="#" class="nav_menu_button">
+				<img src="{% static 'web/img/icons/education.svg' %}" class="nav_menu_button_icon">
+				<span class="nav_menu_button_name">Специалисты</span>
+			</a>
+			<a href="#" class="nav_menu_button">
+				<img src="{% static 'web/img/icons/volunteer.svg' %}" class="nav_menu_button_icon">
+				<span class="nav_menu_button_name">Волонтерство</span>
+			</a>
+			<a href="#" class="nav_menu_button">
+				<img src="{% static 'web/img/icons/need_help.svg' %}" class="nav_menu_button_icon">
+				<span class="nav_menu_button_name">Нуждаются в помощи</span>
+			</a>
+			<a href="#" class="nav_menu_button">
+				<img src="{% static 'web/img/icons/event.svg' %}" class="nav_menu_button_icon">
+				<span class="nav_menu_button_name">Мероприятия</span>
+			</a>
+			<a href="#" class="nav_menu_button">
+				<img src="{% static 'web/img/icons/sections.svg' %}" class="nav_menu_button_icon">
+				<span class="nav_menu_button_name">Секции</span>
+			</a>
+			<a href="#" class="nav_menu_button">
+				<img src="{% static 'web/img/icons/additionally.svg' %}" class="nav_menu_button_icon">
+				<span class="nav_menu_button_name">Полезная информация</span>
+			</a>
+		</div>
+	</div>
+</nav>

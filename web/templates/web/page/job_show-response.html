@@ -1,0 +1,43 @@
+{% extends 'web/base.html' %}
+{% load static %}
+{% block content %}
+
+	<div class="job_responses_title">
+		<h1>{{job.title}}</h1>
+		<span>Отклики на вакансию</span>
+		<input type="button" onclick="history.back();" value="Назад"/>
+	</div>
+	
+	<section class="job_responses_block">
+
+		{% if responses|length == 0  %}
+			К сожалению еще никто не успел откликнуться на ваку вакансию
+		{% endif %}
+
+		{% for responded in responses %}
+			<div class="job_responses_card">
+				<div class="job_responses_card_image">
+					<img src="{{responded.user.profile.image.url}}" alt=" ">
+				</div>
+				<a class="job_responses_card_name" href="/user/{{responded.user.username}}">
+					<span class="job_responses_card_name_username">@{{responded.user.username}}</span>
+					<span class="job_responses_card_name_fio">
+						<h2>{{responded.user.profile.surname}}<br>{{responded.user.profile.name}}</h2>
+						{{responded.user.profile.age}} лет
+					</span>
+				</a>
+				<div class="job_responses_card_bio">
+					{{responded.user.profile.bio}}
+				</div>
+				<div class="job_responses_card_info">
+
+					<span>{{responded.user.email}}</span>
+					<span class="job_responses_card_info_date">{{responded.date}}</span>
+					
+				</div>
+			</div>
+		{% endfor %}
+
+	</section>
+
+{% endblock %}

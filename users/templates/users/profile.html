@@ -1,0 +1,40 @@
+{% extends "web/base.html" %}
+{% load static %}
+{% block content %}
+<div class="profile_block">
+	<div class="my_profile_block">
+		<div class="my_profile_about">
+			<div class="my_profile_about_image">
+				<img src="{{ user.profile.image.url }}" alt=" ">
+			</div>
+			<div class="my_profile_about_bio">
+				{{ user.profile.bio }}
+			</div>
+			<div class="my_profile_logout">
+				<a href="{% url 'logout' %}" class="button">Выйти</a>
+			</div>
+		</div>
+		<div class="my_profile_info">
+			<div class="my_profile_info_name">
+				{% if user.profile.account_type == "Пользователь" %}
+					<h2>{{ user.profile.name }} {{ user.profile.surname }}, {{ user.profile.age }} лет</h2>
+				{% elif user.profile.account_type == "Работодатель" %}
+					<h2>{{user.profile.employer}}</h2>
+				{% endif %}
+				@{{ user.username }}
+			</div>
+			<div class="my_profile_info_account-type">
+				Тип аккаунта: {{ user.profile.account_type }}
+			</div>
+			<a href="{% url 'profile_edit' %}" class="my_profile_edit">
+				<img src="{% static 'web/img/icons/settings.svg' %}">
+			</a>
+			
+			{% for Job in Jobs %}
+				{% include 'web/include/job_card.html' %}
+			{% endfor %}
+
+		</div>
+	</div>
+</div>
+{% endblock %}

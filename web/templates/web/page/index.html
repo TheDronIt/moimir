@@ -1,0 +1,169 @@
+{% extends 'web/base.html' %}
+{% load static %}
+{% block title %}Мой мир - мои возможности{% endblock %} 
+{% block content %}
+	<section class="banner">
+		<a href="{% url 'register' %}">
+			<img src="{% static 'web/img/banner.svg' %}">
+		</a>
+	</section>
+
+
+	<section>
+		<h2>Наши возможности</h2>
+		<div class="opportunities">
+			<div class="opportunities_card__vertical_first" style="background: linear-gradient(180deg, #EBD7FF 0%, #C183FF 100%);">
+				<div class="opportunities_card_text">
+					<b>Для специалистов</b>
+					<span>
+						Рассказать о своей специализации, о своем опыте и найти себе<br><br>
+						новых учеников \ коллег<br><br>
+						Получить рекомендации о процессе взаимодействия с людьми с ОВЗ
+					</span>
+				</div>
+				<img src="{% static 'web/img/win_medal.svg' %}">
+			</div>
+			<div class="opportunities_card__single" style="background: linear-gradient(313.11deg, #88E2B1 4.92%, #23C46D 65.65%);">
+				<div class="opportunities_card_text">
+					<b>Для лиц с ОВЗ</b>
+					<span>
+						Предоставить на рынке труда свои услуги<br><br>
+						Получить необходимую волонтерскую помощь<br><br>
+						Быть социально активным
+					</span>
+				</div>
+				<img src="{% static 'web/img/disabled_person.svg' %}">
+			</div>
+			<div class="opportunities_card__horizontal_first" style="background: linear-gradient(180deg, #FF416F 0%, #FFCCD9 100%);">
+				<div class="opportunities_card_text">
+					<b>Для родителей</b>
+					<span>
+						Обратиться за помощью к волонтерам, квалифицированным специалистам, опытным преподавателям<br><br>
+						Узнать о новых интересных проектах<br><br>
+						Расширить направления социализации своего ребенка
+					</span>
+				</div>
+				<img src="{% static 'web/img/mother.svg' %}">
+			</div>
+			<div class="opportunities_card__horizontal_second" style="background: linear-gradient(190.68deg, #FF9121 18.13%, #FFC68C 94.49%);">
+				<div class="opportunities_card_text">
+					<b>Для волонтеров</b>
+					<span>
+						Поиск активных и заинтересованных единомышленников<br><br>
+						Получение нового опыта, участие в новых проектах, расширение круга волонтерской деятельности<br><br>
+						Возможность поделиться частичкой своего тепла
+					</span>
+				</div>
+				<img src="{% static 'web/img/fingers_heart.svg' %}">
+			</div>
+			<div class="opportunities_card__single" style="background: linear-gradient(358.98deg, #A5B9FF -5.31%, #466EFC 105.6%);">
+				<div class="opportunities_card_text">
+					<b>Для детей</b>
+					<span>
+						Найти интересные занятия и наставников<br><br>
+						Найти единомышленников и друзей по интересам
+					</span>
+				</div>
+				<img src="{% static 'web/img/palette.svg' %}">
+			</div>
+			<div class="opportunities_card__vertical_second" style="background: linear-gradient(180deg, #07B595 0%, #50EACE 100%);">
+				<div class="opportunities_card_text">
+					<b>Для работодателей</b>
+					<span>
+						Подобрать персонал необходимой квалификации, с возможностью работать удаленно<br><br>
+						При соблюдении правил оформления на работу людей с инвалидностью - получение льгот от государства по налогу на прибыль
+					</span>
+				</div>
+				<img src="{% static 'web/img/blank.svg' %}">
+			</div>
+		</div>
+	</section>
+
+
+	<section>
+		<h2>Наши сервисы</h2>
+		<div class="index_services">
+			<a class="index_services_card" href="#">
+				<img src="{% static 'web/img/icons/work_found.svg' %}">
+				<div class="index_services_card_text">
+					<b>Поиск работы</b>
+					<span>Сервис для поиска работы людям с ОВЗ</span>
+				</div>
+				<img src="{% static 'web/img/icons/right_arrow.svg' %}" class="services_card_right-arrow">
+			</a>
+			<a class="index_services_card" href="#">
+				<img src="{% static 'web/img/icons/need_help.svg' %}">
+				<div class="index_services_card_text">
+					<b>Нуждаются в помощи</b>
+					<span>Нужна помощь в чем-либо - оставьте здесь свое объявление и помощь обязательно придёт!</span>
+				</div>
+				<img src="{% static 'web/img/icons/right_arrow.svg' %}" class="services_card_right-arrow">
+			</a>
+			<a class="index_services_card" href="#">
+				<img src="{% static 'web/img/icons/education.svg' %}">
+				<div class="index_services_card_text">
+					<b>Поиск специалистов</b>
+					<span>Возможность найти специалиста в любой сфере деятельностей, готового помочь в достижении Вашей цели</span>
+				</div>
+				<img src="{% static 'web/img/icons/right_arrow.svg' %}" class="services_card_right-arrow">
+			</a>
+			<a class="index_services_card" href="#">
+				<img src="{% static 'web/img/icons/event.svg' %}">
+				<div class="index_services_card_text">
+					<b>Мероприятия</b>
+					<span>Здесь можно найти актуальные мероприятий или рассказать о своих</span>
+				</div>
+				<img src="{% static 'web/img/icons/right_arrow.svg' %}" class="services_card_right-arrow">
+			</a>
+			<a class="index_services_card" href="#">
+				<img src="{% static 'web/img/icons/volunteer.svg' %}">
+				<div class="index_services_card_text">
+					<b>Волонтерство</b>
+					<span>Для тех, кто готов помогать безвозмездно</span>
+				</div>
+				<img src="{% static 'web/img/icons/right_arrow.svg' %}" class="services_card_right-arrow">
+			</a>
+			<a class="index_services_card" href="#">
+				<img src="{% static 'web/img/icons/sections.svg' %}">
+				<div class="index_services_card_text">
+					<b>Секции</b>
+					<span>Секции, кружками, курсы, где каждый сможет найти для себя занятие по интересам, независимо от возраста </span>
+				</div>
+				<img src="{% static 'web/img/icons/right_arrow.svg' %}" class="services_card_right-arrow">
+			</a>
+		</div>
+	</section>
+
+
+	<section>
+		<h2>Новости</h2>
+		<a href="#" class="more_link">Читать больше</a>
+		<div class="news">
+			<a href="#" class="news_card">
+				<img src="{% static 'web/img/tmp_image.jpg' %}" alt=" ">
+				<h3>Тут текст новостей и так он тоже может быть</h3>
+				<span class="news_card_date">13 сентября 2022</span>
+			</a>
+			<a href="#" class="news_card">
+				<img src="{% static 'web/img/tmp_image.jpg' %}" alt=" ">
+				<h3>Тут текст новостей и так он тоже может быть</h3>
+				<span class="news_card_date">13 сентября 2022</span>
+			</a>
+			<a href="#" class="news_card">
+				<img src="{% static 'web/img/tmp_image.jpg' %}" alt=" ">
+				<h3>Тут текст новостей и так он тоже может быть</h3>
+				<span class="news_card_date">13 сентября 2022</span>
+			</a>
+			<a href="#" class="news_card">
+				<img src="{% static 'web/img/tmp_image.jpg' %}" alt=" ">
+				<h3>Тут текст новостей и так он тоже может быть</h3>
+				<span class="news_card_date">13 сентября 2022</span>
+			</a>
+			<a href="#" class="news_card">
+				<img src="{% static 'web/img/tmp_image.jpg' %}" alt=" ">
+				<h3>Тут текст новостей и так он тоже может быть</h3>
+				<span class="news_card_date">13 сентября 2022</span>
+			</a>
+		</div>
+	</section>
+{% endblock content %}

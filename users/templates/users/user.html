@@ -1,0 +1,34 @@
+{% extends "web/base.html" %}
+{% load static %}
+{% block content %}
+<div class="profile_block">
+	<div class="my_profile_block">
+		<div class="my_profile_about">
+			<div class="my_profile_about_image">
+				<img src="{{ user_profile.profile.image.url }}" alt=" ">
+			</div>
+			<div class="my_profile_about_bio">
+				{{ user_profile.profile.bio }}
+			</div>
+			<div class="my_profile_logout">
+			
+			</div>
+		</div>
+		<div class="my_profile_info">
+			<div class="my_profile_info_name">
+				{% if user_profile.profile.account_type == "Пользователь" %}
+					<h2>{{ user_profile.profile.name }} {{ user_profile.profile.surname }}, {{ user_profile.profile.age }} лет</h2>
+				{% elif user_profile.profile.account_type == "Работодатель" %}
+					<h2>{{user_profile.profile.employer}}</h2>
+				{% endif %}
+				@{{ user_profile.username }}
+			</div>
+			{% for Job in Jobs %}
+				
+				{% include 'web/include/job_card.html' %}
+			{% endfor %}
+			
+		</div>
+	</div>
+</div>
+{% endblock %}

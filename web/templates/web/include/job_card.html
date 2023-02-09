@@ -1,0 +1,52 @@
+{% load static %}
+{% block content %}
+	<div class="services_card">
+		<div class="services_card_employer">
+			<div class="services_card_employer_image">
+				<img src="{{Job.employer.image.url}}">
+			</div>
+			<div class="services_card_employer_info">
+				<h2>{{Job.title}}</h2>
+				{{Job.min_salary}}₽ - {{Job.max_salary}}₽<br><br>
+				{{Job.description}}
+
+				<div class="services_card_employer_info_filter">
+					<span><b>Тип занятости:</b> {{Job.type_of_employment}}</span>
+					<span><b>График работы:</b> {{Job.schedule}}</span>
+					<span><b>Опыт работы:</b> {{Job.experience}}</span>
+					<span><b>Особые условия:</b> {{Job.special_conditions}}</span>
+				</div>
+			
+		
+				{% if user.profile.account_type == "Пользователь" %}
+					<form method="POST" action="/job/response">
+						{% csrf_token %}
+						{% if Job.id in Job_response %}
+							<input type="hidden" name="job_id" value="{{Job.id}}" />
+							<input type="hidden" name="response_type" value="cancel" />
+							<button type="submit" class="button services_card_left_cancel-button">
+								Отменить
+							</button>
+						{% else  %}
+						<input type="hidden" name="job_id" value="{{Job.id}}" />
+						<input type="hidden" name="response_type" value="save" />
+						<button type="submit" class="button services_card_save-button">
+							Откликнуться
+						</button>
+						{% endif  %}
+					</form>
+				{% elif user.profile.account_type == "Работодатель" %}
+					{% if Job.employer.employer == user.profile.employer %}
+					<div class="services_card_employer-button_container">
+						<a href="/job/edit/{{Job.id}}" class="button services_card_employer-button">Редактировать</a>
+						<a href="/job/show-response/{{Job.id}}" class="button services_card_employer-button">Посмотреть отклики</a>
+						<a href="/job/delete/{{Job.id}}" style="color:#F44949; display: block;">Удалить</a>
+					</div>
+					{% endif %}
+				{% endif %}
+			</div>
+		</div>
+		<a class="services_card_employer-name" href="/user/{{Job.employer.user.username}}">{{Job.employer.employer}}</a>
+		<span class="services_card_date">{{Job.date}}</span>
+	</div>
+{% endblock %}

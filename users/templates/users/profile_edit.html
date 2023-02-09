@@ -1,0 +1,70 @@
+{% extends "web/base.html" %}
+{% load static %}
+{% block content %}
+<div class="profile_block">
+	<form method="POST" enctype="multipart/form-data">
+		{% csrf_token %}
+		<div class="my_profile_block">
+			<div class="my_profile_about">
+				<div class="my_profile_about_image">
+					<img src="{{ user.profile.image.url }}" alt=" ">
+				</div>
+				<div>
+					<label class="my_profile_about_edit_image">
+						<b class="my_profile_about_edit_b">Изменить аватарку</b>
+						{{ p_form.image }}
+						<span>Выберите файл</span>
+					</label>
+				</div>
+				<div class="my_profile_about_bio">
+					<b class="my_profile_about_edit_b">О себе</b>
+					{{ p_form.bio}}
+				</div>
+				<div class="my_profile_logout">
+					<button class="button" type="submit">Сохранить</button>
+				</div>
+			</div>
+			<div class="my_profile_edit_block">
+				@{{user.username}}
+
+				{% if user.profile.account_type == "Пользователь" %}
+
+					<br><br>
+					<div>
+						<b class="my_profile_about_edit_b">Имя:</b>
+						{{ p_form.name }}
+					</div>
+					<div>
+						<b class="my_profile_about_edit_b">Фамилия:</b>
+						{{ p_form.surname }}
+					</div>
+					<div>
+						<b class="my_profile_about_edit_b">Почта:</b>
+						{{ u_form.email }}
+					</div>
+					<div>
+						<b class="my_profile_about_edit_b">Возраст:</b>
+						{{ p_form.age }}
+					</div>
+
+				{% elif user.profile.account_type == "Детский" %}
+					<div>
+						<b class="my_profile_about_edit_b">Почта:</b>
+						{{ u_form.email }}
+					</div>
+				{% elif user.profile.account_type == "Работодатель" %}
+					<div>
+						<b class="my_profile_about_edit_b">Почта:</b>
+						{{ u_form.email }}
+					</div>
+					<div>
+						<b class="my_profile_about_edit_b">Название организации:</b>
+						{{ p_form.employer }}
+					</div>
+				{% endif %}
+			</div>
+		</div>
+		
+	</form>
+</div>
+{% endblock %}

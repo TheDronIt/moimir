@@ -1,0 +1,17 @@
+{% extends "users/auth_base.html" %}
+
+{% block content %}
+    <div class="auth_form">
+        <form method="POST">
+            {% csrf_token %}
+           
+            {{ form }}
+            <a href="#" class="auth_form_help">Забыли пароль?</a>
+            <div class="auth_form_button">
+                <button class="button" type="submit">Авторизоваться</button>
+            </div>
+            <a href="{% url 'register' %}" class="auth_form_help">Еще нет аккаунта? <b>Зарегистрируйтесь</b></a>
+        </form>
+    </div>
+
+{% endblock content %}

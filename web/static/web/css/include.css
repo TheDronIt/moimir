@@ -1,0 +1,296 @@
+/* NAV  */
+nav
+{
+	width: 100%;
+	padding-top: 40px;
+}
+.nav
+{
+	display: grid;
+	grid-gap: 50px;
+	max-width: 1100px;
+
+	margin: auto;
+}
+.nav_top
+{
+	display: grid;
+	grid-template-columns: 1fr auto;
+}
+.nav_top_logo
+{
+	font-size: 2.4rem;
+	line-height: 2rem;
+}
+.nav_top_link
+{
+	display: grid;
+	grid-template-columns: auto auto auto;
+	align-items: center;
+	grid-gap: 20px;
+}
+.nav_menu
+{
+	display: grid;
+	grid-template-columns: repeat(auto-fit, 120px);
+	grid-gap: 20px;
+	justify-content: center;
+}
+.nav_menu_button
+{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	grid-gap:5px;
+	background-color: white;
+	width: 120px;
+	height: 120px;
+	box-shadow: 0 0 15px 2px rgba(60, 139, 232, 0.2);
+	border-radius: 16px;
+}
+.nav_menu_button_icon
+{
+	height: 30px;
+	object-fit: cover;
+}
+.nav_menu_button_name
+{
+	max-width: 90%;
+	font-size: 1.4rem;
+	text-align: center;
+}
+.nav_top_link_profile
+{
+	display: flex;
+	align-items: center;
+	grid-column-gap: 10px;
+}
+.nav_top_link_profile_image
+{
+	width: 50px;
+	height: 50px;
+	border-radius: 100%;
+	overflow: hidden;
+	background-color: #EFEFEF;
+}
+.nav_top_link_profile_image img
+{
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+/* END NAV */
+
+
+
+
+/* FOOTER  */
+footer
+{
+	max-width: 100%;
+	min-height: 150px;
+	color: white;
+	background-color: #3C8BE8;
+	border-top-left-radius: 24px;
+	border-top-right-radius: 24px;
+	padding: 50px 50px;
+}
+.footer
+{
+	position: relative;
+	display: grid;
+	grid-template-columns: auto auto auto;
+	grid-gap: 90px;
+	justify-content: center;
+
+	font-size: 1.4rem;
+	font-weight: 400;
+	color: rgba(255, 255, 255, 0.7);
+}
+.footer_brand
+{
+	display: grid;
+	grid-gap: 20px;
+}
+.footer_brand_name
+{
+	color: white;
+	font-size: 3rem;
+	line-height: 3rem;
+}
+.footer_brand_contact
+{
+	display: grid;
+	grid-gap: 6px;
+}
+.footer_brand_contact_el
+{
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	grid-column-gap: 12px;
+}
+.footer_brand_social-network
+{
+	display: flex;
+	grid-gap: 15px;
+}
+.footer_brand_social-network_link
+{
+	display: block;
+	width: 35px;
+	height: 35px;
+}
+.footer_brand_social-network_link img
+{
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.footer_for-user
+{
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	grid-column-gap: 30px;
+	grid-template-rows: repeat(auto-fit, 40px);
+}
+.footer_headline
+{
+	display: block;
+	font-size: 1.6rem;
+	color: white;
+}
+.footer_for-user .footer_headline
+{
+	grid-column: 1/3;
+}
+.footer_for-user a
+{
+	display: block;
+	height: auto;
+}
+.footer_about
+{
+	position: relative;
+	display: grid;
+	grid-template-columns: 1fr;
+	grid-template-rows: repeat(auto-fit, 40px);
+}
+.footer_site-by
+{
+	position: absolute;
+	bottom: 0;
+	left: 0;
+}
+/* END FOOTER  */
+
+
+/* AUTH */
+.auth_base
+{
+	max-width: 100vw;
+	min-height: 100vh;
+	background: linear-gradient(180deg, #98C8FF 0%, #6DB0FF 100%);
+
+	font-size: 1.6rem;
+	font-weight: 500;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.auth_form_error
+{
+	display: block;
+	padding: 15px;
+	border-radius: 16px;
+	color: white;
+	background-color: #F44949;
+}
+.auth_form_error ul
+{
+	margin: 0;
+}
+.auth_base_card
+{
+	position: relative;
+	border-radius: 32px;
+	padding: 60px;
+	background-color: white;
+}
+.auth_base_back
+{
+	position: absolute;
+	right: 30px;
+	top: 30px;
+
+	width: 30px;
+	height: 30px;
+}
+.auth_base_back img
+{
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+.auth_base_card h1
+{
+	font-size: 2.2rem;
+	line-height: 2.2rem;
+	font-weight: 500;
+	margin:0 0 30px 0;
+}
+.auth_base_card h2
+{
+	font-size: 1.8rem;
+	font-weight: 500;
+	margin-bottom: 20px;
+}
+
+.auth_form form, .auth_form_content
+{
+	display: grid;
+	grid-template-columns: 1fr;
+	grid-gap: 20px;
+}
+.auth_form_help
+{
+	text-align: center;
+	color: rgba(3, 32, 66, 0.7);;
+	font-size: 1.4rem;
+	font-weight: 400;
+}
+.auth_form_input
+{
+	background: #F1F7FF;
+	border-radius: 16px;
+	padding: 20px;
+	border: none;
+	min-width: 300px;
+	max-width: 100%;
+	outline:none;
+}
+.auth_form_button
+{
+	display: inline-flex;
+}
+.auth_form_button .button
+{
+	padding: 20px 40px;
+	margin: auto;
+	cursor: pointer;
+}
+
+.auth_form .errorlist
+{
+	width: 300px;
+	margin-left: 0; 
+	padding-left: 0;
+	list-style-type: none;
+}
+.auth_form .errorlist li
+{
+	margin-bottom: 10px;
+}
+/* AUTH END  */

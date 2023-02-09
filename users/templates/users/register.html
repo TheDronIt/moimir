@@ -1,0 +1,35 @@
+{% extends "users/auth_base.html" %}
+
+{% block content %}
+    <div class="auth_form">
+        <h2>Регистрация</h2>
+        <form method="POST">
+            {% csrf_token %}
+            
+            {% if p_form.errors.employer %}
+            <span class="auth_form_error">
+                <b>Ошибка!</b><br>
+                {{ p_form.errors.employer }}
+            </span>
+            {% endif %}
+            
+
+            {{ p_form.account_type }}
+            <a href="#" target="_blank" class="auth_form_help">Какой выбрать?</a>
+            {{ u_form }}
+            {{p_form.name}}
+            {{p_form.surname}}
+            {{p_form.age}}
+            {{p_form.employer}}
+            <div class="auth_form_button">
+                <button class="button" type="submit">Зарегестрироваться</button>
+            </div>
+            {% for raido in p_form.account_type %}
+                {{radio}}
+            {% endfor %}
+        </form>
+    </div>
+
+    
+
+{% endblock content %}

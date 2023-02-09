@@ -1,0 +1,29 @@
+{% extends 'web/base.html' %}
+{% load static %}
+
+{% block content %}
+
+	
+	
+
+	<section class="search__block">
+		<div class="job_responses_title">
+			<span>Поиск: {{query}}</span>
+			<input type="button" onclick="history.back();" value="Назад"/>
+		</div>
+
+		{% include 'web/include/search.html' %}
+
+		{% if service_type == "job" %}
+			{% if answer|length == 0 %}
+				К сожалению нет записей по такому запросу
+			{% else %}
+				{% for Job in answer %}
+					{% include 'web/include/job_card.html' %}
+				{% endfor %}
+			{% endif %}
+
+		{% endif %}
+	</section>
+
+{% endblock content %}

@@ -1,0 +1,29 @@
+{% extends 'web/base.html' %}
+{% load static %}
+{% block content %}
+
+	<section class="job_delete_block">
+		<div class="job_responses_title">
+			<h1>{{Job.title}}</h1>
+			<span>Удаление вакансии</span>
+			<input type="button" onclick="history.back();" value="Назад"/>
+		</div>
+
+		<div class="job_delete_card">
+			{% include 'web/include/job_card.html' %}
+		</div>
+
+		<div>
+			<b>На вакансию откликнулось:</b> {{response_value}} человек
+		</div>
+
+		<form method="POST" class="job_delete_confirmation">
+			{% csrf_token %}
+			<h2>Вы точно хотите удалить вакансию?</h2>
+			<button type="submit" class="button button-accept" name="delete_confirmation" value="delete_accept">Удалить</button>
+			<button type="submit" class="button button-cancel" name="delete_confirmation" value="delete_cancel">Отменить</button>
+		</form>
+			
+	</section>
+	
+{% endblock content %}

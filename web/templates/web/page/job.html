@@ -1,0 +1,30 @@
+{% extends 'web/base.html' %}
+{% load static %}
+{% block content %}
+	<section class="services_block">
+		{% include 'web/include/search.html' %}
+		<div class="services_filter">
+			<form method="GET">
+				{% csrf_token %}
+
+				{{filter_form}}
+
+				<div class="services_filter_button__container">
+					<button type="submit" class="services_filter_button">Найти</button>
+				</div>
+				
+			</form>
+		</div>
+		<div class="services_content">
+			
+				{% if Jobs|length == 0 %}
+					К сожалению нет записей с такими параметрами
+				{% else %}
+					{% for Job in Jobs %}
+						{% include 'web/include/job_card.html' %}
+					{% endfor %}
+				{% endif %}
+			
+		</div>
+	</section>
+{% endblock content %}
