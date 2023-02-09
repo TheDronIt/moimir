@@ -17,6 +17,8 @@ def user_register(request):
             u_form = UserRegisterForm(request.POST)
             p_form = ProfileRegisterForm(request.POST)
 
+           
+
             if u_form.is_valid() and p_form.is_valid():
 
                 #Создание user и profile

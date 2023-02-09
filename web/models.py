@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from users.models import Profile
 from datetime import datetime
 from PIL import Image
+from random import randrange
 
 class Job(models.Model):
 
@@ -53,6 +54,8 @@ class Job(models.Model):
 
     def __str__(self):
         return self.title
+
+
 
 
 

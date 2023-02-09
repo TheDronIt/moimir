@@ -25,7 +25,7 @@ class ProfileRegisterForm(forms.ModelForm):
     name = forms.CharField(max_length=20, label='', widget=forms.TextInput(attrs={'class': 'auth_form_input auth_form__user', 'placeholder': 'Имя'}), required=False)
     surname = forms.CharField(max_length=20, label='', widget=forms.TextInput(attrs={'class': 'auth_form_input auth_form__user', 'placeholder': 'Фамилия'}), required=False)
     age = forms.IntegerField(label='', widget=forms.TextInput(attrs={'class': 'auth_form_input auth_form__user', 'placeholder': 'Возраст'}), required=False)
-    employer = forms.CharField(max_length=20, label='', widget=forms.TextInput(attrs={'class': 'auth_form_input auth_form__employer', 'placeholder': 'Название орагнизации'}), error_messages = {'unique':"Выбранное название организации уже используется, выберите другое название"}, required=False)
+    employer = forms.CharField(max_length=20, label='', widget=forms.TextInput(attrs={'class': 'auth_form_input auth_form__employer', 'placeholder': 'Название орагнизации'}), error_messages = {'unique':"Выбранное название организации уже используется, выберите другое название"}, required=False, empty_value=None)
     account_type = forms.ChoiceField(label='', choices=Profile.account_type_list,initial="Пользователь" ,widget=forms.RadioSelect(attrs={'class': 'auth_form_choise', 'placeholder': 'Тип аккаунта'}))
 
     class Meta:
