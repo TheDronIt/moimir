@@ -3,6 +3,7 @@
 {% block content %}
 	<section class="services_block">
 		
+
 		<!-- Поиск + добавить пост -->
 		<div class="services_search">
 			<!-- Поисковик -->
@@ -17,14 +18,15 @@
 			<!-- END Поисковик -->
 
 			<!-- Добавить пост -->
-			{% if user.profile.account_type == "Работодатель" %}
-				<a class="services_search_button" href="/job/add">
+			{% if user.profile.account_type == "Пользователь" %}
+				<a class="services_search_button" href="/specialist/add">
 					<img src="{% static 'web/img/icons/plus.svg' %}">
 				</a>
 			{% endif %}
 			<!-- END Добавить пост -->
 		</div>
 		
+
 		<div class="services_filter">
 			<form method="GET">
 				{% csrf_token %}
@@ -39,11 +41,11 @@
 		</div>
 		<div class="services_content">
 			
-				{% if Jobs|length == 0 %}
+				{% if specialists|length == 0 %}
 					К сожалению нет записей с такими параметрами
 				{% else %}
-					{% for Job in Jobs %}
-						{% include 'web/card/job_card.html' %}
+					{% for specialist in specialists %}
+						{% include 'web/card/specialist_card.html' %}
 					{% endfor %}
 				{% endif %}
 			

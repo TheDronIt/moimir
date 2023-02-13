@@ -85,7 +85,7 @@ def job_response(request):
             #Проверяем на отстутствие записи с такими же данными
             job_response_is_created = Job_response.objects.filter(user=user, job=job)
             if len(job_response_is_created) == 0:
-                Job_response(user =user, job=job).save()
+                Job_response(user=user, job=job).save()
         #Отмена отклика
         elif response_type == "cancel":
             try:
@@ -173,7 +173,9 @@ def job_delete__page(request, id):
 
 
 def search__page(request):
+    job_response = []
     answer = []
+    favorite = []
     query = ""
     service_type = None
     if request.GET['service'] and request.GET['q']:
@@ -181,15 +183,127 @@ def search__page(request):
 
         #Поиск запроса по нужной базе
         if request.GET['service'] == "job":
+            #ID работ, на которые откликнулся юзер
+            if request.user.is_authenticated == True:
+                job_response_queryset = Job_response.objects.filter(user=request.user)
+                for el in job_response_queryset:
+                    job_response.append(el.job.id)
+
             service_type = "job"
             answer = Job.objects.filter(title__icontains=query).order_by('-id') | Job.objects.filter(description__icontains=query).order_by('-id')
-    
+        
+        elif request.GET['service'] == "specialist":
+            if request.user.is_authenticated == True:
+                favorite = user_favorite_list(request.user, "Специалисты")
+                if request.method == "POST" and request.user.is_authenticated == True:
+                    if request.POST['service_id'] and request.POST['service_name']:
+                        change_favorite(
+                            request.user,
+                            request.POST['service_name'],
+                            request.POST['service_id']
+                            )
+                        return redirect('specialist')
+            service_type = "specialist"
+            answer = Specialist.objects.filter(title__icontains=query).order_by('-id') | Specialist.objects.filter(description__icontains=query).order_by('-id')
+
     data = {
         'query':query,
         'service_type': service_type,
-        'answer': answer
+        'answer': answer,
+        'Job_response': job_response,
+        'favorites': favorite
     }
     return render(request, 'web/page/search.html', data)
 
 
 
+def specialist__page(request):
+    
+    favorite = []
+    if request.user.is_authenticated == True:
+        favorite = user_favorite_list(request.user, "Специалисты")
+
+    if request.method == "POST" and request.user.is_authenticated == True:
+        if request.POST['service_id'] and request.POST['service_name']:
+            change_favorite(
+                request.user,
+                request.POST['service_name'],
+                request.POST['service_id']
+                )
+            return redirect('specialist')
+
+    filter_form = SpecialistFilterForm()
+    #Фильтрация по значеням из GET (фильтрация через форму)
+    if request.method == 'GET' and len(request.GET) > 0:
+        query_dict = dict(request.GET)
+        query_dict.pop("csrfmiddlewaretoken")
+        
+        query_dict = {f'{name}__in': query_dict[name]  for name in query_dict if query_dict[name]}
+
+        specialist = Specialist.objects.filter(**query_dict).order_by('-id')
+    else:
+        specialist = Specialist.objects.all().order_by('-id')
+
+        
+    data = {
+        'filter_form': filter_form,
+        'specialists': specialist,
+        'favorites': favorite
+    }
+    return render(request, 'web/page/specialist.html', data)
+
+
+def specialist_add__page(request):
+    if request.user.profile.account_type == "Пользователь":
+        if request.method == 'POST':
+            form = SpecialistEditForm(request.POST)
+
+            if form.is_valid():
+                updated_form = form.save(commit=False)
+                updated_form.user = request.user #User.objects.get(user=request.user.profile.id)
+                updated_form.save()
+                
+                return redirect('specialist')
+        else:
+            form = SpecialistEditForm()
+        
+        data = {
+                'form': form
+            }
+        return render(request, 'web/page/specialist_edit.html', data)
+    else:
+        return redirect('specialist')
+
+
+def change_favorite(user, service_name, service_id):
+    print(user, service_name, service_id)
+
+    service_name_list = ["Специалисты", "Волонтерство", "Нуждается в помощи", 
+                        "Мероприятия", "Секции"]
+
+    try:
+
+        user = User.objects.get(username=user)
+        print(user)
+        favorite = Favorite.objects.filter(user=user, service_name=service_name, service_id=service_id)
+        print(favorite)
+        if service_name in service_name_list:
+            if len(favorite) == 0:
+                Favorite(user=user, service_name=service_name, service_id=int(service_id)).save()
+                print("Добавлено")
+            else:
+                favorite.delete()
+                print("Удалено")
+    except:
+        return redirect('error')
+
+
+
+def user_favorite_list(user, service_name):
+    favorite = []
+
+    favorite_queryset = Favorite.objects.filter(user=user, service_name=service_name)
+    for el in favorite_queryset:
+        favorite.append(el.service_id)
+    
+    return favorite

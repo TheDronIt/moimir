@@ -4,8 +4,6 @@
 {% block content %}
 
 	
-	
-
 	<section class="search__block">
 		<div class="job_responses_title">
 			<span>Поиск: {{query}}</span>
@@ -13,17 +11,21 @@
 		</div>
 
 		{% include 'web/include/search.html' %}
-
-		{% if service_type == "job" %}
-			{% if answer|length == 0 %}
-				К сожалению нет записей по такому запросу
-			{% else %}
+			
+		{% if answer|length == 0 %}
+			К сожалению нет записей по такому запросу
+		{% else %}
+			{% if service_type == "job" %}
 				{% for Job in answer %}
-					{% include 'web/include/job_card.html' %}
+					{% include 'web/card/job_card.html' %}
+				{% endfor %}
+			{% elif service_type == "specialist" %}
+				{% for specialist in answer %}
+					{% include 'web/card/specialist_card.html' %}
 				{% endfor %}
 			{% endif %}
-
 		{% endif %}
+		
 	</section>
 
 {% endblock content %}

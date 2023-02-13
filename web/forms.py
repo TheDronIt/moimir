@@ -29,3 +29,30 @@ class JobAddForm(forms.ModelForm):
     class Meta:
         model = Job
         fields = ['title', 'min_salary', 'max_salary', 'description', 'type_of_employment', 'schedule', 'experience', 'special_conditions']
+
+
+
+
+class SpecialistFilterForm(forms.ModelForm):
+
+    experience = forms.ChoiceField(label='Опыт работы', choices=Specialist.experience_list ,widget=forms.CheckboxSelectMultiple(attrs={'class': 'services_filter_el'}))
+    type_of_employment = forms.ChoiceField(label='Тип занятости', choices=Specialist.type_of_employment_list, widget=forms.CheckboxSelectMultiple(attrs={'class': 'services_filter_el'}))
+    special_conditions = forms.ChoiceField(label='Готов работать с', choices=Specialist.special_conditions_list ,widget=forms.CheckboxSelectMultiple(attrs={'class': 'services_filter_el'}))
+
+    class Meta:
+        model = Specialist
+        fields = ['experience', 'type_of_employment', 'special_conditions']
+
+
+class SpecialistEditForm(forms.ModelForm):
+
+    title = forms.CharField(max_length=20, label='Название услуги специалиста', widget=forms.TextInput(attrs={'class': 'service_add_input', 'placeholder': 'Название услуги специалиста'}))
+    description = forms.CharField(label='Описание', widget=forms.Textarea(attrs={'class': 'service_add_input', 'placeholder': 'Описание'}))
+    
+    experience = forms.ChoiceField(choices=Specialist.experience_list, label='Опыт работы', widget=forms.Select(attrs={'class': 'service_add_input', 'placeholder': 'Опыт работы'}))
+    type_of_employment = forms.ChoiceField(choices=Specialist.type_of_employment_list, label='Тип занятости', widget=forms.Select(attrs={'class': 'service_add_input', 'placeholder': 'Тип занятости'}))
+    special_conditions = forms.ChoiceField(choices=Specialist.special_conditions_list, label='Готов работать с', widget=forms.Select(attrs={'class': 'service_add_input', 'placeholder': 'Особые условия'}))
+
+    class Meta:
+        model = Specialist
+        fields = ['title', 'description', 'type_of_employment', 'special_conditions', 'experience']

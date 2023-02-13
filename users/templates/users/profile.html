@@ -1,3 +1,5 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
 {% extends "web/base.html" %}
 {% load static %}
 {% block content %}
@@ -30,11 +32,66 @@
 				<img src="{% static 'web/img/icons/settings.svg' %}">
 			</a>
 			
+			<!--Карточки вакансий если работодатель-->
 			{% for Job in Jobs %}
-				{% include 'web/include/job_card.html' %}
+				{% include 'web/card/job_card.html' %}
 			{% endfor %}
+
+			
+			<!--Карточки если пользователь-->
+			<div class="my_profile_user_block">
+				<div class="my_profile_user_card_input_block">
+					<input type="button" id="user_card_1" value="Специалист" class="button my_profile_user_card_input" style="background: #032042">
+					<input type="button" id="user_card_2" value="Волонтер" class="button my_profile_user_card_input">
+					<input type="button" id="user_card_3" value="Нуждается в помощи" class="button my_profile_user_card_input">
+					<input type="button" id="user_card_4" value="Организатор мероприятия" class="button my_profile_user_card_input">
+					<input type="button" id="user_card_5" value="Организатор секции" class="button my_profile_user_card_input">
+				</div>
+					
+				<div>
+					<label for="user_card_1" class="my_profile_user_card_label" style="display:block">
+						111
+					</label>
+					<label for="user_card_2" class="my_profile_user_card_label">
+						222
+					</label>
+					<label for="user_card_3" class="my_profile_user_card_label">
+						333
+					</label>
+					<label for="user_card_4" class="my_profile_user_card_label">
+						444
+					</label>
+					<label for="user_card_5" class="my_profile_user_card_label">
+						555
+					</label>
+				</div>
+				
+			</div>
+			
+
+			
+			
+
 
 		</div>
 	</div>
 </div>
+
+<script> /*Отображение пользовательских карточек*/
+    $(".my_profile_user_card_input").click(function(){
+
+    	$(".my_profile_user_card_label").removeAttr("style")
+    	$(".my_profile_user_card_input").removeAttr("style")
+
+    	$this = $(this);
+    	$label = $('label[for="'+ $this.attr('id') +'"]');
+
+    	if ($label.length > 0 ) {
+       		$(this).css("background", "#032042")
+       		$label.css("display", "block")
+    	}
+        
+    });
+ </script>
 {% endblock %}
+

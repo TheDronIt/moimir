@@ -10,5 +10,7 @@ urlpatterns = [
 	path('job/add', views.job_add__page, name='job_response'),
 	path('job/edit/<int:id>', views.job_edit__page, name='job_edit'),
 	path('job/delete/<int:id>', views.job_delete__page, name='job_delete'),
+	path('specialist', views.specialist__page, name='specialist'),
+	path('specialist/add', views.specialist_add__page, name='specialist_add'),
 	path('search', views.search__page, name='search')
 	]
