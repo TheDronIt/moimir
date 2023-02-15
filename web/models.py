@@ -40,12 +40,12 @@ class Job(models.Model):
         ("Другое", "Другое"),
     ]
 
-    title = models.CharField(verbose_name="Название вакансии", max_length=50)
+    title = models.CharField(verbose_name="Название вакансии", max_length=100)
     employer = models.ForeignKey(Profile, on_delete=models.CASCADE, verbose_name="Аккаунт организации")
     min_salary = models.IntegerField(verbose_name="ЗП от")
     max_salary = models.IntegerField(verbose_name="ЗП до")
     date = models.DateField(verbose_name='Дата', default=datetime.now, blank=True)
-    description = models.TextField(verbose_name="Описание")
+    description = models.TextField(verbose_name="Описание", max_length=1000)
 
     type_of_employment = models.CharField(verbose_name="Тип занятости", choices=type_of_employment_list, max_length=50)
     schedule = models.CharField(verbose_name="График работы", choices=schedule_list, max_length=50)
@@ -120,14 +120,44 @@ class Specialist(models.Model):
         ("Любые дни", "Любые дни"),
     ]
 
-    title = models.CharField(verbose_name="Название вакансии", max_length=50)
+    title = models.CharField(verbose_name="Название услуги", max_length=100)
     user =  models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="Пользователь", related_name="specialist_user", null=True)
-    description = models.TextField(verbose_name="Описание")
+    description = models.TextField(verbose_name="Описание", max_length=1000)
     date = models.DateField(verbose_name='Дата', default=datetime.now, blank=True)
 
     experience = models.CharField(verbose_name="Опыт работы", choices=experience_list, max_length=50)
     type_of_employment = models.CharField(verbose_name="Тип занятости", choices=type_of_employment_list, max_length=50)
     special_conditions = models.CharField(verbose_name="Готов работать с", choices=special_conditions_list, max_length=50)
+
+    def __str__(self):
+        return self.title
+
+
+
+class Volunteer(models.Model):
+    class Meta:
+        verbose_name = 'Волонтеры'
+        verbose_name_plural = 'Волонтеры'
+
+    type_of_employment_list = [
+        ("Только в будние дни", "Только в будние дни"),
+        ("Только в выходные дни", "Только в выходные дни"),
+        ("Любые дни", "Любые дни"),
+    ]
+    work_with_list = [
+        ("Ребенку", "Ребенку"),
+        ("Взрослому", "Взрослому"),
+        ("Пожилому", "Пожилому"),
+        ("Всем", "Всем")    
+    ]
+
+    title = models.CharField(verbose_name="Название услуги", max_length=100)
+    user =  models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="Пользователь", related_name="volunteer_user", null=True)
+    description = models.TextField(verbose_name="Описание", max_length=1000)
+    date = models.DateField(verbose_name='Дата', default=datetime.now, blank=True)
+
+    type_of_employment = models.CharField(verbose_name="Тип занятости", choices=type_of_employment_list, max_length=50)
+    work_with = models.CharField(verbose_name="Готов помочь", choices= work_with_list, max_length=50)
 
     def __str__(self):
         return self.title

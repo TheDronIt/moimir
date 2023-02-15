@@ -151,16 +151,13 @@ def job_show_response__page(request, id):
 @login_required
 def job_delete__page(request, id):
     if request.user.profile.account_type == "Работодатель":
-        
         job = Job.objects.get(id=id)
-        
         #Проверка на владение записью
         if job.employer.employer == request.user.profile.employer:
 
             if request.method == "POST" and request.POST['delete_confirmation']:
                 if request.POST['delete_confirmation'] == "delete_accept":
                     job.delete()
-
             else:
                 response_value = Job_response.objects.filter(job=job).count()
                 data ={
@@ -168,7 +165,6 @@ def job_delete__page(request, id):
                     "response_value": response_value,
                 }
                 return render(request, 'web/page/job_delete.html', data)
-
     return redirect('job')
 
 
@@ -273,6 +269,51 @@ def specialist_add__page(request):
         return render(request, 'web/page/specialist_edit.html', data)
     else:
         return redirect('specialist')
+
+
+
+@login_required
+def specialist_edit__page(request, id):
+    if request.user.profile.account_type == "Пользователь":
+        
+        specialist = Specialist.objects.get(id=id)
+        
+        #Проверка на владение записью
+        if specialist.user.username == request.user.username:
+
+            if request.method == 'POST':
+                form = SpecialistEditForm(request.POST, instance=specialist)
+                if form.is_valid():
+                    form.save()
+                    return redirect('specialist')
+            else:
+                form = SpecialistEditForm(instance=specialist)
+
+            data ={
+                'form': form
+            }
+            return render(request, 'web/page/specialist_edit.html', data)
+    return redirect('specialist')
+
+
+
+@login_required
+def specialist_delete__page(request, id):
+    if request.user.profile.account_type == "Пользователь":
+        specialist = Specialist.objects.get(id=id)
+        #Проверка на владение записью
+        if specialist.user == request.user:
+            if request.method == "POST" and request.POST['delete_confirmation']:
+                if request.POST['delete_confirmation'] == "delete_accept":
+                    specialist.delete()
+            else:
+                data ={
+                    "specialist": specialist,
+                }
+                return render(request, 'web/page/specialist_delete.html', data)
+    return redirect('specialist')
+
+
 
 
 def change_favorite(user, service_name, service_id):
