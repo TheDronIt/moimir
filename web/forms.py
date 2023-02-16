@@ -16,7 +16,7 @@ class JobFilterForm(forms.ModelForm):
 
 class JobAddForm(forms.ModelForm):
 
-    title = forms.CharField(max_length=20, label='Название вакансии', widget=forms.TextInput(attrs={'class': 'service_add_input', 'placeholder': 'Название вакансии'}))
+    title = forms.CharField(label='Название вакансии', widget=forms.TextInput(attrs={'class': 'service_add_input', 'placeholder': 'Название вакансии'}))
     min_salary = forms.IntegerField(label='ЗП от', widget=forms.TextInput(attrs={'class': 'service_add_input', 'placeholder': 'ЗП от'}))
     max_salary = forms.IntegerField(label='ЗП до', widget=forms.TextInput(attrs={'class': 'service_add_input', 'placeholder': 'ЗП до'}))
     description = forms.CharField(label='Описание', widget=forms.Textarea(attrs={'class': 'service_add_input', 'placeholder': 'Описание'}))
@@ -46,7 +46,7 @@ class SpecialistFilterForm(forms.ModelForm):
 
 class SpecialistEditForm(forms.ModelForm):
 
-    title = forms.CharField(max_length=20, label='Название услуги специалиста', widget=forms.TextInput(attrs={'class': 'service_add_input', 'placeholder': 'Название услуги специалиста'}))
+    title = forms.CharField(label='Название услуги специалиста', widget=forms.TextInput(attrs={'class': 'service_add_input', 'placeholder': 'Название услуги специалиста'}))
     description = forms.CharField(label='Описание', widget=forms.Textarea(attrs={'class': 'service_add_input', 'placeholder': 'Описание'}))
     
     experience = forms.ChoiceField(choices=Specialist.experience_list, label='Опыт работы', widget=forms.Select(attrs={'class': 'service_add_input', 'placeholder': 'Опыт работы'}))
@@ -56,3 +56,14 @@ class SpecialistEditForm(forms.ModelForm):
     class Meta:
         model = Specialist
         fields = ['title', 'description', 'type_of_employment', 'special_conditions', 'experience']
+
+
+
+class VolunteerFilterForm(forms.ModelForm):
+
+    type_of_employment = forms.ChoiceField(label='Тип занятости', choices=Volunteer.type_of_employment_list, widget=forms.CheckboxSelectMultiple(attrs={'class': 'services_filter_el'}))
+    work_with = forms.ChoiceField(label='Готов помочь', choices=Volunteer.work_with_list, widget=forms.CheckboxSelectMultiple(attrs={'class': 'services_filter_el'}))
+
+    class Meta:
+        model = Volunteer
+        fields = ['type_of_employment', 'work_with']

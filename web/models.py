@@ -120,7 +120,7 @@ class Specialist(models.Model):
         ("Любые дни", "Любые дни"),
     ]
 
-    title = models.CharField(verbose_name="Название услуги", max_length=100)
+    title = models.CharField(verbose_name="Название услуги", max_length=50)
     user =  models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="Пользователь", related_name="specialist_user", null=True)
     description = models.TextField(verbose_name="Описание", max_length=1000)
     date = models.DateField(verbose_name='Дата', default=datetime.now, blank=True)
@@ -151,13 +151,13 @@ class Volunteer(models.Model):
         ("Всем", "Всем")    
     ]
 
-    title = models.CharField(verbose_name="Название услуги", max_length=100)
+    title = models.CharField(verbose_name="Название услуги", max_length=50)
     user =  models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="Пользователь", related_name="volunteer_user", null=True)
     description = models.TextField(verbose_name="Описание", max_length=1000)
     date = models.DateField(verbose_name='Дата', default=datetime.now, blank=True)
 
     type_of_employment = models.CharField(verbose_name="Тип занятости", choices=type_of_employment_list, max_length=50)
-    work_with = models.CharField(verbose_name="Готов помочь", choices= work_with_list, max_length=50)
+    work_with = models.CharField(verbose_name="Готов помочь", choices=work_with_list, max_length=50)
 
     def __str__(self):
         return self.title

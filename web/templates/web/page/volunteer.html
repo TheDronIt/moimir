@@ -1,0 +1,54 @@
+{% extends 'web/base.html' %}
+{% load static %}
+{% block content %}
+	<section class="services_block">
+		
+
+		<!-- Поиск + добавить пост -->
+		<div class="services_search">
+			<!-- Поисковик -->
+			<form method="GET" action="/search" class="services_search_form">
+				<input type="hidden" name="service" value="specialist" />
+				<input type="text" name="q" value="{{query}}" placeholder="Поиск" class="services_search_input">
+
+				<button type="submit" class="services_search_icon">			
+					<img src="{% static 'web/img/icons/search.svg' %}" alt=" ">
+				</button>
+			</form>
+			<!-- END Поисковик -->
+
+			<!-- Добавить пост -->
+			{% if user.profile.account_type == "Пользователь" %}
+				<a class="services_search_button" href="/specialist/add">
+					<img src="{% static 'web/img/icons/plus.svg' %}">
+				</a>
+			{% endif %}
+			<!-- END Добавить пост -->
+		</div>
+		
+
+		<div class="services_filter">
+			<form method="GET">
+				{% csrf_token %}
+
+				{{filter_form}}
+
+				<div class="services_filter_button__container">
+					<button type="submit" class="services_filter_button">Найти</button>
+				</div>
+				
+			</form>
+		</div>
+		<div class="services_content">
+			
+				{% if specialists|length == 0 %}
+					К сожалению нет записей с такими параметрами
+				{% else %}
+					{% for specialist in specialists %}
+						{% include 'web/card/specialist_card.html' %}
+					{% endfor %}
+				{% endif %}
+			
+		</div>
+	</section>
+{% endblock content %}
