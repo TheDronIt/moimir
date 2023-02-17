@@ -8,7 +8,7 @@
 					{% if needhelp.id in favorites %}
 						<form method="POST"  class="services_card_user_add-favorite">
 							{% csrf_token %}
-							<input type="hidden" name="service_name" value="Специалисты" />
+							<input type="hidden" name="service_name" value="Нуждаются в помощи" />
 							<input type="hidden" name="service_id" value="{{needhelp.id}}" />
 							<button type="submit" class="services_card_user_add-favorite_button">
 								<img src="{% static 'web/img/icons/remove-favorite.svg' %}">
@@ -17,7 +17,7 @@
 					{% else %}
 						<form method="POST" class="services_card_user_add-favorite">
 							{% csrf_token %}
-							<input type="hidden" name="service_name" value="Специалисты" />
+							<input type="hidden" name="service_name" value="Нуждаются в помощи" />
 							<input type="hidden" name="service_id" value="{{needhelp.id}}" />
 							<button type="submit" class="services_card_user_add-favorite_button">
 								<img src="{% static 'web/img/icons/add-favorite.svg' %}">

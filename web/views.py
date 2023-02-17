@@ -342,7 +342,6 @@ def volunteer__page(request):
                 request.POST['service_id']
                 )
             return redirect('volunteer')
-
     filter_form = VolunteerFilterForm()
     #Фильтрация по значеням из GET (фильтрация через форму)
     if request.method == 'GET' and len(request.GET) > 0:
@@ -365,12 +364,10 @@ def volunteer_add__page(request):
     if request.user.profile.account_type == "Пользователь":
         if request.method == 'POST':
             form = VolunteerEditForm(request.POST)
-
             if form.is_valid():
                 updated_form = form.save(commit=False)
                 updated_form.user = request.user #User.objects.get(user=request.user.profile.id)
                 updated_form.save()
-                
                 return redirect('volunteer')
         else:
             form = VolunteerEditForm()
@@ -386,12 +383,9 @@ def volunteer_add__page(request):
 @login_required
 def volunteer_edit__page(request, id):
     if request.user.profile.account_type == "Пользователь":
-        
         volunteer = Volunteer.objects.get(id=id)
-        
         #Проверка на владение записью
         if volunteer.user.username == request.user.username:
-
             if request.method == 'POST':
                 form = VolunteerEditForm(request.POST, instance=volunteer)
                 if form.is_valid():
@@ -438,7 +432,6 @@ def needhelp__page(request):
                 request.POST['service_id']
                 )
             return redirect('needhelp')
-
     filter_form = NeedhelpFilterForm()
     #Фильтрация по значеням из GET (фильтрация через форму)
     if request.method == 'GET' and len(request.GET) > 0:
@@ -448,7 +441,6 @@ def needhelp__page(request):
         needhelp = Needhelp.objects.filter(**query_dict).order_by('-id')
     else:
         needhelp = Needhelp.objects.all().order_by('-id')
-
     data = {
         'filter_form': filter_form,
         'needhelps': needhelp,
@@ -461,12 +453,10 @@ def needhelp_add__page(request):
     if request.user.profile.account_type == "Пользователь":
         if request.method == 'POST':
             form = NeedhelpEditForm(request.POST)
-
             if form.is_valid():
                 updated_form = form.save(commit=False)
                 updated_form.user = request.user #User.objects.get(user=request.user.profile.id)
-                updated_form.save()
-                
+                updated_form.save()  
                 return redirect('needhelp')
         else:
             form = NeedhelpEditForm()
@@ -482,12 +472,9 @@ def needhelp_add__page(request):
 @login_required
 def needhelp_edit__page(request, id):
     if request.user.profile.account_type == "Пользователь":
-        
         needhelp = Needhelp.objects.get(id=id)
-        
         #Проверка на владение записью
         if needhelp.user.username == request.user.username:
-
             if request.method == 'POST':
                 form = NeedhelpEditForm(request.POST, instance=needhelp)
                 if form.is_valid():
@@ -522,14 +509,187 @@ def needhelp_delete__page(request, id):
 
 
 
+def section__page(request):
+    favorite = []
+    if request.user.is_authenticated == True:
+        favorite = user_favorite_list(request.user, "Нуждаются в помощи")
+    if request.method == "POST" and request.user.is_authenticated == True:
+        if request.POST['service_id'] and request.POST['service_name']:
+            change_favorite(
+                request.user,
+                request.POST['service_name'],
+                request.POST['service_id']
+                )
+            return redirect('section')
+    filter_form = SectionFilterForm()
+    #Фильтрация по значеням из GET (фильтрация через форму)
+    if request.method == 'GET' and len(request.GET) > 0:
+        query_dict = dict(request.GET)
+        query_dict.pop("csrfmiddlewaretoken")
+        query_dict = {f'{name}__in': query_dict[name]  for name in query_dict if query_dict[name]}
+        section = Section.objects.filter(**query_dict).order_by('-id')
+    else:
+        section = Section.objects.all().order_by('-id')
+    data = {
+        'filter_form': filter_form,
+        'sections': section,
+        'favorites': favorite
+    }
+    return render(request, 'web/page/section.html', data)
+
+
+def section_add__page(request):
+    if request.user.profile.account_type == "Пользователь":
+        if request.method == 'POST':
+            form = SectionEditForm(request.POST)
+            if form.is_valid():
+                updated_form = form.save(commit=False)
+                updated_form.user = request.user
+                updated_form.save()
+                return redirect('section')
+        else:
+            form = SectionEditForm()
+        data = {
+                'form': form
+            }
+        return render(request, 'web/page/service_edit.html', data)
+    else:
+        return redirect('section')
+
+
+@login_required
+def section_edit__page(request, id):
+    if request.user.profile.account_type == "Пользователь":
+        section = Section.objects.get(id=id)
+        #Проверка на владение записью
+        if section.user.username == request.user.username:
+            if request.method == 'POST':
+                form = SectionEditForm(request.POST, instance=section)
+                if form.is_valid():
+                    form.save()
+                    return redirect('section')
+            else:
+                form = SectionEditForm(instance=section)
+
+            data ={
+                'form': form
+            }
+            return render(request, 'web/page/service_edit.html', data)
+    return redirect('section')
+
+
+@login_required
+def section_delete__page(request, id):
+    if request.user.profile.account_type == "Пользователь":
+        section = Section.objects.get(id=id)
+        #Проверка на владение записью
+        if section.user == request.user:
+            if request.method == "POST" and request.POST['delete_confirmation']:
+                if request.POST['delete_confirmation'] == "delete_accept":
+                    section.delete()
+            else:
+                data ={
+                    "section": section,
+                }
+                return render(request, 'web/page/section_delete.html', data)
+    return redirect('section')
+
+
+
+def event__page(request):
+    favorite = []
+    if request.user.is_authenticated == True:
+        favorite = user_favorite_list(request.user, "Мероприятия")
+    if request.method == "POST" and request.user.is_authenticated == True:
+        if request.POST['service_id'] and request.POST['service_name']:
+            change_favorite(
+                request.user,
+                request.POST['service_name'],
+                request.POST['service_id']
+                )
+            return redirect('event')
+    filter_form = EventFilterForm()
+    #Фильтрация по значеням из GET (фильтрация через форму)
+    if request.method == 'GET' and len(request.GET) > 0:
+        query_dict = dict(request.GET)
+        query_dict.pop("csrfmiddlewaretoken")
+        query_dict = {f'{name}__in': query_dict[name]  for name in query_dict if query_dict[name]}
+        event = Event.objects.filter(**query_dict).order_by('-id')
+    else:
+        event = Event.objects.all().order_by('-id')
+    data = {
+        'filter_form': filter_form,
+        'events': event,
+        'favorites': favorite
+    }
+    return render(request, 'web/page/event.html', data)
+
+
+def event_add__page(request):
+    if request.user.profile.account_type == "Пользователь":
+        if request.method == 'POST':
+            form = EventEditForm(request.POST)
+            if form.is_valid():
+                updated_form = form.save(commit=False)
+                updated_form.user = request.user
+                updated_form.save()  
+                return redirect('event')
+        else:
+            form = EventEditForm()
+        
+        data = {
+                'form': form
+            }
+        return render(request, 'web/page/service_edit.html', data)
+    else:
+        return redirect('event')
+
+
+@login_required
+def event_edit__page(request, id):
+    if request.user.profile.account_type == "Пользователь":
+        event = Event.objects.get(id=id)
+        #Проверка на владение записью
+        if event.user.username == request.user.username:
+            if request.method == 'POST':
+                form = EventEditForm(request.POST, instance=event)
+                if form.is_valid():
+                    form.save()
+                    return redirect('event')
+            else:
+                form = EventEditForm(instance=event)
+
+            data ={
+                'form': form
+            }
+            return render(request, 'web/page/service_edit.html', data)
+    return redirect('event')
+
+
+@login_required
+def event_delete__page(request, id):
+    if request.user.profile.account_type == "Пользователь":
+        event = Event.objects.get(id=id)
+        #Проверка на владение записью
+        if event.user == request.user:
+            if request.method == "POST" and request.POST['delete_confirmation']:
+                if request.POST['delete_confirmation'] == "delete_accept":
+                    event.delete()
+            else:
+                data ={
+                    "event": event,
+                }
+                return render(request, 'web/page/event_delete.html', data)
+    return redirect('event')
+
+
+
+
 def change_favorite(user, service_name, service_id):
     print(user, service_name, service_id)
-
-    service_name_list = ["Специалисты", "Волонтерство", "Нуждается в помощи", 
+    service_name_list = ["Специалисты", "Волонтерство", "Нуждаются в помощи", 
                         "Мероприятия", "Секции"]
-
     try:
-
         user = User.objects.get(username=user)
         print(user)
         favorite = Favorite.objects.filter(user=user, service_name=service_name, service_id=service_id)
@@ -537,10 +697,8 @@ def change_favorite(user, service_name, service_id):
         if service_name in service_name_list:
             if len(favorite) == 0:
                 Favorite(user=user, service_name=service_name, service_id=int(service_id)).save()
-                print("Добавлено")
             else:
                 favorite.delete()
-                print("Удалено")
     except:
         return redirect('error')
 
@@ -548,9 +706,7 @@ def change_favorite(user, service_name, service_id):
 
 def user_favorite_list(user, service_name):
     favorite = []
-
     favorite_queryset = Favorite.objects.filter(user=user, service_name=service_name)
     for el in favorite_queryset:
-        favorite.append(el.service_id)
-    
+        favorite.append(el.service_id)  
     return favorite

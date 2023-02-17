@@ -22,5 +22,13 @@ urlpatterns = [
 	path('needhelp/add', views.needhelp_add__page, name='needhelp_add'),
 	path('needhelp/edit/<int:id>', views.needhelp_edit__page, name='needhelp_edit'),
 	path('needhelp/delete/<int:id>', views.needhelp_delete__page, name='needhelp_delete'),
+	path('section', views.section__page, name='section'),
+	path('section/add', views.section_add__page, name='section_add'),
+	path('section/edit/<int:id>', views.section_edit__page, name='section_edit'),
+	path('section/delete/<int:id>', views.section_delete__page, name='section_delete'),
+	path('event', views.event__page, name='event'),
+	path('event/add', views.event_add__page, name='event_add'),
+	path('event/edit/<int:id>', views.event_edit__page, name='event_edit'),
+	path('event/delete/<int:id>', views.event_delete__page, name='event_delete'),
 	path('search', views.search__page, name='search')
 	]

@@ -4,14 +4,14 @@
 	<section class="services_block">
 		
 		<div class="services_page-title">
-			<h1>Волонтерство</h1>
+			<h1>Секции</h1>
 		</div>
 
 		<!-- Поиск + добавить пост -->
 		<div class="services_search">
 			<!-- Поисковик -->
 			<form method="GET" action="/search" class="services_search_form">
-				<input type="hidden" name="service" value="volunteer" />
+				<input type="hidden" name="service" value="section" />
 				<input type="text" name="q" value="{{query}}" placeholder="Поиск" class="services_search_input">
 
 				<button type="submit" class="services_search_icon">			
@@ -22,7 +22,7 @@
 
 			<!-- Добавить пост -->
 			{% if user.profile.account_type == "Пользователь" %}
-				<a class="services_search_button" href="/volunteer/add">
+				<a class="services_search_button" href="/section/add">
 					<img src="{% static 'web/img/icons/plus.svg' %}">
 				</a>
 			{% endif %}
@@ -44,11 +44,11 @@
 		</div>
 		<div class="services_content">
 			
-				{% if volunteers|length == 0 %}
+				{% if sections|length == 0 %}
 					К сожалению нет записей с такими параметрами
 				{% else %}
-					{% for volunteer in volunteers %}
-						{% include 'web/card/volunteer_card.html' %}
+					{% for section in sections %}
+						{% include 'web/card/section_card.html' %}
 					{% endfor %}
 				{% endif %}
 			

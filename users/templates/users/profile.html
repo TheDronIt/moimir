@@ -39,6 +39,7 @@
 
 			
 			<!--Карточки если пользователь-->
+			{% if user.profile.account_type == "Пользователь" %}
 			<div class="my_profile_user_block">
 				<div class="my_profile_user_card_input_block">
 					<input type="button" id="user_card_1" value="Специалист" class="button my_profile_user_card_input" style="background: #032042">
@@ -50,23 +51,35 @@
 					
 				<div>
 					<label for="user_card_1" class="my_profile_user_card_label" style="display:block">
-						111
+						{% for specialist in specialists %}
+							{% include 'web/card/specialist_card.html' %}
+						{% endfor %}
 					</label>
 					<label for="user_card_2" class="my_profile_user_card_label">
-						222
+						{% for volunteer in volunteers %}
+							{% include 'web/card/volunteer_card.html' %}
+						{% endfor %}
 					</label>
 					<label for="user_card_3" class="my_profile_user_card_label">
-						333
+						{% for needhelp in needhelps %}
+							{% include 'web/card/needhelp_card.html' %}
+						{% endfor %}
 					</label>
 					<label for="user_card_4" class="my_profile_user_card_label">
-						444
+						{% for event in events %}
+							{% include 'web/card/event_card.html' %}
+						{% endfor %}
+						
 					</label>
 					<label for="user_card_5" class="my_profile_user_card_label">
-						555
+						{% for section in sections %}
+							{% include 'web/card/section_card.html' %}
+						{% endfor %}
 					</label>
 				</div>
-				
+	
 			</div>
+			{% endif %}
 			
 
 			
@@ -88,7 +101,7 @@
 
     	if ($label.length > 0 ) {
        		$(this).css("background", "#032042")
-       		$label.css("display", "block")
+       		$label.css("display", "grid")
     	}
         
     });

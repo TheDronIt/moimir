@@ -97,8 +97,58 @@ class NeedhelpEditForm(forms.ModelForm):
     title = forms.CharField(label='Название заголовка', widget=forms.TextInput(attrs={'class': 'service_add_input', 'placeholder': 'Название заголовка'}))
     description = forms.CharField(label='Описание', widget=forms.Textarea(attrs={'class': 'service_add_input', 'placeholder': 'Описание'}))
     
-    support_type = forms.ChoiceField(choices=Needhelp.support_type_list, label='Способ помочь', widget=forms.Select(attrs={'class': 'service_add_input', 'placeholder': 'Способ помочь'}))
+    support_type = forms.ChoiceField(choices=Needhelp.support_type_list, label='Способ помочь', widget=forms.Select(attrs={'class': 'service_add_input'}))
 
     class Meta:
         model = Needhelp
         fields = ['title', 'description', 'support_type']
+
+
+
+class SectionFilterForm(forms.ModelForm):
+
+    event_theme = forms.ChoiceField(label='Тема', choices=Section.event_theme_list, widget=forms.CheckboxSelectMultiple(attrs={'class': 'services_filter_el'}))
+    age_limit = forms.ChoiceField(label='Возрастное ограничение', choices=Section.age_limit_list, widget=forms.CheckboxSelectMultiple(attrs={'class': 'services_filter_el'}))
+
+    class Meta:
+        model = Section
+        fields = ['event_theme', 'age_limit']
+
+
+class SectionEditForm(forms.ModelForm):
+
+    title = forms.CharField(label='Название секции', widget=forms.TextInput(attrs={'class': 'service_add_input', 'placeholder': 'Название секции'}))
+    description = forms.CharField(label='Описание', widget=forms.Textarea(attrs={'class': 'service_add_input', 'placeholder': 'Описание'}))
+    
+    event_theme = forms.ChoiceField(choices=Section.event_theme_list, label='Тема секции', widget=forms.Select(attrs={'class': 'service_add_input'}))
+    age_limit = forms.ChoiceField(choices=Section.age_limit_list, label='Возрастное ограничение', widget=forms.Select(attrs={'class': 'service_add_input'}))
+
+    class Meta:
+        model = Section
+        fields = ['title', 'description', 'event_theme', 'age_limit']
+
+
+
+class EventFilterForm(forms.ModelForm):
+
+    event_theme = forms.ChoiceField(label='Тема', choices=Event.event_theme_list, widget=forms.CheckboxSelectMultiple(attrs={'class': 'services_filter_el'}))
+
+    class Meta:
+        model = Event
+        fields = ['event_theme']
+
+
+class EventEditForm(forms.ModelForm):
+
+    title = forms.CharField(label='Название мероприятия', widget=forms.TextInput(attrs={'class': 'service_add_input', 'placeholder': 'Название мероприятия'}))
+    description = forms.CharField(label='Описание', widget=forms.Textarea(attrs={'class': 'service_add_input', 'placeholder': 'Описание'}))
+    
+    event_location = forms.CharField(label='Адрес мероприятия', widget=forms.TextInput(attrs={'class': 'service_add_input', 'placeholder': 'Адрес мероприятия'}))
+    event_date = forms.DateField(label='Дата мероприятия', widget=forms.DateInput(attrs={'class': 'service_add_input', 'type': 'date', }))
+    event_time = forms.TimeField(label='Дата мероприятия', widget=forms.TimeInput(attrs={'class': 'service_add_input', 'type': 'time' }))
+
+    event_theme = forms.ChoiceField(choices=Event.event_theme_list, label='Тема мероприятия', widget=forms.Select(attrs={'class': 'service_add_input'}))
+
+    class Meta:
+        model = Event
+        fields = ['title', 'description', 'event_location', 'event_date', 'event_time', 'event_theme']

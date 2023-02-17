@@ -80,7 +80,7 @@ class Favorite(models.Model):
     service_name_list = [
         ("Специалисты", "Специалисты"),
         ("Волонтерство", "Волонтерство"),
-        ("Нуждается в помощи", "Нуждается в помощи"),
+        ("Нуждаются в помощи", "Нуждаются в помощи"),
         ("Мероприятия", "Мероприятия"),
         ("Секции", "Секции"),
     ]
@@ -166,8 +166,8 @@ class Volunteer(models.Model):
 
 class Needhelp(models.Model):
     class Meta:
-        verbose_name = 'Волонтеры'
-        verbose_name_plural = 'Волонтеры'
+        verbose_name = 'Нуждаются в помощи'
+        verbose_name_plural = 'Нуждаются в помощи'
 
     support_type_list = [
         ("Финансы", "Финансы"),
@@ -184,3 +184,88 @@ class Needhelp(models.Model):
 
     def __str__(self):
         return self.title
+
+
+
+class Section(models.Model):
+    class Meta:
+        verbose_name = 'Секции'
+        verbose_name_plural = 'Секции'
+
+    event_theme_list = [
+        ("Спорт", "Спорт"),
+        ("Волонтерство", "Волонтерство"),
+        ("Игры", "Игры"),
+        ("Театральное искусство", "Театральное искусство"),
+        ("Образование", "Образование"),
+        ("Творчество", "Творчество"),
+        ("Другое", "Другое")
+    ]
+    age_limit_list = [
+        ("Для детей", "Для детей"),
+        ("Для взрослых", "Для взрослых"),
+        ("Без ограничений", "Без ограничений")
+    ]
+
+    title = models.CharField(verbose_name="Название секции", max_length=50)
+    user =  models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="Пользователь", related_name="sections_user", null=True)
+    description = models.TextField(verbose_name="Описание", max_length=1000)
+    date = models.DateField(verbose_name='Дата', default=datetime.now, blank=True)
+
+    event_theme = models.CharField(verbose_name="Тема секции", choices=event_theme_list, max_length=50)
+    age_limit = models.CharField(verbose_name="Возрастное ограничение", choices=age_limit_list, max_length=50)
+
+    def __str__(self):
+        return self.title
+
+
+class Event(models.Model):
+    class Meta:
+        verbose_name = 'Мероприятия'
+        verbose_name_plural = 'Мероприятия'
+
+    display_status_list = [
+        ("Отображать", "Отображать"),
+        ("Скрывать", "Скрывать")
+    ]
+
+    event_theme_list = [
+        ("Спорт", "Спорт"),
+        ("Цирк", "Цирк"),
+        ("Городские события", "Городские события"),
+        ("Игры и квесты", "Игры и квесты"),
+        ("Театры", "Театры"),
+        ("Концерты", "Концерты"),
+        ("Музеи и галереи", "Музеи и галереи"),
+        ("Экскурсии ", "Экскурсии "),
+        ("Обучение ", "Обучение "),
+        ("Творчество", "Творчество")
+    ]
+
+    title = models.CharField(verbose_name="Название мероприятия", max_length=50)
+    user =  models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="Пользователь", related_name="event_user", null=True)
+    description = models.TextField(verbose_name="Описание", max_length=1000)
+    date = models.DateField(verbose_name='Дата', default=datetime.now, blank=True)
+
+    event_location = models.CharField(verbose_name="Адрес мероприятия", max_length=50)
+    event_date = models.DateField(verbose_name='Дата мероприятия')
+    event_time = models.TimeField(verbose_name='Время мероприятия')
+
+    event_theme = models.CharField(verbose_name="Тема мероприятия", choices=event_theme_list, max_length=50)
+
+    display_status = models.CharField(verbose_name="Статус отображения", choices=display_status_list, default="Скрывать" ,max_length=50)
+
+    def __str__(self):
+        return self.title
+
+'''
+class InfoCategory(models.Model):
+    class Meta:
+        verbose_name = 'Категории полезной информации'
+        verbose_name_plural = 'Категории полезной информации'
+
+    Name = models.CharField(verbose_name="Название", max_length=50)
+
+    def __str__(self):
+        return str(self.Name)
+'''

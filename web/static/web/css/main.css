@@ -252,7 +252,7 @@ a {
 {
 	width: 200px;
 	height: 200px;
-	border-radius: 100%;
+	border-radius: 16px;
 	background-color: #EFEFEF;
 	overflow: hidden;
 }
@@ -401,6 +401,7 @@ a {
 {
 	margin-top: 20px;
 	display: none;
+	grid-row-gap: 20px;
 }
 /* END MY_PROFILE */
 
@@ -427,10 +428,16 @@ a {
 	color: gray;
 	cursor: pointer;
 }
-.services_search
+.services_page-title
 {
-	grid-row: 1;
-	grid-column: 2;
+	display: flex;
+	align-items: center;
+	max-width: 100%;
+}
+.services_page-title h1
+{
+	font-size: 2rem;
+	margin: 0;
 }
 .services_filter_button__container
 {
@@ -511,8 +518,9 @@ div.services_filter_el
 .services_card_user_add-favorite
 {
 	position: absolute;
-	bottom: 0px;
+	bottom: 4px;
 	left: 4px;
+	margin: 0;
 }
 .services_card_user_add-favorite_button
 {
@@ -657,7 +665,8 @@ div.services_filter_el
 	border-radius: 8px;
 	padding: 10px 15px;
 	border: none;
-	width: 600px;
+	min-width: 550px;
+	max-width: 600px;
 	outline:none;
 	margin-bottom: 15px;
 }

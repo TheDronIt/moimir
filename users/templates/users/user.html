@@ -1,3 +1,5 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
 {% extends "web/base.html" %}
 {% load static %}
 {% block content %}
@@ -24,11 +26,82 @@
 				@{{ user_profile.username }}
 			</div>
 			{% for Job in Jobs %}
-				
 				{% include 'web/card/job_card.html' %}
 			{% endfor %}
 			
+
+
+			<!--Карточки если пользователь-->
+			{% if user_profile.profile.account_type == "Пользователь" %}
+			<div class="my_profile_user_block">
+				<div class="my_profile_user_card_input_block">
+					<input type="button" id="user_card_1" value="Специалист" class="button my_profile_user_card_input" style="background: #032042">
+					<input type="button" id="user_card_2" value="Волонтер" class="button my_profile_user_card_input">
+					<input type="button" id="user_card_3" value="Нуждается в помощи" class="button my_profile_user_card_input">
+					<input type="button" id="user_card_4" value="Организатор мероприятия" class="button my_profile_user_card_input">
+					<input type="button" id="user_card_5" value="Организатор секции" class="button my_profile_user_card_input">
+				</div>
+					
+				<div>
+					<label for="user_card_1" class="my_profile_user_card_label" style="display:block">
+						{% with favorites=favorite_specialist %}
+							{% for specialist in specialists %}
+								{% include 'web/card/specialist_card.html' %}
+							{% endfor %}
+						{% endwith %}
+					</label>
+					<label for="user_card_2" class="my_profile_user_card_label">
+						{% with favorites=favorite_volunteer %}
+							{% for volunteer in volunteers %}
+								{% include 'web/card/volunteer_card.html' %}
+							{% endfor %}
+						{% endwith %}
+					</label>
+					<label for="user_card_3" class="my_profile_user_card_label">
+						{% with favorites=favorite_needhelp %}
+							{% for needhelp in needhelps %}
+								{% include 'web/card/needhelp_card.html' %}
+							{% endfor %}
+						{% endwith %}
+					</label>
+					<label for="user_card_4" class="my_profile_user_card_label">
+						{% with favorites=favorite_event %}
+							{% for event in events %}
+								{% include 'web/card/event_card.html' %}
+							{% endfor %}
+						{% endwith %}
+					</label>
+					<label for="user_card_5" class="my_profile_user_card_label">
+						{% with favorites=favorite_section %}
+							{% for section in sections %}
+								{% include 'web/card/section_card.html' %}
+							{% endfor %}
+						{% endwith %}
+					</label>
+				</div>
+	
+			</div>
+			{% endif %}
+
 		</div>
 	</div>
 </div>
+
+
+<script> /*Отображение пользовательских карточек*/
+    $(".my_profile_user_card_input").click(function(){
+
+    	$(".my_profile_user_card_label").removeAttr("style")
+    	$(".my_profile_user_card_input").removeAttr("style")
+
+    	$this = $(this);
+    	$label = $('label[for="'+ $this.attr('id') +'"]');
+
+    	if ($label.length > 0 ) {
+       		$(this).css("background", "#032042")
+       		$label.css("display", "grid")
+    	}
+        
+    });
+ </script>
 {% endblock %}

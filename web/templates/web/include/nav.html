@@ -56,11 +56,11 @@
 				<img src="{% static 'web/img/icons/need_help.svg' %}" class="nav_menu_button_icon">
 				<span class="nav_menu_button_name">Нуждаются в помощи</span>
 			</a>
-			<a href="#" class="nav_menu_button">
+			<a href="{% url 'event' %}" class="nav_menu_button">
 				<img src="{% static 'web/img/icons/event.svg' %}" class="nav_menu_button_icon">
 				<span class="nav_menu_button_name">Мероприятия</span>
 			</a>
-			<a href="#" class="nav_menu_button">
+			<a href="{% url 'section' %}" class="nav_menu_button">
 				<img src="{% static 'web/img/icons/sections.svg' %}" class="nav_menu_button_icon">
 				<span class="nav_menu_button_name">Секции</span>
 			</a>

@@ -4,6 +4,7 @@ from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login
 
+from web.views import *
 from web.models import *
 from .models import *
 from .forms import *
@@ -87,8 +88,19 @@ def profile(request):
         data={
             "Jobs": job
         }
-    else:
-        data={}
+    elif request.user.profile.account_type == "Пользователь":
+        specialist = Specialist.objects.filter(user=request.user)
+        volunteer = Volunteer.objects.filter(user=request.user)
+        needhelp = Needhelp.objects.filter(user=request.user)
+        section = Section.objects.filter(user=request.user)
+        event = Event.objects.filter(user=request.user)
+        data={
+            'specialists': specialist,
+            'volunteers': volunteer,
+            'needhelps': needhelp,
+            'sections': section,
+            'events': event
+        }
     return render(request, 'users/profile.html', data)
 
 
@@ -132,6 +144,8 @@ def profile_edit(request):
 def user_profile(request, username):
     user = User.objects.get(username=username)
 
+
+
     if user.profile.account_type == "Работодатель":
 
         job_response = []
@@ -149,8 +163,43 @@ def user_profile(request, username):
             'user_profile': user,
             'Job_response': job_response
         }
-    else:
+    elif user.profile.account_type == "Пользователь":
+
+        favorite = []
+        if request.user.is_authenticated == True:
+            favorite_specialist = user_favorite_list(request.user, "Специалисты")
+            favorite_volunteer = user_favorite_list(request.user, "Волонтерство")
+            favorite_needhelp = user_favorite_list(request.user, "Нуждаются в помощи")
+            favorite_section = user_favorite_list(request.user, "Секции")
+            favorite_event = user_favorite_list(request.user, "Мероприятия")
+
+
+        if request.method == "POST" and request.user.is_authenticated == True:
+            if request.POST['service_id'] and request.POST['service_name']:
+                change_favorite(
+                    request.user,
+                    request.POST['service_name'],
+                    request.POST['service_id']
+                    )
+                return redirect(f'/user/{user.username}')
+
+
+        specialist = Specialist.objects.filter(user=user)
+        volunteer = Volunteer.objects.filter(user=user)
+        needhelp = Needhelp.objects.filter(user=user)
+        section = Section.objects.filter(user=user)
+        event = Event.objects.filter(user=user)
         data = {
-            'user_profile': user
+            'user_profile': user,
+            'favorite_specialist': favorite_specialist,
+            'favorite_volunteer': favorite_volunteer,
+            'favorite_needhelp': favorite_needhelp,
+            'favorite_section': favorite_section,
+            'favorite_event': favorite_event,
+            'specialists': specialist,
+            'volunteers': volunteer,
+            'needhelps': needhelp,
+            'sections': section,
+            'events': event
         }
     return render(request, 'users/user.html', data)
