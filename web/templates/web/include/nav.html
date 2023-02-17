@@ -40,19 +40,19 @@
 			</div>
 		</div>
 		<div class="nav_menu">
-			<a href="/job" class="nav_menu_button">
+			<a href="{% url 'job' %}" class="nav_menu_button">
 				<img src="{% static 'web/img/icons/work_found.svg' %}" class="nav_menu_button_icon">
 				<span class="nav_menu_button_name">Поиск работы</span>
 			</a>
-			<a href="/specialist" class="nav_menu_button">
+			<a href="{% url 'specialist' %}" class="nav_menu_button">
 				<img src="{% static 'web/img/icons/education.svg' %}" class="nav_menu_button_icon">
 				<span class="nav_menu_button_name">Специалисты</span>
 			</a>
-			<a href="#" class="nav_menu_button">
+			<a href="{% url 'volunteer' %}" class="nav_menu_button">
 				<img src="{% static 'web/img/icons/volunteer.svg' %}" class="nav_menu_button_icon">
 				<span class="nav_menu_button_name">Волонтерство</span>
 			</a>
-			<a href="#" class="nav_menu_button">
+			<a href="{% url 'needhelp' %}" class="nav_menu_button">
 				<img src="{% static 'web/img/icons/need_help.svg' %}" class="nav_menu_button_icon">
 				<span class="nav_menu_button_name">Нуждаются в помощи</span>
 			</a>

@@ -67,3 +67,38 @@ class VolunteerFilterForm(forms.ModelForm):
     class Meta:
         model = Volunteer
         fields = ['type_of_employment', 'work_with']
+
+
+class VolunteerEditForm(forms.ModelForm):
+
+    title = forms.CharField(label='Название услуги волонтера', widget=forms.TextInput(attrs={'class': 'service_add_input', 'placeholder': 'Название услуги волонтера'}))
+    description = forms.CharField(label='Описание', widget=forms.Textarea(attrs={'class': 'service_add_input', 'placeholder': 'Описание'}))
+    
+    type_of_employment = forms.ChoiceField(choices=Volunteer.type_of_employment_list, label='Тип занятости', widget=forms.Select(attrs={'class': 'service_add_input', 'placeholder': 'Тип занятости'}))
+    work_with = forms.ChoiceField(choices=Volunteer.work_with_list, label='Готов помочь', widget=forms.Select(attrs={'class': 'service_add_input', 'placeholder': 'Особые условия'}))
+
+    class Meta:
+        model = Volunteer
+        fields = ['title', 'description', 'type_of_employment', 'work_with']
+
+
+
+class NeedhelpFilterForm(forms.ModelForm):
+
+    support_type = forms.ChoiceField(label='Способ помочь', choices=Needhelp.support_type_list, widget=forms.CheckboxSelectMultiple(attrs={'class': 'services_filter_el'}))
+
+    class Meta:
+        model = Needhelp
+        fields = ['support_type']
+
+
+class NeedhelpEditForm(forms.ModelForm):
+
+    title = forms.CharField(label='Название заголовка', widget=forms.TextInput(attrs={'class': 'service_add_input', 'placeholder': 'Название заголовка'}))
+    description = forms.CharField(label='Описание', widget=forms.Textarea(attrs={'class': 'service_add_input', 'placeholder': 'Описание'}))
+    
+    support_type = forms.ChoiceField(choices=Needhelp.support_type_list, label='Способ помочь', widget=forms.Select(attrs={'class': 'service_add_input', 'placeholder': 'Способ помочь'}))
+
+    class Meta:
+        model = Needhelp
+        fields = ['title', 'description', 'support_type']

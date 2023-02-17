@@ -1,0 +1,52 @@
+{% load static %}
+{% block content %}
+	<div class="services_card">
+		<div class="services_card_user">
+			<div class="services_card_user_image">
+				<img src="{{needhelp.user.profile.image.url}}">
+				{% if user.username != needhelp.user.username %}
+					{% if needhelp.id in favorites %}
+						<form method="POST"  class="services_card_user_add-favorite">
+							{% csrf_token %}
+							<input type="hidden" name="service_name" value="Специалисты" />
+							<input type="hidden" name="service_id" value="{{needhelp.id}}" />
+							<button type="submit" class="services_card_user_add-favorite_button">
+								<img src="{% static 'web/img/icons/remove-favorite.svg' %}">
+							</button>
+						</form>
+					{% else %}
+						<form method="POST" class="services_card_user_add-favorite">
+							{% csrf_token %}
+							<input type="hidden" name="service_name" value="Специалисты" />
+							<input type="hidden" name="service_id" value="{{needhelp.id}}" />
+							<button type="submit" class="services_card_user_add-favorite_button">
+								<img src="{% static 'web/img/icons/add-favorite.svg' %}">
+							</button>
+						</form>
+					{% endif %}
+				{% endif %}
+			</div>
+			<div class="services_card_employer_info">
+				<h2>{{needhelp.title}}</h2>
+				
+				{{needhelp.description}}
+
+				<div class="services_card_employer_info_filter">
+					<span><b>Способ помочь:</b> {{needhelp.support_type}}</span>
+				</div>
+			
+				
+				{% if needhelp.user.username == user.username %}
+					<div class="services_card_employer-button_container">
+						<a href="/needhelp/edit/{{needhelp.id}}" class="button services_card_employer-button">Редактировать</a>
+						<a href="/needhelp/delete/{{needhelp.id}}" style="color:#F44949; display: block;">Удалить</a>
+					</div>
+				{% endif %}
+
+				
+			</div>
+		</div>
+		<a class="services_card_employer-name" href="/user/{{needhelp.user.username}}">{{needhelp.user.profile.name}} {{needhelp.user.profile.surname}}, {{needhelp.user.profile.age}}</a>
+		<span class="services_card_date">{{needhelp.date}}</span>
+	</div>
+{% endblock %}

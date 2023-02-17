@@ -1,0 +1,53 @@
+{% load static %}
+{% block content %}
+	<div class="services_card">
+		<div class="services_card_user">
+			<div class="services_card_user_image">
+				<img src="{{volunteer.user.profile.image.url}}">
+				{% if user.username != volunteer.user.username %}
+					{% if volunteer.id in favorites %}
+						<form method="POST"  class="services_card_user_add-favorite">
+							{% csrf_token %}
+							<input type="hidden" name="service_name" value="Специалисты" />
+							<input type="hidden" name="service_id" value="{{volunteer.id}}" />
+							<button type="submit" class="services_card_user_add-favorite_button">
+								<img src="{% static 'web/img/icons/remove-favorite.svg' %}">
+							</button>
+						</form>
+					{% else %}
+						<form method="POST" class="services_card_user_add-favorite">
+							{% csrf_token %}
+							<input type="hidden" name="service_name" value="Специалисты" />
+							<input type="hidden" name="service_id" value="{{volunteer.id}}" />
+							<button type="submit" class="services_card_user_add-favorite_button">
+								<img src="{% static 'web/img/icons/add-favorite.svg' %}">
+							</button>
+						</form>
+					{% endif %}
+				{% endif %}
+			</div>
+			<div class="services_card_employer_info">
+				<h2>{{volunteer.title}}</h2>
+				
+				{{volunteer.description}}
+
+				<div class="services_card_employer_info_filter">
+					<span><b>Тип занятости:</b> {{volunteer.type_of_employment}}</span>
+					<span><b>Готов помочь:</b> {{volunteer.work_with}}</span>
+				</div>
+			
+				
+				{% if volunteer.user.username == user.username %}
+					<div class="services_card_employer-button_container">
+						<a href="/volunteer/edit/{{volunteer.id}}" class="button services_card_employer-button">Редактировать</a>
+						<a href="/volunteer/delete/{{volunteer.id}}" style="color:#F44949; display: block;">Удалить</a>
+					</div>
+				{% endif %}
+
+				
+			</div>
+		</div>
+		<a class="services_card_employer-name" href="/user/{{volunteer.user.username}}">{{volunteer.user.profile.name}} {{volunteer.user.profile.surname}}, {{volunteer.user.profile.age}}</a>
+		<span class="services_card_date">{{volunteer.date}}</span>
+	</div>
+{% endblock %}

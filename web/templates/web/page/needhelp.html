@@ -8,7 +8,7 @@
 		<div class="services_search">
 			<!-- Поисковик -->
 			<form method="GET" action="/search" class="services_search_form">
-				<input type="hidden" name="service" value="volunteer" />
+				<input type="hidden" name="service" value="needhelp" />
 				<input type="text" name="q" value="{{query}}" placeholder="Поиск" class="services_search_input">
 
 				<button type="submit" class="services_search_icon">			
@@ -19,7 +19,7 @@
 
 			<!-- Добавить пост -->
 			{% if user.profile.account_type == "Пользователь" %}
-				<a class="services_search_button" href="/volunteer/add">
+				<a class="services_search_button" href="/needhelp/add">
 					<img src="{% static 'web/img/icons/plus.svg' %}">
 				</a>
 			{% endif %}
@@ -41,11 +41,11 @@
 		</div>
 		<div class="services_content">
 			
-				{% if volunteers|length == 0 %}
+				{% if needhelps|length == 0 %}
 					К сожалению нет записей с такими параметрами
 				{% else %}
-					{% for volunteer in volunteers %}
-						{% include 'web/card/volunteer_card.html' %}
+					{% for needhelp in needhelps %}
+						{% include 'web/card/needhelp_card.html' %}
 					{% endfor %}
 				{% endif %}
 			

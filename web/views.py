@@ -60,7 +60,7 @@ def job_add__page(request):
         data = {
                 'form': form
             }
-        return render(request, 'web/page/job_add.html', data)
+        return render(request, 'web/page/service_edit.html', data)
     else:
         return redirect('job')
         
@@ -124,7 +124,7 @@ def job_edit__page(request, id):
             data ={
                 'form': form
             }
-            return render(request, 'web/page/job_add.html', data)
+            return render(request, 'web/page/service_edit.html', data)
     return redirect('job')
 
 
@@ -184,7 +184,6 @@ def search__page(request):
                 job_response_queryset = Job_response.objects.filter(user=request.user)
                 for el in job_response_queryset:
                     job_response.append(el.job.id)
-
             service_type = "job"
             answer = Job.objects.filter(title__icontains=query).order_by('-id') | Job.objects.filter(description__icontains=query).order_by('-id')
         
@@ -202,6 +201,21 @@ def search__page(request):
             service_type = "specialist"
             answer = Specialist.objects.filter(title__icontains=query).order_by('-id') | Specialist.objects.filter(description__icontains=query).order_by('-id')
 
+        elif request.GET['service'] == "volunteer":
+            if request.user.is_authenticated == True:
+                favorite = user_favorite_list(request.user, "Волонтерство")
+                if request.method == "POST" and request.user.is_authenticated == True:
+                    if request.POST['service_id'] and request.POST['service_name']:
+                        change_favorite(
+                            request.user,
+                            request.POST['service_name'],
+                            request.POST['service_id']
+                            )
+                        return redirect('volunteer')
+            service_type = "volunteer"
+            answer = Volunteer.objects.filter(title__icontains=query).order_by('-id') | Volunteer.objects.filter(description__icontains=query).order_by('-id')
+
+
     data = {
         'query':query,
         'service_type': service_type,
@@ -213,8 +227,7 @@ def search__page(request):
 
 
 
-def specialist__page(request):
-    
+def specialist__page(request): 
     favorite = []
     if request.user.is_authenticated == True:
         favorite = user_favorite_list(request.user, "Специалисты")
@@ -266,7 +279,7 @@ def specialist_add__page(request):
         data = {
                 'form': form
             }
-        return render(request, 'web/page/specialist_edit.html', data)
+        return render(request, 'web/page/service_edit.html', data)
     else:
         return redirect('specialist')
 
@@ -292,7 +305,7 @@ def specialist_edit__page(request, id):
             data ={
                 'form': form
             }
-            return render(request, 'web/page/specialist_edit.html', data)
+            return render(request, 'web/page/service_edit.html', data)
     return redirect('specialist')
 
 
@@ -312,6 +325,199 @@ def specialist_delete__page(request, id):
                 }
                 return render(request, 'web/page/specialist_delete.html', data)
     return redirect('specialist')
+
+
+
+
+
+def volunteer__page(request):
+    favorite = []
+    if request.user.is_authenticated == True:
+        favorite = user_favorite_list(request.user, "Волонтерство")
+    if request.method == "POST" and request.user.is_authenticated == True:
+        if request.POST['service_id'] and request.POST['service_name']:
+            change_favorite(
+                request.user,
+                request.POST['service_name'],
+                request.POST['service_id']
+                )
+            return redirect('volunteer')
+
+    filter_form = VolunteerFilterForm()
+    #Фильтрация по значеням из GET (фильтрация через форму)
+    if request.method == 'GET' and len(request.GET) > 0:
+        query_dict = dict(request.GET)
+        query_dict.pop("csrfmiddlewaretoken")
+        query_dict = {f'{name}__in': query_dict[name]  for name in query_dict if query_dict[name]}
+        volunteer = Volunteer.objects.filter(**query_dict).order_by('-id')
+    else:
+        volunteer = Volunteer.objects.all().order_by('-id')
+
+    data = {
+        'filter_form': filter_form,
+        'volunteers': volunteer,
+        'favorites': favorite
+    }
+    return render(request, 'web/page/volunteer.html', data)
+
+
+def volunteer_add__page(request):
+    if request.user.profile.account_type == "Пользователь":
+        if request.method == 'POST':
+            form = VolunteerEditForm(request.POST)
+
+            if form.is_valid():
+                updated_form = form.save(commit=False)
+                updated_form.user = request.user #User.objects.get(user=request.user.profile.id)
+                updated_form.save()
+                
+                return redirect('volunteer')
+        else:
+            form = VolunteerEditForm()
+        
+        data = {
+                'form': form
+            }
+        return render(request, 'web/page/service_edit.html', data)
+    else:
+        return redirect('volunteer')
+
+
+@login_required
+def volunteer_edit__page(request, id):
+    if request.user.profile.account_type == "Пользователь":
+        
+        volunteer = Volunteer.objects.get(id=id)
+        
+        #Проверка на владение записью
+        if volunteer.user.username == request.user.username:
+
+            if request.method == 'POST':
+                form = VolunteerEditForm(request.POST, instance=volunteer)
+                if form.is_valid():
+                    form.save()
+                    return redirect('volunteer')
+            else:
+                form = VolunteerEditForm(instance=volunteer)
+
+            data ={
+                'form': form
+            }
+            return render(request, 'web/page/service_edit.html', data)
+    return redirect('volunteer')
+
+
+@login_required
+def volunteer_delete__page(request, id):
+    if request.user.profile.account_type == "Пользователь":
+        volunteer = Volunteer.objects.get(id=id)
+        #Проверка на владение записью
+        if volunteer.user == request.user:
+            if request.method == "POST" and request.POST['delete_confirmation']:
+                if request.POST['delete_confirmation'] == "delete_accept":
+                    volunteer.delete()
+            else:
+                data ={
+                    "volunteer": volunteer,
+                }
+                return render(request, 'web/page/volunteer_delete.html', data)
+    return redirect('volunteer')
+
+
+
+
+def needhelp__page(request):
+    favorite = []
+    if request.user.is_authenticated == True:
+        favorite = user_favorite_list(request.user, "Нуждаются в помощи")
+    if request.method == "POST" and request.user.is_authenticated == True:
+        if request.POST['service_id'] and request.POST['service_name']:
+            change_favorite(
+                request.user,
+                request.POST['service_name'],
+                request.POST['service_id']
+                )
+            return redirect('needhelp')
+
+    filter_form = NeedhelpFilterForm()
+    #Фильтрация по значеням из GET (фильтрация через форму)
+    if request.method == 'GET' and len(request.GET) > 0:
+        query_dict = dict(request.GET)
+        query_dict.pop("csrfmiddlewaretoken")
+        query_dict = {f'{name}__in': query_dict[name]  for name in query_dict if query_dict[name]}
+        needhelp = Needhelp.objects.filter(**query_dict).order_by('-id')
+    else:
+        needhelp = Needhelp.objects.all().order_by('-id')
+
+    data = {
+        'filter_form': filter_form,
+        'needhelps': needhelp,
+        'favorites': favorite
+    }
+    return render(request, 'web/page/needhelp.html', data)
+
+
+def needhelp_add__page(request):
+    if request.user.profile.account_type == "Пользователь":
+        if request.method == 'POST':
+            form = NeedhelpEditForm(request.POST)
+
+            if form.is_valid():
+                updated_form = form.save(commit=False)
+                updated_form.user = request.user #User.objects.get(user=request.user.profile.id)
+                updated_form.save()
+                
+                return redirect('needhelp')
+        else:
+            form = NeedhelpEditForm()
+        
+        data = {
+                'form': form
+            }
+        return render(request, 'web/page/service_edit.html', data)
+    else:
+        return redirect('needhelp')
+
+
+@login_required
+def needhelp_edit__page(request, id):
+    if request.user.profile.account_type == "Пользователь":
+        
+        needhelp = Needhelp.objects.get(id=id)
+        
+        #Проверка на владение записью
+        if needhelp.user.username == request.user.username:
+
+            if request.method == 'POST':
+                form = NeedhelpEditForm(request.POST, instance=needhelp)
+                if form.is_valid():
+                    form.save()
+                    return redirect('needhelp')
+            else:
+                form = NeedhelpEditForm(instance=needhelp)
+
+            data ={
+                'form': form
+            }
+            return render(request, 'web/page/service_edit.html', data)
+    return redirect('needhelp')
+
+
+@login_required
+def needhelp_delete__page(request, id):
+    if request.user.profile.account_type == "Пользователь":
+        needhelp = Needhelp.objects.get(id=id)
+        #Проверка на владение записью
+        if needhelp.user == request.user:
+            if request.method == "POST" and request.POST['delete_confirmation']:
+                if request.POST['delete_confirmation'] == "delete_accept":
+                    needhelp.delete()
+            else:
+                data ={
+                    "needhelp": needhelp,
+                }
+                return render(request, 'web/page/needhelp_delete.html', data)
+    return redirect('needhelp')
 
 
 

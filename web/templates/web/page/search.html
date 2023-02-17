@@ -23,6 +23,10 @@
 				{% for specialist in answer %}
 					{% include 'web/card/specialist_card.html' %}
 				{% endfor %}
+			{% elif service_type == "volunteer" %}
+				{% for volunteer in answer %}
+					{% include 'web/card/volunteer_card.html' %}
+				{% endfor %}
 			{% endif %}
 		{% endif %}
 		

@@ -14,5 +14,13 @@ urlpatterns = [
 	path('specialist/add', views.specialist_add__page, name='specialist_add'),
 	path('specialist/edit/<int:id>', views.specialist_edit__page, name='specialist_edit'),
 	path('specialist/delete/<int:id>', views.specialist_delete__page, name='specialist_delete'),
+	path('volunteer', views.volunteer__page, name='volunteer'),
+	path('volunteer/add', views.volunteer_add__page, name='volunteer_add'),
+	path('volunteer/edit/<int:id>', views.volunteer_edit__page, name='volunteer_edit'),
+	path('volunteer/delete/<int:id>', views.volunteer_delete__page, name='volunteer_delete'),
+	path('needhelp', views.needhelp__page, name='needhelp'),
+	path('needhelp/add', views.needhelp_add__page, name='needhelp_add'),
+	path('needhelp/edit/<int:id>', views.needhelp_edit__page, name='needhelp_edit'),
+	path('needhelp/delete/<int:id>', views.needhelp_delete__page, name='needhelp_delete'),
 	path('search', views.search__page, name='search')
 	]

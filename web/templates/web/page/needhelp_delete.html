@@ -4,13 +4,13 @@
 
 	<section class="job_delete_block">
 		<div class="job_responses_title">
-			<h1>{{specialist.title}}</h1>
+			<h1>{{needhelp.title}}</h1>
 			<span>Удаление карточки</span>
 			<input type="button" onclick="history.back();" value="Назад"/>
 		</div>
 
 		<div class="job_delete_card">
-			{% include 'web/card/volunteer_card.html' %}
+			{% include 'web/card/needhelp_card.html' %}
 		</div>
 
 		<form method="POST" class="job_delete_confirmation">
