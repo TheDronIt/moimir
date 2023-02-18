@@ -10,6 +10,10 @@ class Profile(models.Model):
         ("Детский", "Детский"),
         ("Работодатель", "Работодатель")
     ]
+    show_list = [
+        ("Отображать", "Отображать"),
+        ("Скрывать", "Скрывать")
+    ]
 
     def random_default_image():
         image_list = [
@@ -28,6 +32,9 @@ class Profile(models.Model):
     surname = models.CharField(verbose_name="Фамилия", max_length=50, null=True, blank=True)
     age =  models.IntegerField(verbose_name="Возраст", null=True, blank=True)
     bio =  models.TextField(max_length=500, verbose_name="О себе", blank=True)
+    contacts = models.CharField(verbose_name="Контакты", max_length=50, null=True, blank=True)
+    show_email = models.CharField(max_length=50, choices=show_list, default="Скрывать", verbose_name="Отображение почты")
+    show_contacts = models.CharField(max_length=50, choices=show_list, default="Скрывать", verbose_name="Отображение контактов")
     account_type = models.CharField(max_length=50, choices=account_type_list, default="Пользователь", verbose_name="Тип аккаунта")
     employer = models.CharField(verbose_name="Название организации", max_length=50, default="", null=True, blank=True, unique=True)
 

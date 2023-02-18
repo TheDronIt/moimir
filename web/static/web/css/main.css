@@ -312,6 +312,19 @@ a {
 	width: 26px;
 	height: 26px;
 }
+.my_profile_edit_save
+{
+	position: absolute;
+	right: 40px;
+	top: 40px;
+}
+.my_profile_edit_save_button
+{
+	background-color: inherit;
+	font-size: 1.6rem;
+	border: none;
+	cursor: pointer;
+}
 .my_profile_edit_block
 {
 	display: flex;
@@ -330,8 +343,8 @@ a {
 	border-radius: 8px;
 	padding: 10px 15px;
 	border: none;
-	min-width: 200px;
-	max-width: 400px;
+	min-width: 400px;
+	max-width: 600px;
 	outline:none;
 }
 .my_profile_edit_textarea{
@@ -342,7 +355,16 @@ a {
 	max-width: 200px;
 	outline:none;
 }
-
+.my_profile_about_contact
+{
+	display: flex;
+	flex-direction: column;
+}
+.my_profile_about_contact_small
+{
+	font-size: 1.3rem;
+	color: gray;
+}
 .my_profile_about_edit_b
 {
 	display: block;
@@ -414,6 +436,31 @@ a {
 	grid-template-columns: 300px 1fr;
 	grid-gap: 30px;
 }
+.services_info-block
+{
+	display: flex;
+	flex-direction: column;
+	grid-row-gap: 30px;
+}
+.services_info-card
+{
+	background-color: #F1F7FF;
+	border-radius: 16px;
+	padding: 30px;
+}
+.services_info-card h2
+{
+	margin: 0 0 10px 0;
+}
+.services_info-card a
+{
+	display: block;
+	margin-bottom: 10px;
+}
+.services_info-card a:hover
+{
+	text-decoration: underline;
+}
 .button-back_container
 {
 	max-width: 700px;
@@ -424,7 +471,7 @@ a {
 	display: inline-block;
 	background-color: initial;
 	text-align: left;
-	border: 0;
+	border: none;
 	color: gray;
 	cursor: pointer;
 }
@@ -561,6 +608,13 @@ div.services_filter_el
 .services_card_employer_info h2
 {
 	margin: 0;
+}
+.services_card_employer_info h3
+{
+	margin: 0 0 10px 0;
+	font-size: 1.6rem;
+	font-weight: 400;
+	cursor: pointer;
 }
 .services_card_employer-name
 {

@@ -683,6 +683,58 @@ def event_delete__page(request, id):
     return redirect('event')
 
 
+def news__page(request):
+    data ={
+    }
+    return render(request, 'web/page/news.html', data)
+
+
+def info__page(request):
+    info_category = InfoCategory.objects.all()
+    data ={
+        'info_categorys': info_category
+    }
+    return render(request, 'web/page/info.html', data)
+
+
+@login_required
+def favorite__page(request):
+
+    favorite_value = Favorite.objects.filter(user=request.user).count()
+
+    if favorite_value > 0:
+        specialist_favorite_id_list =   Favorite.objects.filter(user=request.user, service_name="Специалисты").values_list('service_id', flat=True)
+        specialist_favorite_list =      Specialist.objects.filter(id__in=specialist_favorite_id_list)
+        volunteer_favorite_id_list =    Favorite.objects.filter(user=request.user, service_name="Волонтерство").values_list('service_id', flat=True)
+        volunteer_favorite_list =       Volunteer.objects.filter(id__in=volunteer_favorite_id_list)
+        needhelp_favorite_id_list =     Favorite.objects.filter(user=request.user, service_name="Нуждаются в помощи").values_list('service_id', flat=True)
+        needhelp_favorite_list =        Needhelp.objects.filter(id__in=needhelp_favorite_id_list)
+        section_favorite_id_list =      Favorite.objects.filter(user=request.user, service_name="Секции").values_list('service_id', flat=True)
+        section_favorite_list =         Section.objects.filter(id__in=section_favorite_id_list)
+        event_favorite_id_list =        Favorite.objects.filter(user=request.user, service_name="Мероприятия").values_list('service_id', flat=True)
+        event_favorite_list =           Event.objects.filter(id__in=event_favorite_id_list)
+    
+        data = {
+            'specialist_favorite_id_list': specialist_favorite_id_list,
+            'volunteer_favorite_id_list': volunteer_favorite_id_list,
+            'needhelp_favorite_id_list': needhelp_favorite_id_list,
+            'section_favorite_id_list': section_favorite_id_list,
+            'event_favorite_id_list': event_favorite_id_list,
+
+            'specialist_favorite_list': specialist_favorite_list,
+            'volunteer_favorite_list': volunteer_favorite_list,
+            'needhelp_favorite_list': needhelp_favorite_list,
+            'section_favorite_list': section_favorite_list,
+            'event_favorite_list': event_favorite_list,
+
+            'favorite_value': favorite_value
+        }
+    else:
+        data = {
+            'favorite_value': favorite_value
+        }
+
+    return render(request, 'web/page/favorite.html', data)
 
 
 def change_favorite(user, service_name, service_id):

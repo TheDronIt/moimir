@@ -12,9 +12,29 @@
 			<div class="my_profile_about_bio">
 				{{ user.profile.bio }}
 			</div>
-			<div class="my_profile_logout">
-				<a href="{% url 'logout' %}" class="button">Выйти</a>
+			<div class="my_profile_about_contact">
+				<b>Почта:</b>
+				<span>
+					{{user.email}}
+					{% if user.profile.show_email == "Скрывать" %}
+						<span class="my_profile_about_contact_small">(Скрыто)<br>
+							Внимание! Ваша почта отображается у работодателя, при отклике на вакансию!
+						</span>
+					{% endif %}
+				</span>
 			</div>
+			{% if user.profile.contacts != "" %}
+				<div class="my_profile_about_contact">
+					<b>Контакт:</b>
+					<span>
+						{{user.profile.contacts}}
+						{% if user.profile.show_contacts == "Скрывать" %}
+							<span class="my_profile_about_contact_small">(Скрыто)</span>
+						{% endif %}
+					</span>
+					
+				</div>
+			{% endif %}
 		</div>
 		<div class="my_profile_info">
 			<div class="my_profile_info_name">

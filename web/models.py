@@ -258,14 +258,35 @@ class Event(models.Model):
     def __str__(self):
         return self.title
 
-'''
+
 class InfoCategory(models.Model):
     class Meta:
         verbose_name = 'Категории полезной информации'
         verbose_name_plural = 'Категории полезной информации'
 
-    Name = models.CharField(verbose_name="Название", max_length=50)
+    name = models.CharField(verbose_name="Название", max_length=50)
 
     def __str__(self):
-        return str(self.Name)
-'''
+        return str(self.name)
+
+
+class InfoFile(models.Model):
+    class Meta:
+        verbose_name = 'Полезная информация'
+        verbose_name_plural = 'Полезная информация'
+
+    visibility_list = [
+        ("Отображать", "Отображать"),
+        ("Не отображать", "Не отображать")
+    ]
+
+    name = models.CharField(verbose_name="Название", max_length=50)
+    category = models.ForeignKey(InfoCategory, on_delete=models.SET_NULL, null=True, blank=True,related_name='infocategory_category', verbose_name="Категория")
+    file = models.FileField(upload_to='info/file/',null=True, verbose_name="Фаил")
+    visibility = models.CharField(max_length=50, choices=visibility_list, default="Отображать", verbose_name="Отображение")
+
+    def __str__(self):
+        return str(self.name)
+
+
+

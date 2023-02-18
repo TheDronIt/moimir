@@ -65,6 +65,50 @@ nav
 	display: flex;
 	align-items: center;
 	grid-column-gap: 10px;
+	position: relative;
+	cursor: default;
+}
+.nav_top_link_profile_menu
+{
+	position: absolute;
+	z-index: 1;
+	right: -5px;
+	top: -5px;
+	min-width: 200px;
+	max-width: 400px;
+	height: 0px;
+	transition-duration: 0.2s;
+	overflow: hidden;
+	padding: 0 15px;
+	border-radius: 16px;
+	background-color: white;
+	display: grid;
+	grid-template-columns: 1fr;
+	grid-row-gap: 20px;
+}
+.nav_top_link_profile:hover .nav_top_link_profile_menu
+{
+	display: grid;
+	transition-duration: 0.3s;
+	height: auto;
+	padding: 70px 15px 15px 15px;
+	box-shadow: 0 0 15px 2px rgb(60 139 232 / 40%);
+}
+.nav_top_link_profile_menu a
+{
+	display: grid;
+	grid-template-columns: auto 1fr;
+	grid-column-gap: 6px;
+	align-items: center;
+}
+.nav_top_link_profile_menu a img
+{
+	height: 14px;
+	object-fit: cover;
+}
+.nav_top_link_profile_name
+{
+	z-index: 2;
 }
 .nav_top_link_profile_image
 {
@@ -73,6 +117,7 @@ nav
 	border-radius: 100%;
 	overflow: hidden;
 	background-color: #EFEFEF;
+	z-index: 2;
 }
 .nav_top_link_profile_image img
 {

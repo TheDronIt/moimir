@@ -1,0 +1,14 @@
+{% extends 'web/base.html' %}
+{% load static %}
+{% block content %}
+	<section class="services_info-block">
+		{% for info_category in info_categorys %}
+			<div class="services_info-card">
+				<h2>{{info_category.name}}</h2>
+				{% for info in info_category.infocategory_category.all %}
+					<a href="{{info.file.url}}">{{info.name}}</a>
+				{% endfor %}
+			</div>
+		{% endfor %}
+	</section>
+{% endblock content %}

@@ -53,10 +53,13 @@ class UserProfileUpdateForm(forms.ModelForm):
     age = forms.IntegerField(label='Возраст', widget=forms.TextInput(attrs={'class': 'my_profile_edit_input', 'placeholder': 'Возраст'}))
     image = forms.ImageField(label='', widget = forms.FileInput(attrs={'class': 'my_profile_edit_file'}))
     bio = forms.CharField(widget=forms.Textarea(attrs={'class': 'my_profile_edit_textarea', 'placeholder': 'О себе'}))
+    contacts = forms.CharField(label='Контакты',required=False, widget=forms.TextInput(attrs={'class': 'my_profile_edit_input', 'placeholder': 'Контакты'}))
+    show_email = forms.ChoiceField(label='', choices=Profile.show_list,initial="Отображение почты" ,widget=forms.Select(attrs={'class': 'my_profile_edit_input'}))
+    show_contacts = forms.ChoiceField(label='', choices=Profile.show_list,initial="Отображение контактов" ,widget=forms.Select(attrs={'class': 'my_profile_edit_input'}))
 
     class Meta:
         model = Profile
-        fields = ['name', 'surname', 'age', 'image', 'bio']
+        fields = ['name', 'surname', 'age', 'image', 'bio', 'contacts', 'show_email', 'show_contacts']
 
 class EmployerProfileUpdateForm(forms.ModelForm):
     

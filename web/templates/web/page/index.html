@@ -83,7 +83,7 @@
 	<section>
 		<h2>Наши сервисы</h2>
 		<div class="index_services">
-			<a class="index_services_card" href="#">
+			<a class="index_services_card" href="{% url 'job' %}">
 				<img src="{% static 'web/img/icons/work_found.svg' %}">
 				<div class="index_services_card_text">
 					<b>Поиск работы</b>
@@ -91,7 +91,7 @@
 				</div>
 				<img src="{% static 'web/img/icons/right_arrow.svg' %}" class="services_card_right-arrow">
 			</a>
-			<a class="index_services_card" href="#">
+			<a class="index_services_card" href="{% url 'needhelp' %}">
 				<img src="{% static 'web/img/icons/need_help.svg' %}">
 				<div class="index_services_card_text">
 					<b>Нуждаются в помощи</b>
@@ -99,7 +99,7 @@
 				</div>
 				<img src="{% static 'web/img/icons/right_arrow.svg' %}" class="services_card_right-arrow">
 			</a>
-			<a class="index_services_card" href="#">
+			<a class="index_services_card" href="{% url 'specialist' %}">
 				<img src="{% static 'web/img/icons/education.svg' %}">
 				<div class="index_services_card_text">
 					<b>Поиск специалистов</b>
@@ -107,7 +107,7 @@
 				</div>
 				<img src="{% static 'web/img/icons/right_arrow.svg' %}" class="services_card_right-arrow">
 			</a>
-			<a class="index_services_card" href="#">
+			<a class="index_services_card" href="{% url 'event' %}">
 				<img src="{% static 'web/img/icons/event.svg' %}">
 				<div class="index_services_card_text">
 					<b>Мероприятия</b>
@@ -115,7 +115,7 @@
 				</div>
 				<img src="{% static 'web/img/icons/right_arrow.svg' %}" class="services_card_right-arrow">
 			</a>
-			<a class="index_services_card" href="#">
+			<a class="index_services_card" href="{% url 'volunteer' %}">
 				<img src="{% static 'web/img/icons/volunteer.svg' %}">
 				<div class="index_services_card_text">
 					<b>Волонтерство</b>
@@ -123,7 +123,7 @@
 				</div>
 				<img src="{% static 'web/img/icons/right_arrow.svg' %}" class="services_card_right-arrow">
 			</a>
-			<a class="index_services_card" href="#">
+			<a class="index_services_card" href="{% url 'section' %}">
 				<img src="{% static 'web/img/icons/sections.svg' %}">
 				<div class="index_services_card_text">
 					<b>Секции</b>

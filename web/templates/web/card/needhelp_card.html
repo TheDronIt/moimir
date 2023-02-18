@@ -29,6 +29,10 @@
 			<div class="services_card_employer_info">
 				<h2>{{needhelp.title}}</h2>
 				
+				<a href="/user/{{needhelp.user.username}}">
+					<h3>{{needhelp.user.profile.name}} {{needhelp.user.profile.surname}}</h3>
+				</a>
+				
 				{{needhelp.description}}
 
 				<div class="services_card_employer_info_filter">
@@ -46,7 +50,6 @@
 				
 			</div>
 		</div>
-		<a class="services_card_employer-name" href="/user/{{needhelp.user.username}}">{{needhelp.user.profile.name}} {{needhelp.user.profile.surname}}, {{needhelp.user.profile.age}}</a>
 		<span class="services_card_date">{{needhelp.date}}</span>
 	</div>
 {% endblock %}

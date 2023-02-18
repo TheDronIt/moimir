@@ -7,6 +7,11 @@
 			</div>
 			<div class="services_card_employer_info">
 				<h2>{{Job.title}}</h2>
+
+				<a href="/user/{{Job.employer.user.username}}">
+					<h3>{{Job.employer.employer}}</h3>
+				</a>
+
 				{{Job.min_salary}}₽ - {{Job.max_salary}}₽<br><br>
 				{{Job.description}}
 
@@ -46,7 +51,8 @@
 				{% endif %}
 			</div>
 		</div>
-		<a class="services_card_employer-name" href="/user/{{Job.employer.user.username}}">{{Job.employer.employer}}</a>
+		<!--
+		<a class="services_card_employer-name" href="/user/{{Job.employer.user.username}}">{{Job.employer.employer}}</a>-->
 		<span class="services_card_date">{{Job.date}}</span>
 	</div>
 {% endblock %}

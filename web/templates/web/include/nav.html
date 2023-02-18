@@ -12,19 +12,58 @@
 				<a href="/contacts" class="link">Контакты</a>
 				{% if user.is_authenticated %}
 					{% if user.profile.account_type == "Пользователь" %}
-						<a href="{% url 'profile' %}" class="nav_top_link_profile">
-							{{user.profile.name}} {{user.profile.surname}}
+						<div class="nav_top_link_profile">
+							<span class="nav_top_link_profile_name">
+								{{user.profile.name}} {{user.profile.surname}}</span>
 							<div class="nav_top_link_profile_image">
 								<img src="{{user.profile.image.url}}">
 							</div>
-						</a>
+							<div class="nav_top_link_profile_menu">
+								<a href="{% url 'profile' %}">
+									<img src="{% static 'web/img/icons/star.svg' %}">
+									<span>Личный кабинет</span>
+								</a>
+								<a href="{% url 'favorite' %}">
+									<img src="{% static 'web/img/icons/save.svg' %}">
+									<span>Закладки</span>
+								</a>
+								<a href="{% url 'profile' %}">
+									<img src="{% static 'web/img/icons/response.svg' %}">
+									<span>Ваши отклики</span>
+								</a>
+								<a href="{% url 'logout' %}">
+									<img src="{% static 'web/img/icons/logout.svg' %}">
+									<span style="color:red">Выйти</span>
+								</a>
+							</div>
+						</div>
 					{% elif user.profile.account_type == "Работодатель" %}
-						<a href="{% url 'profile' %}" class="nav_top_link_profile">
-							{{user.profile.employer}}
+						<div class="nav_top_link_profile">
+							<span class="nav_top_link_profile_name">
+								{{user.profile.employer}}
+							</span>
 							<div class="nav_top_link_profile_image">
 								<img src="{{user.profile.image.url}}">
 							</div>
-						</a>
+							<div class="nav_top_link_profile_menu">
+								<a href="{% url 'profile' %}">
+									<img src="{% static 'web/img/icons/star.svg' %}">
+									<span>Личный кабинет</span>
+								</a>
+								<a href="{% url 'profile' %}">
+									<img src="{% static 'web/img/icons/save.svg' %}">
+									<span>Закладки</span>
+								</a>
+								<a href="{% url 'profile' %}">
+									<img src="{% static 'web/img/icons/response.svg' %}">
+									<span>Отклики на вакансии</span>
+								</a>
+								<a href="{% url 'logout' %}">
+									<img src="{% static 'web/img/icons/logout.svg' %}">
+									<span style="color:red">Выйти</span>
+								</a>
+							</div>
+						</div>
 					{% else %}
 					<a href="{% url 'profile' %}" class="nav_top_link_profile">
 						{{user.username}}
@@ -64,7 +103,11 @@
 				<img src="{% static 'web/img/icons/sections.svg' %}" class="nav_menu_button_icon">
 				<span class="nav_menu_button_name">Секции</span>
 			</a>
-			<a href="#" class="nav_menu_button">
+			<a href="{% url 'news' %}" class="nav_menu_button">
+				<img src="{% static 'web/img/icons/news.svg' %}" class="nav_menu_button_icon">
+				<span class="nav_menu_button_name">Новости</span>
+			</a>
+			<a href="{% url 'info' %}" class="nav_menu_button">
 				<img src="{% static 'web/img/icons/additionally.svg' %}" class="nav_menu_button_icon">
 				<span class="nav_menu_button_name">Полезная информация</span>
 			</a>

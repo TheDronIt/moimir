@@ -121,6 +121,8 @@ def profile_edit(request):
             p_form.save()
             #messages.success(request, f'Ваш профиль успешно обновлен.')
             return redirect('profile')
+        else:
+            print(u_form.errors, p_form.errors)
 
     else:
         u_form = UserUpdateForm(instance=request.user)

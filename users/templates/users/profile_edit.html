@@ -20,9 +20,6 @@
 					<b class="my_profile_about_edit_b">О себе</b>
 					{{ p_form.bio}}
 				</div>
-				<div class="my_profile_logout">
-					<button class="button" type="submit">Сохранить</button>
-				</div>
 			</div>
 			<div class="my_profile_edit_block">
 				@{{user.username}}
@@ -46,6 +43,18 @@
 						<b class="my_profile_about_edit_b">Возраст:</b>
 						{{ p_form.age }}
 					</div>
+					<div>
+						<b class="my_profile_about_edit_b">Контакты:</b>
+						{{ p_form.contacts }}
+					</div>
+					<div>
+						<b class="my_profile_about_edit_b">Отображение почты:</b>
+						{{ p_form.show_email }}
+					</div>
+					<div>
+						<b class="my_profile_about_edit_b">Отображение контактов:</b>
+						{{ p_form.show_contacts }}
+					</div>
 
 				{% elif user.profile.account_type == "Детский" %}
 					<div>
@@ -62,6 +71,10 @@
 						{{ p_form.employer }}
 					</div>
 				{% endif %}
+
+				<a href="{% url 'profile_edit' %}" class="my_profile_edit_save">
+					<button class="my_profile_edit_save_button" type="submit">Сохранить изменения</button>
+				</a>
 			</div>
 		</div>
 		

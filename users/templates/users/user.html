@@ -12,9 +12,18 @@
 			<div class="my_profile_about_bio">
 				{{ user_profile.profile.bio }}
 			</div>
-			<div class="my_profile_logout">
-			
-			</div>
+			{% if user_profile.profile.show_email == "Отображать" %}
+				<div class="my_profile_about_contact">
+					<b>Почта:</b>
+					<span>{{user_profile.email}}</span>
+				</div>
+			{% endif %}
+			{% if user_profile.profile.contacts != "" and user_profile.profile.contacts != None and user_profile.profile.show_contacts == "Отображать"%}
+				<div class="my_profile_about_contact">
+					<b>Контакт:</b>
+					<span>{{user_profile.profile.contacts}}</span>	
+				</div>
+			{% endif %}
 		</div>
 		<div class="my_profile_info">
 			<div class="my_profile_info_name">

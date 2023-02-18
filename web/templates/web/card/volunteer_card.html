@@ -29,6 +29,10 @@
 			<div class="services_card_employer_info">
 				<h2>{{volunteer.title}}</h2>
 				
+				<a href="/user/{{volunteer.user.username}}">
+					<h3>{{volunteer.user.profile.name}} {{volunteer.user.profile.surname}}</h3>
+				</a>
+
 				{{volunteer.description}}
 
 				<div class="services_card_employer_info_filter">
@@ -44,10 +48,8 @@
 					</div>
 				{% endif %}
 
-				
 			</div>
 		</div>
-		<a class="services_card_employer-name" href="/user/{{volunteer.user.username}}">{{volunteer.user.profile.name}} {{volunteer.user.profile.surname}}, {{volunteer.user.profile.age}}</a>
 		<span class="services_card_date">{{volunteer.date}}</span>
 	</div>
 {% endblock %}

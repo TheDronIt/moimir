@@ -29,6 +29,10 @@
 			<div class="services_card_employer_info">
 				<h2>{{specialist.title}}</h2>
 				
+				<a href="/user/{{specialist.user.username}}">
+					<h3>{{specialist.user.profile.name}} {{specialist.user.profile.surname}}</h3>
+				</a>
+
 				{{specialist.description}}
 
 				<div class="services_card_employer_info_filter">
@@ -48,7 +52,7 @@
 				
 			</div>
 		</div>
-		<a class="services_card_employer-name" href="/user/{{specialist.user.username}}">{{specialist.user.profile.name}} {{specialist.user.profile.surname}}, {{specialist.user.profile.age}}</a>
+	
 		<span class="services_card_date">{{specialist.date}}</span>
 	</div>
 {% endblock %}

@@ -1,0 +1,56 @@
+{% extends 'web/base.html' %}
+{% load static %}
+
+{% block content %}
+
+	
+	<section class="search__block">
+
+		<div class="button-back_container" style="margin: 0">
+			<input type="button" class="button-back" onclick="history.back();" value="Назад"/>
+		</div>
+		
+
+		{% if favorite_value == 0 %}
+			<div>
+				<h2 style="margin: 0;">Пусто</h2>
+				Вы еще не успели добавить карточки в избранное
+			</div>
+			
+		{% else %}
+			{% with favorites=specialist_favorite_id_list %}
+				{% for specialist in specialist_favorite_list %}
+					{% include 'web/card/specialist_card.html' %}
+				{% endfor %}
+			{% endwith %}
+
+			{% with favorites=volunteer_favorite_id_list %}
+				{% for volunteer in volunteer_favorite_list %}
+					{% include 'web/card/volunteer_card.html' %}
+				{% endfor %}
+			{% endwith %}
+
+			{% with favorites=needhelp_favorite_id_list %}
+				{% for needhelp in needhelp_favorite_list %}
+					{% include 'web/card/needhelp_card.html' %}
+				{% endfor %}
+			{% endwith %}
+
+			{% with favorites=needhelp_favorite_id_list %}
+				{% for needhelp in needhelp_favorite_list %}
+					{% include 'web/card/needhelp_card.html' %}
+				{% endfor %}
+			{% endwith %}
+
+			{% with favorites=section_favorite_id_list %}
+				{% for section in section_favorite_list %}
+					{% include 'web/card/section_card.html' %}
+				{% endfor %}
+			{% endwith %}
+		{% endif %}
+
+		
+		
+	</section>
+
+{% endblock content %}

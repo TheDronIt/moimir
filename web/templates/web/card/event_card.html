@@ -29,6 +29,10 @@
 			<div class="services_card_employer_info">
 				<h2>{{event.title}}</h2>
 				
+				<a href="/user/{{event.user.username}}">
+					<h3>{{event.user.profile.name}} {{event.user.profile.surname}}</h3>
+				</a>
+
 				{{event.description}}
 
 				<div class="services_card_employer_info_filter">
@@ -49,7 +53,6 @@
 				
 			</div>
 		</div>
-		<a class="services_card_employer-name" href="/user/{{event.user.username}}">{{event.user.profile.name}} {{event.user.profile.surname}}, {{event.user.profile.age}}</a>
 		<span class="services_card_date">{{event.date}}</span>
 	</div>
 {% endblock %}
