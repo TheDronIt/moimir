@@ -6,8 +6,9 @@ from .models import *
 
 
 def index__page(request):
+    news = News.objects.all().order_by('-id')[:2] 
     data = {
-        
+        'news':news
     }
     return render(request, 'web/page/index.html', data)
 
@@ -512,7 +513,7 @@ def needhelp_delete__page(request, id):
 def section__page(request):
     favorite = []
     if request.user.is_authenticated == True:
-        favorite = user_favorite_list(request.user, "Нуждаются в помощи")
+        favorite = user_favorite_list(request.user, "Секции")
     if request.method == "POST" and request.user.is_authenticated == True:
         if request.POST['service_id'] and request.POST['service_name']:
             change_favorite(
@@ -520,7 +521,7 @@ def section__page(request):
                 request.POST['service_name'],
                 request.POST['service_id']
                 )
-            return redirect('section')
+            return redirect('section')  
     filter_form = SectionFilterForm()
     #Фильтрация по значеням из GET (фильтрация через форму)
     if request.method == 'GET' and len(request.GET) > 0:
@@ -684,9 +685,19 @@ def event_delete__page(request, id):
 
 
 def news__page(request):
+    news = News.objects.all().order_by('-id')
     data ={
+        'news':news
     }
     return render(request, 'web/page/news.html', data)
+
+
+def news_about__page(request, id):
+    news = News.objects.get(id=id)
+    data ={
+        'news':news
+    }
+    return render(request, 'web/page/news_about.html', data)
 
 
 def info__page(request):
@@ -699,6 +710,15 @@ def info__page(request):
 
 @login_required
 def favorite__page(request):
+
+    if request.method == "POST" and request.user.is_authenticated == True:
+        if request.POST['service_id'] and request.POST['service_name']:
+            change_favorite(
+                request.user,
+                request.POST['service_name'],
+                request.POST['service_id']
+                )
+            return redirect('favorite')
 
     favorite_value = Favorite.objects.filter(user=request.user).count()
 
@@ -735,6 +755,29 @@ def favorite__page(request):
         }
 
     return render(request, 'web/page/favorite.html', data)
+
+
+@login_required
+def response__page(request):
+    if request.user.profile.account_type == "Пользователь":
+
+        job_response = []
+
+        #ID работ, на которые откликнулся юзер
+        if request.user.is_authenticated == True:
+            job_response_queryset = Job_response.objects.filter(user=request.user)
+            for el in job_response_queryset:
+                job_response.append(el.job.id)
+
+        job_response_id_list = Job_response.objects.filter(user=request.user).values_list('job', flat=True)
+        job = Job.objects.filter(id__in=job_response_id_list)
+        data = {
+            'Jobs': job,
+            'Job_response': job_response
+        }
+        return render(request, 'web/page/response.html', data)
+    else:
+        return redirect('profile')
 
 
 def change_favorite(user, service_name, service_id):

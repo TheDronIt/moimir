@@ -2,6 +2,15 @@
 {% load static %}
 {% block content %}
 	<section class="news_block">
-
+		<h2>Новости</h2>
+		<div class="news">
+			{% for news in news %}
+				<a href="/news/{{news.id}}" class="news_card">
+					<img src="{{news.image.url}}" alt=" ">
+					<h3>{{news.title}}</h3>
+					<span class="news_card_date">{{news.date}}</span>
+				</a>
+			{% endfor %}
+		</div>
 	</section>
 {% endblock content %}

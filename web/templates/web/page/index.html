@@ -137,33 +137,15 @@
 
 	<section>
 		<h2>Новости</h2>
-		<a href="#" class="more_link">Читать больше</a>
+		<a href="{% url 'news' %}" class="more_link">Читать больше</a>
 		<div class="news">
-			<a href="#" class="news_card">
-				<img src="{% static 'web/img/tmp_image.jpg' %}" alt=" ">
-				<h3>Тут текст новостей и так он тоже может быть</h3>
-				<span class="news_card_date">13 сентября 2022</span>
-			</a>
-			<a href="#" class="news_card">
-				<img src="{% static 'web/img/tmp_image.jpg' %}" alt=" ">
-				<h3>Тут текст новостей и так он тоже может быть</h3>
-				<span class="news_card_date">13 сентября 2022</span>
-			</a>
-			<a href="#" class="news_card">
-				<img src="{% static 'web/img/tmp_image.jpg' %}" alt=" ">
-				<h3>Тут текст новостей и так он тоже может быть</h3>
-				<span class="news_card_date">13 сентября 2022</span>
-			</a>
-			<a href="#" class="news_card">
-				<img src="{% static 'web/img/tmp_image.jpg' %}" alt=" ">
-				<h3>Тут текст новостей и так он тоже может быть</h3>
-				<span class="news_card_date">13 сентября 2022</span>
-			</a>
-			<a href="#" class="news_card">
-				<img src="{% static 'web/img/tmp_image.jpg' %}" alt=" ">
-				<h3>Тут текст новостей и так он тоже может быть</h3>
-				<span class="news_card_date">13 сентября 2022</span>
-			</a>
+			{% for news in news %}
+				<a href="/news/{{news.id}}" class="news_card">
+					<img src="{{news.image.url}}" alt=" ">
+					<h3>{{news.title}}</h3>
+					<span class="news_card_date">{{news.date}}</span>
+				</a>
+			{% endfor %}
 		</div>
 	</section>
 {% endblock content %}

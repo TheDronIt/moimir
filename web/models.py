@@ -290,3 +290,14 @@ class InfoFile(models.Model):
 
 
 
+class News(models.Model):
+    class Meta:
+        verbose_name = 'Новости'
+        verbose_name_plural = 'Новости'
+
+    title = models.CharField(verbose_name="Заголовок", max_length=50)
+    image = models.ImageField(verbose_name="Изображение", upload_to='news/')
+    date = models.DateField(verbose_name='Дата', default=datetime.now, blank=True)
+
+    def __str__(self):
+        return str(self.title)

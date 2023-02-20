@@ -1,0 +1,12 @@
+{% extends 'web/base.html' %}
+{% load static %}
+{% block content %}
+	<section class="news_about_block">
+		<div class="news_about_image">
+			<img src="{{news.image.url}}" alt=" ">
+		</div>
+		
+		<h3>{{news.title}}</h3>
+		<span class="news_card_date">{{news.date}}</span>
+	</section>
+{% endblock content %}

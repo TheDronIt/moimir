@@ -18,8 +18,6 @@ def user_register(request):
             u_form = UserRegisterForm(request.POST)
             p_form = ProfileRegisterForm(request.POST)
 
-           
-
             if u_form.is_valid() and p_form.is_valid():
 
                 #Создание user и profile
@@ -145,8 +143,6 @@ def profile_edit(request):
 @login_required
 def user_profile(request, username):
     user = User.objects.get(username=username)
-
-
 
     if user.profile.account_type == "Работодатель":
 

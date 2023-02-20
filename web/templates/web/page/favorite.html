@@ -7,13 +7,14 @@
 	<section class="search__block">
 
 		<div class="button-back_container" style="margin: 0">
+			<h1 style="margin:0">Ваши закладки</h1>
 			<input type="button" class="button-back" onclick="history.back();" value="Назад"/>
 		</div>
 		
 
 		{% if favorite_value == 0 %}
 			<div>
-				<h2 style="margin: 0;">Пусто</h2>
+				<b style="margin: 0;">Пусто</b><br>
 				Вы еще не успели добавить карточки в избранное
 			</div>
 			
@@ -36,9 +37,9 @@
 				{% endfor %}
 			{% endwith %}
 
-			{% with favorites=needhelp_favorite_id_list %}
-				{% for needhelp in needhelp_favorite_list %}
-					{% include 'web/card/needhelp_card.html' %}
+			{% with favorites=event_favorite_id_list %}
+				{% for event in event_favorite_list %}
+					{% include 'web/card/event_card.html' %}
 				{% endfor %}
 			{% endwith %}
 

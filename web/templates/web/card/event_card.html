@@ -4,25 +4,27 @@
 		<div class="services_card_user">
 			<div class="services_card_user_image">
 				<img src="{{event.user.profile.image.url}}">
-				{% if user.username != event.user.username %}
-					{% if event.id in favorites %}
-						<form method="POST"  class="services_card_user_add-favorite">
-							{% csrf_token %}
-							<input type="hidden" name="service_name" value="Мероприятия" />
-							<input type="hidden" name="service_id" value="{{event.id}}" />
-							<button type="submit" class="services_card_user_add-favorite_button">
-								<img src="{% static 'web/img/icons/remove-favorite.svg' %}">
-							</button>
-						</form>
-					{% else %}
-						<form method="POST" class="services_card_user_add-favorite">
-							{% csrf_token %}
-							<input type="hidden" name="service_name" value="Мероприятия" />
-							<input type="hidden" name="service_id" value="{{event.id}}" />
-							<button type="submit" class="services_card_user_add-favorite_button">
-								<img src="{% static 'web/img/icons/add-favorite.svg' %}">
-							</button>
-						</form>
+				{% if user.is_authenticated %}
+					{% if user.username != event.user.username %}
+						{% if event.id in favorites %}
+							<form method="POST"  class="services_card_user_add-favorite">
+								{% csrf_token %}
+								<input type="hidden" name="service_name" value="Мероприятия" />
+								<input type="hidden" name="service_id" value="{{event.id}}" />
+								<button type="submit" class="services_card_user_add-favorite_button">
+									<img src="{% static 'web/img/icons/remove-favorite.svg' %}">
+								</button>
+							</form>
+						{% else %}
+							<form method="POST" class="services_card_user_add-favorite">
+								{% csrf_token %}
+								<input type="hidden" name="service_name" value="Мероприятия" />
+								<input type="hidden" name="service_id" value="{{event.id}}" />
+								<button type="submit" class="services_card_user_add-favorite_button">
+									<img src="{% static 'web/img/icons/add-favorite.svg' %}">
+								</button>
+							</form>
+						{% endif %}
 					{% endif %}
 				{% endif %}
 			</div>

@@ -1,0 +1,31 @@
+{% extends 'web/base.html' %}
+{% load static %}
+
+{% block content %}
+
+	
+	<section class="search__block">
+
+		<div class="button-back_container" style="margin: 0">
+			<h1 style="margin:0">Ваши отклики</h1>
+			<input type="button" class="button-back" onclick="history.back();" value="Назад"/>
+		</div>
+		
+
+		{% if Jobs|length == 0 %}
+			<div>
+				<b style="margin: 0;">Пусто</b><br>
+				Вы еще не успели откликнуться на вакансии
+			</div>
+			
+		{% else %}
+			{% for Job in Jobs %}
+				{% include 'web/card/job_card.html' %}
+			{% endfor %}
+		{% endif %}
+
+		
+		
+	</section>
+
+{% endblock content %}

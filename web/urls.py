@@ -31,7 +31,9 @@ urlpatterns = [
 	path('event/edit/<int:id>', views.event_edit__page, name='event_edit'),
 	path('event/delete/<int:id>', views.event_delete__page, name='event_delete'),
 	path('favorite', views.favorite__page, name='favorite'),
+	path('response', views.response__page, name='response'),
 	path('news', views.news__page, name='news'),
+	path('news/<int:id>', views.news_about__page, name='news_about'),
 	path('info', views.info__page, name='info'),
 	path('search', views.search__page, name='search')
 	]
