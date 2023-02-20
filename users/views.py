@@ -99,6 +99,12 @@ def profile(request):
             'sections': section,
             'events': event
         }
+    elif request.user.profile.account_type == "Детский":
+        data = {
+
+        }
+    else:
+        return redirect('home')
     return render(request, 'users/profile.html', data)
 
 

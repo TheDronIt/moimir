@@ -4,6 +4,10 @@
 	<section class="news_about_block">
 		<div class="news_about_image">
 			<img src="{{news.image.url}}" alt=" ">
+			<button class="news_about_back" onclick="history.back();">
+				<img src="{% static 'web/img/icons/back.svg' %}" alt=" ">
+			</button>
+			
 		</div>
 		
 		<h3>{{news.title}}</h3>

@@ -70,6 +70,18 @@
 						<b class="my_profile_about_edit_b">Название организации:</b>
 						{{ p_form.employer }}
 					</div>
+					<div>
+						<b class="my_profile_about_edit_b">Контакты:</b>
+						{{ p_form.contacts }}
+					</div>
+					<div>
+						<b class="my_profile_about_edit_b">Отображение почты:</b>
+						{{ p_form.show_email }}
+					</div>
+					<div>
+						<b class="my_profile_about_edit_b">Отображение контактов:</b>
+						{{ p_form.show_contacts }}
+					</div>
 				{% endif %}
 
 				<a href="{% url 'profile_edit' %}" class="my_profile_edit_save">

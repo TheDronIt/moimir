@@ -18,23 +18,26 @@
 					{{user.email}}
 					{% if user.profile.show_email == "Скрывать" %}
 						<span class="my_profile_about_contact_small">(Скрыто)<br>
-							Внимание! Ваша почта отображается у работодателя, при отклике на вакансию!
+							{% if user.profile.account_type == "Пользователь" %}
+								Внимание! Ваша почта отображается у работодателя, при отклике на вакансию!
+							{% endif %}
 						</span>
 					{% endif %}
 				</span>
 			</div>
-			{% if user.profile.contacts != "" %}
 				<div class="my_profile_about_contact">
 					<b>Контакт:</b>
 					<span>
-						{{user.profile.contacts}}
+						{% if user.profile.contacts == "" or user.profile.contacts == Null %}
+							Ничего не указано
+						{% else %}
+							{{user.profile.contacts}}
+						{% endif %}
 						{% if user.profile.show_contacts == "Скрывать" %}
-							<span class="my_profile_about_contact_small">(Скрыто)</span>
+							<span class="my_profile_about_contact_small">(Скрыто)<br>
 						{% endif %}
 					</span>
-					
 				</div>
-			{% endif %}
 		</div>
 		<div class="my_profile_info">
 			<div class="my_profile_info_name">
