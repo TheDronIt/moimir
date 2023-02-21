@@ -44,11 +44,27 @@
 			{% if user_profile.profile.account_type == "Пользователь" %}
 			<div class="my_profile_user_block">
 				<div class="my_profile_user_card_input_block">
-					<input type="button" id="user_card_1" value="Специалист" class="button my_profile_user_card_input" style="background: #032042">
-					<input type="button" id="user_card_2" value="Волонтер" class="button my_profile_user_card_input">
-					<input type="button" id="user_card_3" value="Нуждается в помощи" class="button my_profile_user_card_input">
-					<input type="button" id="user_card_4" value="Организатор мероприятия" class="button my_profile_user_card_input">
-					<input type="button" id="user_card_5" value="Организатор секции" class="button my_profile_user_card_input">
+
+					{% if specialists|length == 0 and volunteers|length == 0 and needhelps|length == 0 and events|length == 0 and sections|length == 0%}
+						<b>Пусто...</b><br>
+						Пользователь еще не успел создать карточки в сервисах 
+					{% endif %}
+
+					{% if specialists|length > 0 %}
+						<input type="button" id="user_card_1" value="Специалист" class="button my_profile_user_card_input" style="background: #032042">
+					{% endif %}
+					{% if volunteers|length > 0 %}
+						<input type="button" id="user_card_2" value="Волонтер" class="button my_profile_user_card_input">
+					{% endif %}
+					{% if needhelps|length > 0 %}
+						<input type="button" id="user_card_3" value="Нуждается в помощи" class="button my_profile_user_card_input">
+					{% endif %}
+					{% if events|length > 0 %}
+						<input type="button" id="user_card_4" value="Организатор мероприятия" class="button my_profile_user_card_input">
+					{% endif %}
+					{% if sections|length > 0 %}
+						<input type="button" id="user_card_5" value="Организатор секции" class="button my_profile_user_card_input">
+					{% endif %}
 				</div>
 					
 				<div>

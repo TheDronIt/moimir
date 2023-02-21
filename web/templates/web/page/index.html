@@ -136,8 +136,10 @@
 
 
 	<section>
-		<h2>Новости</h2>
-		<a href="{% url 'news' %}" class="more_link">Читать больше</a>
+		<div class="index_news_title">
+			<h2 style="margin: 0;">Новости</h2>
+			<a href="{% url 'news' %}" class="more_link">Читать больше</a>
+		</div>
 		<div class="news">
 			{% for news in news %}
 				<a href="/news/{{news.id}}" class="news_card">

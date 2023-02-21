@@ -52,7 +52,7 @@ class UserProfileUpdateForm(forms.ModelForm):
     surname = forms.CharField(max_length=20, label='Фамилия', widget=forms.TextInput(attrs={'class': 'my_profile_edit_input', 'placeholder': 'Фамилия'}))
     age = forms.IntegerField(label='Возраст', widget=forms.TextInput(attrs={'class': 'my_profile_edit_input', 'placeholder': 'Возраст'}))
     image = forms.ImageField(label='', widget = forms.FileInput(attrs={'class': 'my_profile_edit_file'}))
-    bio = forms.CharField(widget=forms.Textarea(attrs={'class': 'my_profile_edit_textarea', 'placeholder': 'О себе'}))
+    bio = forms.CharField(widget=forms.Textarea(attrs={'class': 'my_profile_edit_textarea', 'placeholder': 'О себе'}), required=False)
     contacts = forms.CharField(label='Контакты',required=False, widget=forms.TextInput(attrs={'class': 'my_profile_edit_input', 'placeholder': 'Контакты'}))
     show_email = forms.ChoiceField(label='', choices=Profile.show_list,initial="Отображение почты" ,widget=forms.Select(attrs={'class': 'my_profile_edit_input'}))
     show_contacts = forms.ChoiceField(label='', choices=Profile.show_list,initial="Отображение контактов" ,widget=forms.Select(attrs={'class': 'my_profile_edit_input'}))
@@ -65,7 +65,7 @@ class EmployerProfileUpdateForm(forms.ModelForm):
     
     employer = forms.CharField(max_length=20, label='Имя', widget=forms.TextInput(attrs={'class': 'my_profile_edit_input', 'placeholder': 'Название орагнизации'}), error_messages = {'unique':"Выбранное название организации уже используется, выберите другое название"})
     image = forms.ImageField(label='', widget = forms.FileInput(attrs={'class': 'my_profile_edit_file'}))
-    bio = forms.CharField(widget=forms.Textarea(attrs={'class': 'my_profile_edit_textarea', 'placeholder': 'О себе'}))
+    bio = forms.CharField(widget=forms.Textarea(attrs={'class': 'my_profile_edit_textarea', 'placeholder': 'О себе'}), required=False)
     contacts = forms.CharField(label='Контакты',required=False, widget=forms.TextInput(attrs={'class': 'my_profile_edit_input', 'placeholder': 'Контакты'}))
     show_email = forms.ChoiceField(label='', choices=Profile.show_list,initial="Отображение почты" ,widget=forms.Select(attrs={'class': 'my_profile_edit_input'}))
     show_contacts = forms.ChoiceField(label='', choices=Profile.show_list,initial="Отображение контактов" ,widget=forms.Select(attrs={'class': 'my_profile_edit_input'}))

@@ -2,7 +2,7 @@
 nav
 {
 	width: 100%;
-	padding-top: 40px;
+	padding-top: 20px;
 }
 .nav
 {
@@ -38,29 +38,40 @@ nav
 }
 .nav_menu_button
 {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	grid-gap:5px;
+	display: grid;
+	grid-template-rows: 1fr 1fr;
+	grid-gap: 10px;
 	background-color: white;
 	width: 120px;
 	height: 120px;
-	box-shadow: 0 0 15px 2px rgba(60, 139, 232, 0.2);
+	box-shadow: 0 0 20px 8px rgba(60, 139, 232, 0.2);
 	border-radius: 16px;
 }
 .nav_menu_button:hover
 {
 	transition-duration: 0.4s;
-	box-shadow: 0 0 15px 3px rgba(60, 139, 232, 0.4);
+	box-shadow: 0 0 20px 8px rgba(60, 139, 232, 0.4);
+}
+.nav_menu_button__activate
+{
+	background-color: #509AF1;
+	color: white;
 }
 .nav_menu_button_icon
+{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: end;
+}
+.nav_menu_button_icon img
 {
 	height: 30px;
 	object-fit: cover;
 }
 .nav_menu_button_name
 {
+	margin: 0 auto;
 	max-width: 90%;
 	font-size: 1.4rem;
 	text-align: center;
@@ -304,6 +315,7 @@ footer
 	padding: 60px;
 	background-color: white;
 	overflow: hidden;
+	margin: 15px;
 }
 .auth_base_back
 {
@@ -355,24 +367,36 @@ footer
 	overflow: hidden;
 	cursor: pointer;
 }
+@keyframes block_visible {
+	0% 		{opacity: 0; z-index: 1;}
+	100% 	{opacity: 1; z-index: 1;}
+}
+
 .auth_form_help_banner
 {
 	position: absolute;
 	top: 25px;
-	left: -100vw;
+	left: 10%;
+	/*left: -100vw;*/
 	width: 300px;
 	background-color: white;
 	box-shadow: 0 0 15px 2px rgb(60 139 232 / 40%);
 	border-radius: 16px;
 	padding: 30px;
-	z-index: 2;
+	z-index: -1;
+	opacity: 0;
 	transition-duration: 0.3s;
 }
 .auth_form_help:hover > .auth_form_help_banner
 {
-	left: 10%;
+	animation: block_visible 0.4s forwards ;
+	/*left: 10%;*/
 }
-
+.auth_form .errorlist
+{
+	width: 450px !important;
+	color: #032042;
+}
 
 .auth_form_input
 {

@@ -13,6 +13,7 @@ def index__page(request):
     return render(request, 'web/page/index.html', data)
 
 
+@login_required
 def job__page(request):
 
     filter_form = JobFilterForm()
@@ -169,6 +170,7 @@ def job_delete__page(request, id):
     return redirect('job')
 
 
+@login_required
 def search__page(request):
     job_response = []
     answer = []
@@ -227,7 +229,7 @@ def search__page(request):
     return render(request, 'web/page/search.html', data)
 
 
-
+@login_required
 def specialist__page(request): 
     favorite = []
     if request.user.is_authenticated == True:
@@ -263,6 +265,7 @@ def specialist__page(request):
     return render(request, 'web/page/specialist.html', data)
 
 
+@login_required
 def specialist_add__page(request):
     if request.user.profile.account_type == "Пользователь":
         if request.method == 'POST':
@@ -330,7 +333,7 @@ def specialist_delete__page(request, id):
 
 
 
-
+@login_required
 def volunteer__page(request):
     favorite = []
     if request.user.is_authenticated == True:
@@ -361,6 +364,7 @@ def volunteer__page(request):
     return render(request, 'web/page/volunteer.html', data)
 
 
+@login_required
 def volunteer_add__page(request):
     if request.user.profile.account_type == "Пользователь":
         if request.method == 'POST':
@@ -420,7 +424,7 @@ def volunteer_delete__page(request, id):
 
 
 
-
+@login_required
 def needhelp__page(request):
     favorite = []
     if request.user.is_authenticated == True:
@@ -450,6 +454,8 @@ def needhelp__page(request):
     return render(request, 'web/page/needhelp.html', data)
 
 
+
+@login_required
 def needhelp_add__page(request):
     if request.user.profile.account_type == "Пользователь":
         if request.method == 'POST':
@@ -509,7 +515,7 @@ def needhelp_delete__page(request, id):
 
 
 
-
+@login_required
 def section__page(request):
     favorite = []
     if request.user.is_authenticated == True:
@@ -539,6 +545,7 @@ def section__page(request):
     return render(request, 'web/page/section.html', data)
 
 
+@login_required
 def section_add__page(request):
     if request.user.profile.account_type == "Пользователь":
         if request.method == 'POST':
@@ -596,7 +603,7 @@ def section_delete__page(request, id):
     return redirect('section')
 
 
-
+@login_required
 def event__page(request):
     favorite = []
     if request.user.is_authenticated == True:
@@ -626,6 +633,7 @@ def event__page(request):
     return render(request, 'web/page/event.html', data)
 
 
+@login_required
 def event_add__page(request):
     if request.user.profile.account_type == "Пользователь":
         if request.method == 'POST':
@@ -684,6 +692,7 @@ def event_delete__page(request, id):
     return redirect('event')
 
 
+@login_required
 def news__page(request):
     news = News.objects.all().order_by('-id')
     data ={
@@ -692,6 +701,7 @@ def news__page(request):
     return render(request, 'web/page/news.html', data)
 
 
+@login_required
 def news_about__page(request, id):
     news = News.objects.get(id=id)
     data ={
@@ -700,6 +710,7 @@ def news_about__page(request, id):
     return render(request, 'web/page/news_about.html', data)
 
 
+@login_required
 def info__page(request):
     info_category = InfoCategory.objects.all()
     data ={

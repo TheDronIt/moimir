@@ -114,6 +114,7 @@ a {
 
 .opportunities_card_text
 {
+	position: inherit;
 	display: block;
 	z-index: 2;
 }
@@ -152,8 +153,8 @@ a {
 .opportunities_card__vertical_first .opportunities_card_text
 {
 	position: absolute;
-	left: 0;
-	bottom: 0;
+	left: 10px;
+	bottom: 10px;
 }
 .opportunities_card__vertical_first
 {
@@ -211,26 +212,43 @@ a {
 }
 
 
+.index_news_title
+{
+	display: flex;
+	margin-bottom: 5px;
+	justify-content: space-between;
+}
+.index_news_title .more_link
+{
+	margin: 0;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+	flex-wrap: nowrap;
+
+}
+
+
 .news
 {
 	display: flex;
 	flex-wrap:wrap;
-	grid-gap: 50px;
+	justify-content: space-between;
+	grid-gap: 40px;
 }
 .news_card:nth-child(4n), .news_card:nth-child(4n+1) /*Маленькая карточка новости*/
 {
-	width: 400px;
+	width: 430px;
 }
 .news_card /*Большая карточка новости*/
 {
-	width: 600px;
+	width: 630px;
 }
-
 	
 .news_card img
 {
 	width: 100%;
-	height: 250px;
+	height: 270px;
 	border-radius: 16px;
 	object-fit: cover;
 }
@@ -585,7 +603,7 @@ div.services_filter_el
 }
 .services_card
 {
-	padding: 28px 18px;
+	padding: 18px 18px 28px 18px;
 	background-color: white;
 	box-shadow: 0 0 70px 2px rgba(60, 139, 232, 0.2);
 	border-radius: 16px;
@@ -616,15 +634,16 @@ div.services_filter_el
 .services_card_user_add-favorite
 {
 	position: absolute;
-	bottom: 4px;
-	left: 4px;
+	width: 40px;
+	height: 40px;
+	bottom: 5px;
+	left: 5px;
 	margin: 0;
 }
 .services_card_user_add-favorite_button
 {
 	border: none;
-	height: 40px;
-	width: 40px;
+	/*height: 40px;width: 40px;*/
 	padding: 0;
 	background: inherit;
 	cursor: pointer;
@@ -726,8 +745,8 @@ div.services_filter_el
 }
 .services_search_button
 {
-	width: 60px;
-	height: 60px;
+	width: 50px;
+	height: 50px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
