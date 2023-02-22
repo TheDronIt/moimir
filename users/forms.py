@@ -45,9 +45,8 @@ class UserUpdateForm(forms.ModelForm):
         model = User
         fields = ['email']
  
- 
-class UserProfileUpdateForm(forms.ModelForm):
 
+class UserProfileUpdateForm(forms.ModelForm):
     name = forms.CharField(max_length=20, label='Имя', widget=forms.TextInput(attrs={'class': 'my_profile_edit_input', 'placeholder': 'Имя'}))
     surname = forms.CharField(max_length=20, label='Фамилия', widget=forms.TextInput(attrs={'class': 'my_profile_edit_input', 'placeholder': 'Фамилия'}))
     age = forms.IntegerField(label='Возраст', widget=forms.TextInput(attrs={'class': 'my_profile_edit_input', 'placeholder': 'Возраст'}))
@@ -60,6 +59,7 @@ class UserProfileUpdateForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ['name', 'surname', 'age', 'image', 'bio', 'contacts', 'show_email', 'show_contacts']
+
 
 class EmployerProfileUpdateForm(forms.ModelForm):
     
@@ -74,7 +74,11 @@ class EmployerProfileUpdateForm(forms.ModelForm):
         model = Profile
         fields = ['employer', 'image','bio', 'contacts', 'show_email', 'show_contacts']
 
+
 class ChildrenProfileUpdateForm(forms.ModelForm):
+    name = forms.CharField(max_length=20, label='Имя', widget=forms.TextInput(attrs={'class': 'my_profile_edit_input', 'placeholder': 'Имя'}))
+    surname = forms.CharField(max_length=20, label='Фамилия', widget=forms.TextInput(attrs={'class': 'my_profile_edit_input', 'placeholder': 'Фамилия'}))
+    age = forms.IntegerField(label='Возраст', widget=forms.TextInput(attrs={'class': 'my_profile_edit_input', 'placeholder': 'Возраст'}))
     image = forms.ImageField(label='', widget = forms.FileInput(attrs={'class': 'my_profile_edit_file'}))
     bio = forms.CharField(widget=forms.Textarea(attrs={'class': 'my_profile_edit_textarea', 'placeholder': 'О себе'}))
 

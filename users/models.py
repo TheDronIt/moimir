@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 import random
 from PIL import Image
+from web.models import *
 
 
 class Profile(models.Model):
@@ -53,3 +54,51 @@ class Profile(models.Model):
             img.save(self.image.path)
     
 
+
+class User_portfolio(models.Model):
+
+    class Meta:
+        verbose_name = 'Портфолио'
+        verbose_name_plural = 'Портфолио'
+
+    type_of_employment_list = [
+        ("Полная занятость", "Полная занятость"),
+        ("Частичная занятость", "Частичная занятость"),
+        ("Проектная работа", "Проектная работа"),
+        ("Стажировка", "Стажировка")
+    ]
+    schedule_list = [
+        ("Полный день", "Полный день"),
+        ("Вахтовый метод", "Вахтовый метод"),
+        ("Сменный график", "Сменный график"),
+        ("Удаленная работа", "Удаленная работа"),
+        ("Гибкий график", "Гибкий график"),
+    ]
+    experience_list = [
+        ("Не важно","Не важно"),
+        ("До 1 года","До 1 года"),
+        ("От 1 года","От 1 года"),
+        ("От 2 лет","От 2 лет"),
+        ("Более 5 лет","Более 5 лет"),
+    ]
+    special_conditions_list = [
+        ("Проблемы со зрением", "Проблемы со зрением"),
+        ("Проблемы со слухом", "Проблемы со слухом"),
+        ("Проблемы c речью", "Проблемы c речью"),
+        ("Нарушения опорно-двигательного аппарата", "Нарушения опорно-двигательного аппарата"),
+        ("Ментальные нарушения", "Ментальные нарушения"),
+        ("Другое", "Другое"),
+    ]
+
+    user =  models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="Пользователь", related_name="portfolio_user", null=True)
+    type_of_employment = models.CharField(verbose_name="Тип занятости", choices=type_of_employment_list, max_length=50)
+    schedule = models.CharField(verbose_name="График работы", choices=schedule_list, max_length=50)
+    experience = models.CharField(verbose_name="Опыт работы", choices=experience_list, max_length=50)
+    special_conditions = models.CharField(verbose_name="Особые условия", choices=special_conditions_list, max_length=50)
+
+    title = models.CharField(verbose_name="Заголовок", max_length=100)
+    about = models.TextField(max_length=500, verbose_name="Ваше описание", blank=True)
+    link = models.CharField(verbose_name="Ссылка на портфолио", max_length=200)
+
+    def __str__(self):
+        return self.user.username
