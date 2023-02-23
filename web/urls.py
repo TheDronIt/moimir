@@ -35,5 +35,8 @@ urlpatterns = [
 	path('news', views.news__page, name='news'),
 	path('news/<int:id>', views.news_about__page, name='news_about'),
 	path('info', views.info__page, name='info'),
+	path('portfolio', views.portfolio__page, name='portfolio'),
+	path('portfolio/<int:id>', views.portfolio_show__page, name='portfolio_show'),
+	path('portfolio/edit', views.portfolio_edit__page, name='portfolio_edit'),
 	path('search', views.search__page, name='search')
 	]

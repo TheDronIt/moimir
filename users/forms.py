@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
-from .models import Profile
+from .models import *
 
 
 
@@ -87,15 +87,19 @@ class ChildrenProfileUpdateForm(forms.ModelForm):
         fields = ['image','bio']
 
 
-'''
-class ProfileUpdateForm(forms.ModelForm):
-    image = forms.ImageField(label='', widget = forms.FileInput(attrs={'class': 'my_profile_edit_file'}))
-    name = forms.CharField(max_length=20, label='Имя', widget=forms.TextInput(attrs={'class': 'my_profile_edit_input', 'placeholder': 'Имя'}))
-    surname = forms.CharField(max_length=20, label='Фамилия', widget=forms.TextInput(attrs={'class': 'my_profile_edit_input', 'placeholder': 'Фамилия'}))
-    age = forms.IntegerField(label='Возраст', widget=forms.TextInput(attrs={'class': 'my_profile_edit_input', 'placeholder': 'Возраст'}))
-    bio = forms.CharField(widget=forms.Textarea(attrs={'class': 'my_profile_edit_textarea', 'placeholder': 'О себе'}))
+class PortfolioEditForm(forms.ModelForm):
+
+    title = forms.CharField(label='Должность', widget=forms.TextInput(attrs={'class': 'service_add_input', 'placeholder': 'Укажите желаемую должность'}))
+    about = forms.CharField(label='О себе', widget=forms.Textarea(attrs={'class': 'service_add_input', 'placeholder': 'Укажите кратко о себе'}))
+    work_experience = forms.CharField(label='Опыт работы', widget=forms.Textarea(attrs={'class': 'service_add_input', 'placeholder': 'Расскажите о вашем опыте работы'}))
+    education = forms.CharField(label='Образование', widget=forms.Textarea(attrs={'class': 'service_add_input', 'placeholder': 'Укажите ваше образование', 'rows':'5'}))
+    languages = forms.CharField(label='Языки', widget=forms.Textarea(attrs={'class': 'service_add_input', 'placeholder': 'Укажите языки которыми вы владеете, а так же их уровнь', 'rows':'5'}))
+    link = forms.URLField(label='Ссылка на портфолио', widget=forms.TextInput(attrs={'class': 'service_add_input', 'placeholder': 'Вставьте ссылку на ваше портфолио/сайт/облачное хранилище'}), required=False)
+
+    type_of_employment = forms.ChoiceField(choices=User_portfolio.type_of_employment_list, label='Тип занятости', widget=forms.Select(attrs={'class': 'service_add_input'}))
+    schedule = forms.ChoiceField(choices=User_portfolio.schedule_list, label='График работы', widget=forms.Select(attrs={'class': 'service_add_input'}))
+    special_conditions = forms.ChoiceField(choices=User_portfolio.special_conditions_list, label='Особые условия', widget=forms.Select(attrs={'class': 'service_add_input'}))
 
     class Meta:
-        model = Profile
-        fields = ['image', 'name', 'surname', 'age', 'bio']
-'''
+        model = User_portfolio
+        fields = ['title', 'about', 'work_experience', 'education', 'languages', 'link', 'type_of_employment', 'schedule', 'special_conditions']

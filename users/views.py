@@ -87,12 +87,14 @@ def profile(request):
             "Jobs": job
         }
     elif request.user.profile.account_type == "Пользователь":
+        portfolio   = User_portfolio.objects.filter(user=request.user)
         specialist = Specialist.objects.filter(user=request.user)
         volunteer = Volunteer.objects.filter(user=request.user)
         needhelp = Needhelp.objects.filter(user=request.user)
         section = Section.objects.filter(user=request.user)
         event = Event.objects.filter(user=request.user)
         data={
+            'portfolio'   : portfolio,  
             'specialists': specialist,
             'volunteers': volunteer,
             'needhelps': needhelp,
@@ -186,7 +188,6 @@ def user_profile(request, username):
                     request.POST['service_id']
                     )
                 return redirect(f'/user/{user.username}')
-
 
         specialist = Specialist.objects.filter(user=user)
         volunteer = Volunteer.objects.filter(user=user)

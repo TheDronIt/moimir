@@ -66,13 +66,12 @@
 			<div class="my_profile_user_block">
 				<div class="my_profile_user_card_input_block">
 
-					{% if specialists|length == 0 and volunteers|length == 0 and needhelps|length == 0 and events|length == 0 and sections|length == 0%}
-						<b>Пусто...</b><br>
-						Вы еще не успели создать карточки в сервисах 
-					{% endif %}
+					
+
+					<input type="button" id="user_card_0" value="Портфолио" class="button my_profile_user_card_input" style="background: #032042">
 
 					{% if specialists|length > 0 %}
-						<input type="button" id="user_card_1" value="Специалист" class="button my_profile_user_card_input" style="background: #032042">
+						<input type="button" id="user_card_1" value="Специалист" class="button my_profile_user_card_input">
 					{% endif %}
 					{% if volunteers|length > 0 %}
 						<input type="button" id="user_card_2" value="Волонтер" class="button my_profile_user_card_input">
@@ -89,7 +88,31 @@
 				</div>
 					
 				<div>
-					<label for="user_card_1" class="my_profile_user_card_label" style="display:block">
+					<label for="user_card_0" class="my_profile_user_card_label" style="display:grid">
+						{% if portfolio|length > 0 %}
+							{% for portfolio in portfolio %}
+								<div class="profile_portfolio">
+									<input type="checkbox" id="profile_portfolio">
+									<label for="profile_portfolio">
+										<span class="profile_portfolio_title">Портфолио</span>
+										<img src="{% static 'web/img/icons/arrow_down.png' %}" class="profile_portfolio_arrow">
+										<a href="{% url 'portfolio_edit' %}" class="profile_portfolio_link">Редактировать</a>
+
+										<div class="profile_portfolio_card">
+											{% include 'web/card/portfolio_card.html' %}
+										</div>
+									</label>
+								</div>
+							{% endfor %}
+						{% else %}
+							<div>
+								<b>У вас нет активного портфолио</b><br>
+								<a href="{% url 'portfolio_edit' %}">Хотите создать?</a><br><br>
+								<a href="{% url 'portfolio_edit' %}" class="button">Создать</a>
+							</div>
+						{% endif %}
+					</label>
+					<label for="user_card_1" class="my_profile_user_card_label">
 						{% for specialist in specialists %}
 							{% include 'web/card/specialist_card.html' %}
 						{% endfor %}

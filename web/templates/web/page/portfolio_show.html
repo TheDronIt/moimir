@@ -1,0 +1,14 @@
+{% extends 'web/base.html' %}
+{% load static %}
+{% block content %}
+
+	<section class="job_delete_block">
+		<div class="job_responses_title">
+			<input type="button" onclick="history.back();" value="Назад"/>
+		</div>
+
+		{% include 'web/card/portfolio_card.html' %}	
+			
+	</section>
+	
+{% endblock content %}

@@ -1,0 +1,83 @@
+{% load static %}
+{% block content %}
+	<div class="services_card">
+		<div class="portfolio_block">
+			<div class="portfolio_main">
+				<h2>{{portfolio.title}}</h2>
+				<h3 class="portfolio_main_fi">{{portfolio.user.profile.surname}} {{portfolio.user.profile.name}}</h3>
+
+				<div class="portfolio_section">
+					<h3 class="portfolio_section_title">О себе</h3>
+					<div class="portfolio_section_content">
+						{{portfolio.about|linebreaks}}
+					</div>
+				</div>
+
+				<div class="portfolio_section">
+					<h3 class="portfolio_section_title">Опыт работы</h3>
+					<div class="portfolio_section_content">
+						{{portfolio.work_experience|linebreaks}}
+					</div>
+				</div>
+
+				<div class="portfolio_section">
+					<h3 class="portfolio_section_title">Образование</h3>
+					<div class="portfolio_section_content">
+						{{portfolio.education|linebreaks}}
+					</div>
+				</div>
+
+				<div class="portfolio_section">
+					<h3 class="portfolio_section_title">Дополнительно</h3>
+					<div class="portfolio_section_content">
+						<span>
+							<b>Тип занятости:</b>
+							{{portfolio.type_of_employment}}
+						</span>
+						
+						<span>
+							<b>График работы:</b>
+							{{portfolio.schedule}}
+						</span>
+						<span>
+							<b>Особые условия:</b>
+							{{portfolio.special_conditions}}
+						</span>
+					</div>
+				</div>
+
+			</div>
+			<div class="portfolio_side">
+				<div class="portfolio_side_image">
+					<img src="{{portfolio.user.profile.image.url}}">	
+				</div>
+
+				<div class="portfolio_section">
+					<h3 class="portfolio_section_title">Контакты</h3>
+					<div class="portfolio_section_content">
+						<span>{{ portfolio.user.email }}</span>
+						{% if portfolio.user.profile.contacts != "" and portfolio.user.profile.contacts != Null %}
+							<span>{{ portfolio.user.profile.contacts }}</span>
+						{% endif %}
+					</div>
+				</div>
+
+				<div class="portfolio_section">
+					<h3 class="portfolio_section_title">Языки</h3>
+					<div class="portfolio_section_content">
+						{{portfolio.languages|linebreaks}}
+					</div>
+				</div>
+
+				{% if portfolio.link != "" and portfolio.link != Null %}
+					<div class="portfolio_section">
+						<h3 class="portfolio_section_title">Портфолио</h3>
+						<div class="portfolio_section_content">
+							<a href="{{portfolio.link}}" target="_blank" style="text-decoration: underline;">Ссылка на источник</a>
+						</div>
+					</div>
+				{% endif %}
+			</div>
+		</div>
+	</div>
+{% endblock %}

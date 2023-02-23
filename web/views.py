@@ -1,8 +1,12 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
 from django.contrib.auth.decorators import login_required
+
 from .forms import *
 from .models import *
+
+from users.forms import *
+from users.models import *
 
 
 def index__page(request):
@@ -787,8 +791,60 @@ def response__page(request):
             'Job_response': job_response
         }
         return render(request, 'web/page/response.html', data)
-    else:
-        return redirect('profile')
+    return redirect('profile')
+
+
+@login_required
+def portfolio__page(request):
+    if request.user.profile.account_type == "Пользователь":
+        portfolio = User_portfolio.objects.get(user=request.user)
+        print(portfolio)
+        pass
+
+
+@login_required
+def portfolio_show__page(request, id):
+    portfolio = User_portfolio.objects.get(id=id)
+    data = {
+        'portfolio':portfolio
+    }
+    return render(request, 'web/page/portfolio_show.html', data)
+
+@login_required
+def portfolio_edit__page(request):
+    if request.user.profile.account_type == "Пользователь":
+        user_portfolio = User_portfolio.objects.filter(user=request.user)
+        
+        #Если у пользователя нет портфолио
+        if user_portfolio.count() == 0:
+            if request.method == "POST":
+                form = PortfolioEditForm(request.POST)
+                if form.is_valid():
+                    new_form = form.save(commit=False)
+                    new_form.user = request.user
+                    new_form.save()
+                    return redirect('profile')
+            else:
+                form = PortfolioEditForm()
+
+        #Если у пользователя есть портфолио
+        else:
+            portfolio = User_portfolio.objects.get(user=request.user)
+            if request.method == "POST":
+                form = PortfolioEditForm(request.POST, instance=portfolio)
+                if form.is_valid():
+                    new_form = form.save(commit=False)
+                    new_form.user = request.user
+                    new_form.save()
+                    return redirect('profile')
+            else:
+                form = PortfolioEditForm(instance=portfolio)
+            
+        data = {
+            'form':form
+        }
+        return render(request, 'web/page/portfolio_edit.html', data)
+    return redirect('profile')
 
 
 def change_favorite(user, service_name, service_id):

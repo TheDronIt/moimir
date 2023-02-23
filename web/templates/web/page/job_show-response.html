@@ -20,6 +20,7 @@
 					<img src="{{responded.user.profile.image.url}}" alt=" ">
 				</div>
 				<a class="job_responses_card_name" href="/user/{{responded.user.username}}">
+
 					<span class="job_responses_card_name_username">@{{responded.user.username}}</span>
 					<span class="job_responses_card_name_fio">
 						<h2>{{responded.user.profile.surname}}<br>{{responded.user.profile.name}}</h2>
@@ -31,6 +32,12 @@
 				</div>
 				<div class="job_responses_card_info">
 
+					{% if responded.user.portfolio_user %}
+						<span><a href="/portfolio/{{responded.user.portfolio_user.id}}">Портфолио</a></span>
+					{% else %}
+						<span class="job_responses_card_info_no-portfolio">Пользователь не создал резюме</span>
+					{% endif %}
+					
 					<span>{{responded.user.email}}</span>
 					<span class="job_responses_card_info_date">{{responded.date}}</span>
 					

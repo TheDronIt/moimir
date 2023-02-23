@@ -297,6 +297,7 @@ class News(models.Model):
 
     title = models.CharField(verbose_name="Заголовок", max_length=50)
     image = models.ImageField(verbose_name="Изображение", upload_to='news/')
+    description = models.TextField(verbose_name="Описание", max_length=10000)
     date = models.DateField(verbose_name='Дата', default=datetime.now, blank=True)
 
     def __str__(self):

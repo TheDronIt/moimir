@@ -38,6 +38,7 @@ class Profile(models.Model):
     show_contacts = models.CharField(max_length=50, choices=show_list, default="Скрывать", verbose_name="Отображение контактов")
     account_type = models.CharField(max_length=50, choices=account_type_list, default="Пользователь", verbose_name="Тип аккаунта")
     employer = models.CharField(verbose_name="Название организации", max_length=50, default="", null=True, blank=True, unique=True)
+    
 
     def __str__(self):
         return self.user.username
@@ -74,13 +75,6 @@ class User_portfolio(models.Model):
         ("Удаленная работа", "Удаленная работа"),
         ("Гибкий график", "Гибкий график"),
     ]
-    experience_list = [
-        ("Не важно","Не важно"),
-        ("До 1 года","До 1 года"),
-        ("От 1 года","От 1 года"),
-        ("От 2 лет","От 2 лет"),
-        ("Более 5 лет","Более 5 лет"),
-    ]
     special_conditions_list = [
         ("Проблемы со зрением", "Проблемы со зрением"),
         ("Проблемы со слухом", "Проблемы со слухом"),
@@ -88,17 +82,20 @@ class User_portfolio(models.Model):
         ("Нарушения опорно-двигательного аппарата", "Нарушения опорно-двигательного аппарата"),
         ("Ментальные нарушения", "Ментальные нарушения"),
         ("Другое", "Другое"),
+        ("Отсутствуют", "Отсутствуют"),
     ]
 
-    user =  models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="Пользователь", related_name="portfolio_user", null=True)
+    user =  models.OneToOneField(User, on_delete=models.CASCADE, verbose_name="Пользователь", related_name="portfolio_user", null=True)
+    title = models.CharField(verbose_name="Заголовок", max_length=100)
+    about = models.TextField(max_length=500, verbose_name="Ваше описание")
+    work_experience = models.TextField(max_length=500, verbose_name="Опыт работы")
+    education = models.TextField(max_length=500, verbose_name="Ваше описание")
+    languages = models.TextField(max_length=500, verbose_name="Языки")
+    link = models.CharField(verbose_name="Ссылка на портфолио", max_length=200, null=True, default=None)
+
     type_of_employment = models.CharField(verbose_name="Тип занятости", choices=type_of_employment_list, max_length=50)
     schedule = models.CharField(verbose_name="График работы", choices=schedule_list, max_length=50)
-    experience = models.CharField(verbose_name="Опыт работы", choices=experience_list, max_length=50)
     special_conditions = models.CharField(verbose_name="Особые условия", choices=special_conditions_list, max_length=50)
-
-    title = models.CharField(verbose_name="Заголовок", max_length=100)
-    about = models.TextField(max_length=500, verbose_name="Ваше описание", blank=True)
-    link = models.CharField(verbose_name="Ссылка на портфолио", max_length=200)
 
     def __str__(self):
         return self.user.username
