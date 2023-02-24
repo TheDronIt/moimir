@@ -9,7 +9,9 @@
 				<h2>{{achievement.title}}</h2>
 				<span class="achievement_card_content_date">{{achievement.date}}</span>
 				<span class="achievement_card_content_about">{{achievement.about}}</span>
-				<a href="/achievement/edit/{{achievement.id}}" class="achievement_card_content_edit">Редактировать</a>
+				{% if achievement.user.username == user.username %}
+					<a href="/achievement/edit/{{achievement.id}}" class="achievement_card_content_edit">Редактировать</a>
+				{% endif %}
 			</div>
 		</div>
 	</div>

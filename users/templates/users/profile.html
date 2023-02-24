@@ -65,10 +65,8 @@
 			<!--Карточки если пользователь-->
 			{% if user.profile.account_type == "Пользователь" %}
 				<div class="my_profile_user_block">
+					
 					<div class="my_profile_user_card_input_block">
-
-						
-
 						<input type="button" id="user_card_0" value="Портфолио" class="button my_profile_user_card_input" style="background: #032042">
 
 						{% if specialists|length > 0 %}

@@ -108,6 +108,20 @@
 			</div>
 			{% endif %}
 
+			<!--Карточки если ребенок-->
+			{% if user_profile.profile.account_type == "Детский" %}
+				<div class="my_profile_user_block">
+					<div class="my_profile_user_card_input_block">
+						<input type="button" id="children_card_0" value="Достижения" class="button my_profile_user_card_input" style="background: #032042">
+						<label for="children_card_0" class="my_profile_user_card_label" style="display:grid">
+							{% for achievement in achievements %}
+								{% include 'web/card/achievement_card.html' %}
+							{% endfor %}
+						</label>
+					</div>
+				</div>
+			{% endif %}
+
 		</div>
 	</div>
 </div>

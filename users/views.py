@@ -209,8 +209,10 @@ def user_profile(request, username):
             'events': event
         }
     elif user.profile.account_type == "Детский":
+        achievement = Children_achievement.objects.filter(user=user)
         data = {
             'user_profile': user,
+            'achievements': achievement
         }
 
     return render(request, 'users/user.html', data)

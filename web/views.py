@@ -17,7 +17,7 @@ def index__page(request):
     return render(request, 'web/page/index.html', data)
 
 
-@login_required
+
 def job__page(request):
 
     filter_form = JobFilterForm()
@@ -233,7 +233,7 @@ def search__page(request):
     return render(request, 'web/page/search.html', data)
 
 
-@login_required
+
 def specialist__page(request): 
     favorite = []
     if request.user.is_authenticated == True:
@@ -337,7 +337,6 @@ def specialist_delete__page(request, id):
 
 
 
-@login_required
 def volunteer__page(request):
     favorite = []
     if request.user.is_authenticated == True:
@@ -428,7 +427,7 @@ def volunteer_delete__page(request, id):
 
 
 
-@login_required
+
 def needhelp__page(request):
     favorite = []
     if request.user.is_authenticated == True:
@@ -519,7 +518,7 @@ def needhelp_delete__page(request, id):
 
 
 
-@login_required
+
 def section__page(request):
     favorite = []
     if request.user.is_authenticated == True:
@@ -607,7 +606,7 @@ def section_delete__page(request, id):
     return redirect('section')
 
 
-@login_required
+
 def event__page(request):
     favorite = []
     if request.user.is_authenticated == True:
@@ -696,7 +695,7 @@ def event_delete__page(request, id):
     return redirect('event')
 
 
-@login_required
+
 def news__page(request):
     news = News.objects.all().order_by('-id')
     data ={
@@ -705,7 +704,7 @@ def news__page(request):
     return render(request, 'web/page/news.html', data)
 
 
-@login_required
+
 def news_about__page(request, id):
     news = News.objects.get(id=id)
     data ={
@@ -714,7 +713,7 @@ def news_about__page(request, id):
     return render(request, 'web/page/news_about.html', data)
 
 
-@login_required
+
 def info__page(request):
     info_category = InfoCategory.objects.all()
     data ={
