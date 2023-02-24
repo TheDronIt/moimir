@@ -27,7 +27,7 @@
 		</div>
 		<div class="my_profile_info">
 			<div class="my_profile_info_name">
-				{% if user_profile.profile.account_type == "Пользователь" %}
+				{% if user_profile.profile.account_type == "Пользователь" or  user_profile.profile.account_type == "Детский"%}
 					<h2>{{ user_profile.profile.name }} {{ user_profile.profile.surname }}, {{ user_profile.profile.age }} лет</h2>
 				{% elif user_profile.profile.account_type == "Работодатель" %}
 					<h2>{{user_profile.profile.employer}}</h2>

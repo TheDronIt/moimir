@@ -253,7 +253,7 @@ class Event(models.Model):
 
     event_theme = models.CharField(verbose_name="Тема мероприятия", choices=event_theme_list, max_length=50)
 
-    display_status = models.CharField(verbose_name="Статус отображения", choices=display_status_list, default="Скрывать" ,max_length=50)
+    display_status = models.CharField(verbose_name="Статус отображения", choices=display_status_list, default="Отображать" ,max_length=50)
 
     def __str__(self):
         return self.title

@@ -4,12 +4,7 @@ from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from .models import *
 
 
-
-
-
-
 class UserRegisterForm(UserCreationForm):
-    
     email = forms.EmailField(label='', widget=forms.TextInput(attrs={'class': 'auth_form_input', 'placeholder': 'Адрес электронной почты'}))
     username= forms.CharField(max_length=20, label='', widget=forms.TextInput(attrs={'class': 'auth_form_input', 'placeholder': 'Логин'}))
     password1 = forms.CharField(label='', widget=forms.PasswordInput(attrs={'class': 'auth_form_input', 'placeholder': 'Пароль'}))
@@ -21,7 +16,6 @@ class UserRegisterForm(UserCreationForm):
 
 
 class ProfileRegisterForm(forms.ModelForm):
-
     name = forms.CharField(max_length=20, label='', widget=forms.TextInput(attrs={'class': 'auth_form_input auth_form__user', 'placeholder': 'Имя'}), required=False)
     surname = forms.CharField(max_length=20, label='', widget=forms.TextInput(attrs={'class': 'auth_form_input auth_form__user', 'placeholder': 'Фамилия'}), required=False)
     age = forms.IntegerField(label='', widget=forms.TextInput(attrs={'class': 'auth_form_input auth_form__user', 'placeholder': 'Возраст'}), required=False)
@@ -61,8 +55,7 @@ class UserProfileUpdateForm(forms.ModelForm):
         fields = ['name', 'surname', 'age', 'image', 'bio', 'contacts', 'show_email', 'show_contacts']
 
 
-class EmployerProfileUpdateForm(forms.ModelForm):
-    
+class EmployerProfileUpdateForm(forms.ModelForm):   
     employer = forms.CharField(max_length=20, label='Имя', widget=forms.TextInput(attrs={'class': 'my_profile_edit_input', 'placeholder': 'Название орагнизации'}), error_messages = {'unique':"Выбранное название организации уже используется, выберите другое название"})
     image = forms.ImageField(label='', widget = forms.FileInput(attrs={'class': 'my_profile_edit_file'}))
     bio = forms.CharField(widget=forms.Textarea(attrs={'class': 'my_profile_edit_textarea', 'placeholder': 'О себе'}), required=False)
@@ -88,7 +81,6 @@ class ChildrenProfileUpdateForm(forms.ModelForm):
 
 
 class PortfolioEditForm(forms.ModelForm):
-
     title = forms.CharField(label='Должность', widget=forms.TextInput(attrs={'class': 'service_add_input', 'placeholder': 'Укажите желаемую должность'}))
     about = forms.CharField(label='О себе', widget=forms.Textarea(attrs={'class': 'service_add_input', 'placeholder': 'Укажите кратко о себе'}))
     work_experience = forms.CharField(label='Опыт работы', widget=forms.Textarea(attrs={'class': 'service_add_input', 'placeholder': 'Расскажите о вашем опыте работы'}))
@@ -103,3 +95,12 @@ class PortfolioEditForm(forms.ModelForm):
     class Meta:
         model = User_portfolio
         fields = ['title', 'about', 'work_experience', 'education', 'languages', 'link', 'type_of_employment', 'schedule', 'special_conditions']
+
+
+class AchievementEditForm(forms.ModelForm):
+    title = forms.CharField(label='Заголовок', widget=forms.TextInput(attrs={'class': 'service_add_input', 'placeholder': 'Напишите краткое название. Пример: первое место за стих'}))
+    about = forms.CharField(label='Описание', widget=forms.Textarea(attrs={'class': 'service_add_input', 'placeholder': 'Напишите о конкурсе, что вы сделали, какие награды получили'}))
+
+    class Meta:
+        model = Children_achievement
+        fields = ['title', 'image', 'about']

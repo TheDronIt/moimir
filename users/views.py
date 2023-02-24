@@ -30,7 +30,7 @@ def user_register(request):
                 if profile.account_type == "Пользователь":
                     Profile.objects.filter(user=profile.user).update(employer=None)
                 elif profile.account_type == "Детский":
-                    Profile.objects.filter(user=profile.user).update(name=None, surname=None, age=None, employer=None)
+                    Profile.objects.filter(user=profile.user).update(employer=None) #name=None, surname=None, age=None, 
                 elif profile.account_type == "Работодатель":
                     Profile.objects.filter(user=profile.user).update(name=None, surname=None, age=None)
 
@@ -102,8 +102,9 @@ def profile(request):
             'events': event
         }
     elif request.user.profile.account_type == "Детский":
+        achievement = Children_achievement.objects.filter(user=request.user)
         data = {
-
+            'achievements': achievement
         }
     else:
         return redirect('home')
@@ -207,4 +208,9 @@ def user_profile(request, username):
             'sections': section,
             'events': event
         }
+    elif user.profile.account_type == "Детский":
+        data = {
+            'user_profile': user,
+        }
+
     return render(request, 'users/user.html', data)

@@ -1,0 +1,17 @@
+{% load static %}
+{% block content %}
+	<div class="services_card">
+		<div class="achievement_card">
+			<a href="{{ achievement.image.url }}" data-fancybox class="achievement_card_image">
+				<img src="{{ achievement.image.url }}" alt=" ">
+			</a>
+			<div class="achievement_card_content">
+				<h2>{{achievement.title}}</h2>
+				<span class="achievement_card_content_date">{{achievement.date}}</span>
+				<span class="achievement_card_content_about">{{achievement.about}}</span>
+				<a href="/achievement/edit/{{achievement.id}}" class="achievement_card_content_edit">Редактировать</a>
+			</div>
+		</div>
+	</div>
+{% endblock %}
+

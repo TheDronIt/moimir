@@ -1,5 +1,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
+
 {% extends "web/base.html" %}
 {% load static %}
 {% block content %}
@@ -41,7 +42,7 @@
 		</div>
 		<div class="my_profile_info">
 			<div class="my_profile_info_name">
-				{% if user.profile.account_type == "Пользователь" %}
+				{% if user.profile.account_type == "Пользователь" or user.profile.account_type == "Детский"%}
 					<h2>{{ user.profile.name }} {{ user.profile.surname }}, {{ user.profile.age }} лет</h2>
 				{% elif user.profile.account_type == "Работодатель" %}
 					<h2>{{user.profile.employer}}</h2>
@@ -63,88 +64,100 @@
 			
 			<!--Карточки если пользователь-->
 			{% if user.profile.account_type == "Пользователь" %}
-			<div class="my_profile_user_block">
-				<div class="my_profile_user_card_input_block">
+				<div class="my_profile_user_block">
+					<div class="my_profile_user_card_input_block">
 
-					
-
-					<input type="button" id="user_card_0" value="Портфолио" class="button my_profile_user_card_input" style="background: #032042">
-
-					{% if specialists|length > 0 %}
-						<input type="button" id="user_card_1" value="Специалист" class="button my_profile_user_card_input">
-					{% endif %}
-					{% if volunteers|length > 0 %}
-						<input type="button" id="user_card_2" value="Волонтер" class="button my_profile_user_card_input">
-					{% endif %}
-					{% if needhelps|length > 0 %}
-						<input type="button" id="user_card_3" value="Нуждается в помощи" class="button my_profile_user_card_input">
-					{% endif %}
-					{% if events|length > 0 %}
-						<input type="button" id="user_card_4" value="Организатор мероприятия" class="button my_profile_user_card_input">
-					{% endif %}
-					{% if sections|length > 0 %}
-						<input type="button" id="user_card_5" value="Организатор секции" class="button my_profile_user_card_input">
-					{%endif %}
-				</div>
-					
-				<div>
-					<label for="user_card_0" class="my_profile_user_card_label" style="display:grid">
-						{% if portfolio|length > 0 %}
-							{% for portfolio in portfolio %}
-								<div class="profile_portfolio">
-									<input type="checkbox" id="profile_portfolio">
-									<label for="profile_portfolio">
-										<span class="profile_portfolio_title">Портфолио</span>
-										<img src="{% static 'web/img/icons/arrow_down.png' %}" class="profile_portfolio_arrow">
-										<a href="{% url 'portfolio_edit' %}" class="profile_portfolio_link">Редактировать</a>
-
-										<div class="profile_portfolio_card">
-											{% include 'web/card/portfolio_card.html' %}
-										</div>
-									</label>
-								</div>
-							{% endfor %}
-						{% else %}
-							<div>
-								<b>У вас нет активного портфолио</b><br>
-								<a href="{% url 'portfolio_edit' %}">Хотите создать?</a><br><br>
-								<a href="{% url 'portfolio_edit' %}" class="button">Создать</a>
-							</div>
-						{% endif %}
-					</label>
-					<label for="user_card_1" class="my_profile_user_card_label">
-						{% for specialist in specialists %}
-							{% include 'web/card/specialist_card.html' %}
-						{% endfor %}
-					</label>
-					<label for="user_card_2" class="my_profile_user_card_label">
-						{% for volunteer in volunteers %}
-							{% include 'web/card/volunteer_card.html' %}
-						{% endfor %}
-					</label>
-					<label for="user_card_3" class="my_profile_user_card_label">
-						{% for needhelp in needhelps %}
-							{% include 'web/card/needhelp_card.html' %}
-						{% endfor %}
-					</label>
-					<label for="user_card_4" class="my_profile_user_card_label">
-						{% for event in events %}
-							{% include 'web/card/event_card.html' %}
-						{% endfor %}
 						
-					</label>
-					<label for="user_card_5" class="my_profile_user_card_label">
-						{% for section in sections %}
-							{% include 'web/card/section_card.html' %}
-						{% endfor %}
-					</label>
+
+						<input type="button" id="user_card_0" value="Портфолио" class="button my_profile_user_card_input" style="background: #032042">
+
+						{% if specialists|length > 0 %}
+							<input type="button" id="user_card_1" value="Специалист" class="button my_profile_user_card_input">
+						{% endif %}
+						{% if volunteers|length > 0 %}
+							<input type="button" id="user_card_2" value="Волонтер" class="button my_profile_user_card_input">
+						{% endif %}
+						{% if needhelps|length > 0 %}
+							<input type="button" id="user_card_3" value="Нуждается в помощи" class="button my_profile_user_card_input">
+						{% endif %}
+						{% if events|length > 0 %}
+							<input type="button" id="user_card_4" value="Организатор мероприятия" class="button my_profile_user_card_input">
+						{% endif %}
+						{% if sections|length > 0 %}
+							<input type="button" id="user_card_5" value="Организатор секции" class="button my_profile_user_card_input">
+						{%endif %}
+					</div>
+						
+					<div>
+						<label for="user_card_0" class="my_profile_user_card_label" style="display:grid">
+							{% if portfolio|length > 0 %}
+								{% for portfolio in portfolio %}
+									<div class="profile_portfolio">
+										<input type="checkbox" id="profile_portfolio">
+										<label for="profile_portfolio">
+											<span class="profile_portfolio_title">Портфолио</span>
+											<img src="{% static 'web/img/icons/arrow_down.png' %}" class="profile_portfolio_arrow">
+											<a href="{% url 'portfolio_edit' %}" class="profile_portfolio_link">Редактировать</a>
+
+											<div class="profile_portfolio_card">
+												{% include 'web/card/portfolio_card.html' %}
+											</div>
+										</label>
+									</div>
+								{% endfor %}
+							{% else %}
+								<div>
+									<b>У вас нет активного портфолио</b><br>
+									<a href="{% url 'portfolio_edit' %}">Хотите создать?</a><br><br>
+									<a href="{% url 'portfolio_edit' %}" class="button">Создать</a>
+								</div>
+							{% endif %}
+						</label>
+						<label for="user_card_1" class="my_profile_user_card_label">
+							{% for specialist in specialists %}
+								{% include 'web/card/specialist_card.html' %}
+							{% endfor %}
+						</label>
+						<label for="user_card_2" class="my_profile_user_card_label">
+							{% for volunteer in volunteers %}
+								{% include 'web/card/volunteer_card.html' %}
+							{% endfor %}
+						</label>
+						<label for="user_card_3" class="my_profile_user_card_label">
+							{% for needhelp in needhelps %}
+								{% include 'web/card/needhelp_card.html' %}
+							{% endfor %}
+						</label>
+						<label for="user_card_4" class="my_profile_user_card_label">
+							{% for event in events %}
+								{% include 'web/card/event_card.html' %}
+							{% endfor %}
+							
+						</label>
+						<label for="user_card_5" class="my_profile_user_card_label">
+							{% for section in sections %}
+								{% include 'web/card/section_card.html' %}
+							{% endfor %}
+						</label>
+					</div>
+		
 				</div>
-	
-			</div>
 			{% endif %}
 			
-
-			
+			<!--Карточки если ребенок-->
+			{% if user.profile.account_type == "Детский" %}
+				<div class="my_profile_user_block">
+					<div class="my_profile_user_card_input_block">
+						<input type="button" id="children_card_0" value="Достижения" class="button my_profile_user_card_input" style="background: #032042">
+						<label for="children_card_0" class="my_profile_user_card_label" style="display:grid">
+							<a href="{% url 'achievement_add' %}">Добавить достижение</a>
+							{% for achievement in achievements %}
+								{% include 'web/card/achievement_card.html' %}
+							{% endfor %}
+						</label>
+					</div>
+				</div>
+			{% endif %}
 			
 
 
@@ -165,8 +178,8 @@
        		$(this).css("background", "#032042")
        		$label.css("display", "grid")
     	}
-        
     });
- </script>
+
+</script>
 {% endblock %}
 

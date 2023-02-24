@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from datetime import datetime
 import random
 from PIL import Image
 from web.models import *
@@ -99,3 +100,28 @@ class User_portfolio(models.Model):
 
     def __str__(self):
         return self.user.username
+
+
+class Children_achievement(models.Model):
+    class Meta:
+        verbose_name = 'Достижения'
+        verbose_name_plural = 'Достижения'
+
+    user =  models.ForeignKey(User, on_delete=models.CASCADE, verbose_name="Пользователь", related_name="achievements_user", null=True)
+    title = models.CharField(verbose_name="Заголовок", max_length=100)
+    image = models.ImageField(verbose_name="Изображение", upload_to='achievements_pics')#default='default_achievement.png',
+    about = models.TextField(max_length=500, verbose_name="Описание")
+    date = models.DateField(verbose_name='Дата', default=datetime.now, blank=True)
+
+    def __str__(self):
+        return f"{self.user.username}: {self.title}"
+
+    '''
+    def save(self):
+        super().save()
+        img = Image.open(self.image.path)
+        if img.height > 300 or img.width > 300:
+            output_size = (300, 300)
+            img.thumbnail(output_size)
+            img.save(self.image.path)
+    '''

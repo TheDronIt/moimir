@@ -1062,3 +1062,55 @@ input[type="checkbox"][id^="profile_portfolio"] {
    margin-top: 0;
 }
 /* END PORTFOLIO */
+
+
+/* ACHIEVEMENT  */
+.achievement_card
+{
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    grid-gap: 30px;
+}
+.achievement_card_image
+{
+    width: 200px;
+    height: 200px;
+    border-radius: 16px;
+    background-color: white;
+    overflow: hidden;
+}
+.achievement_card_image img
+{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.achievement_card_content
+{
+    position: relative;
+}
+.achievement_card_content h2
+{
+    margin: 0 0 5px 0;
+    font-size: 2rem;
+    font-weight: 500;
+}
+.achievement_card_content_date
+{
+    display: block;
+    font-size: 1.4rem;
+}
+.achievement_card_content_about
+{
+    display: block;
+    margin: 10px 0;
+}
+.achievement_card_content_edit
+{
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    font-size: 1.4rem;
+    color: #3C8BE8;
+}
+/* END ACHIEVEMENT  */

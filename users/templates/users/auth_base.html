@@ -65,8 +65,12 @@
         $(this).closest("#id_account_type").find("label").removeClass("account_type__selected")
         $(this).closest("div").find("label").addClass("account_type__selected")
 
+        $(this).closest("form").find(".disabled").removeClass("disabled")
+        $(this).closest("form").find(".auth_form__employer").addClass("disabled")
+        /*
         $(this).closest("form").find(".auth_form__user").addClass("disabled")
         $(this).closest("form").find(".auth_form__employer").addClass("disabled")
+        */
     });
     /*Работодатель*/
     $("#id_account_type_2").click(function() {

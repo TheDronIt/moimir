@@ -119,73 +119,77 @@
 			</div>
 		</div>
 		<div class="nav_menu">
-			{% if request.path == "/job" %}
-				<a href="{% url 'job' %}" class="nav_menu_button nav_menu_button__activate">
-					<div class="nav_menu_button_icon">
-						<img src="{% static 'web/img/icons/work_found__active.svg' %}">
-					</div>
-					<span class="nav_menu_button_name">Поиск работы</span>
-				</a>
-			{% else%}
-				<a href="{% url 'job' %}" class="nav_menu_button">
-					<div class="nav_menu_button_icon">
-						<img src="{% static 'web/img/icons/work_found.svg' %}">
-					</div>
-					<span class="nav_menu_button_name">Поиск работы</span>
-				</a>
-			{% endif %} 
-			
 
-			{% if request.path == "/specialist" %}
-				<a href="{% url 'specialist' %}" class="nav_menu_button nav_menu_button__activate">
-					<div class="nav_menu_button_icon">
-						<img src="{% static 'web/img/icons/education__active.svg' %}">
-					</div>
-					<span class="nav_menu_button_name">Специалисты</span>
-				</a>
-			{% else %}
-				<a href="{% url 'specialist' %}" class="nav_menu_button">
-					<div class="nav_menu_button_icon">
-						<img src="{% static 'web/img/icons/education.svg' %}">
-					</div>
-					<span class="nav_menu_button_name">Специалисты</span>
-				</a>
+			{% if user.profile.account_type != "Детский" %}
+
+				{% if request.path == "/job" %}
+					<a href="{% url 'job' %}" class="nav_menu_button nav_menu_button__activate">
+						<div class="nav_menu_button_icon">
+							<img src="{% static 'web/img/icons/work_found__active.svg' %}">
+						</div>
+						<span class="nav_menu_button_name">Поиск работы</span>
+					</a>
+				{% else%}
+					<a href="{% url 'job' %}" class="nav_menu_button">
+						<div class="nav_menu_button_icon">
+							<img src="{% static 'web/img/icons/work_found.svg' %}">
+						</div>
+						<span class="nav_menu_button_name">Поиск работы</span>
+					</a>
+				{% endif %} 
+				
+
+				{% if request.path == "/specialist" %}
+					<a href="{% url 'specialist' %}" class="nav_menu_button nav_menu_button__activate">
+						<div class="nav_menu_button_icon">
+							<img src="{% static 'web/img/icons/education__active.svg' %}">
+						</div>
+						<span class="nav_menu_button_name">Специалисты</span>
+					</a>
+				{% else %}
+					<a href="{% url 'specialist' %}" class="nav_menu_button">
+						<div class="nav_menu_button_icon">
+							<img src="{% static 'web/img/icons/education.svg' %}">
+						</div>
+						<span class="nav_menu_button_name">Специалисты</span>
+					</a>
+				{% endif %}
+
+
+				{% if request.path == "/volunteer" %}
+					<a href="{% url 'volunteer' %}" class="nav_menu_button nav_menu_button__activate">
+						<div class="nav_menu_button_icon">
+							<img src="{% static 'web/img/icons/volunteer__active.svg' %}" >
+						</div>
+						<span class="nav_menu_button_name">Волонтерство</span>
+					</a>
+				{% else %}
+					<a href="{% url 'volunteer' %}" class="nav_menu_button">
+						<div class="nav_menu_button_icon">
+							<img src="{% static 'web/img/icons/volunteer.svg' %}" >
+						</div>
+						<span class="nav_menu_button_name">Волонтерство</span>
+					</a>
+				{% endif %}
+
+
+				{% if request.path == "/needhelp" %}
+					<a href="{% url 'needhelp' %}" class="nav_menu_button nav_menu_button__activate">
+						<div class="nav_menu_button_icon">
+							<img src="{% static 'web/img/icons/need_help__active.svg' %}">
+						</div>
+						<span class="nav_menu_button_name">Нуждаются в помощи</span>
+					</a>
+				{% else %}
+					<a href="{% url 'needhelp' %}" class="nav_menu_button">
+						<div class="nav_menu_button_icon">
+							<img src="{% static 'web/img/icons/need_help.svg' %}">
+						</div>
+						<span class="nav_menu_button_name">Нуждаются в помощи</span>
+					</a>
+				{% endif %}
+
 			{% endif %}
-
-
-			{% if request.path == "/volunteer" %}
-				<a href="{% url 'volunteer' %}" class="nav_menu_button nav_menu_button__activate">
-					<div class="nav_menu_button_icon">
-						<img src="{% static 'web/img/icons/volunteer__active.svg' %}" >
-					</div>
-					<span class="nav_menu_button_name">Волонтерство</span>
-				</a>
-			{% else %}
-				<a href="{% url 'volunteer' %}" class="nav_menu_button">
-					<div class="nav_menu_button_icon">
-						<img src="{% static 'web/img/icons/volunteer.svg' %}" >
-					</div>
-					<span class="nav_menu_button_name">Волонтерство</span>
-				</a>
-			{% endif %}
-
-
-			{% if request.path == "/needhelp" %}
-				<a href="{% url 'needhelp' %}" class="nav_menu_button nav_menu_button__activate">
-					<div class="nav_menu_button_icon">
-						<img src="{% static 'web/img/icons/need_help__active.svg' %}">
-					</div>
-					<span class="nav_menu_button_name">Нуждаются в помощи</span>
-				</a>
-			{% else %}
-				<a href="{% url 'needhelp' %}" class="nav_menu_button">
-					<div class="nav_menu_button_icon">
-						<img src="{% static 'web/img/icons/need_help.svg' %}">
-					</div>
-					<span class="nav_menu_button_name">Нуждаются в помощи</span>
-				</a>
-			{% endif %}
-
 
 			{% if request.path == "/event" %}
 				<a href="{% url 'event' %}" class="nav_menu_button nav_menu_button__activate">
@@ -235,6 +239,7 @@
 				</a>
 			{% endif %}
 
+			<!--
 			{% if request.path == "/info" %}
 				<a href="{% url 'info' %}" class="nav_menu_button nav_menu_button__activate">
 					<div class="nav_menu_button_icon">
@@ -250,6 +255,7 @@
 					<span class="nav_menu_button_name">Полезная информация</span>
 				</a>
 			{% endif %}
+			-->
 		</div>
 	</div>
 </nav>

@@ -810,6 +810,7 @@ def portfolio_show__page(request, id):
     }
     return render(request, 'web/page/portfolio_show.html', data)
 
+
 @login_required
 def portfolio_edit__page(request):
     if request.user.profile.account_type == "Пользователь":
@@ -846,6 +847,47 @@ def portfolio_edit__page(request):
         return render(request, 'web/page/portfolio_edit.html', data)
     return redirect('profile')
 
+
+@login_required
+def achievement_add__page(request):
+    if request.user.profile.account_type == "Детский":
+        if request.method == 'POST':
+            form = AchievementEditForm(request.POST, request.FILES)
+            print(request.POST, request.FILES)
+            if form.is_valid():
+                updated_form = form.save(commit=False)
+                updated_form.user = request.user
+                updated_form.save()  
+                return redirect('profile')
+        else:
+            form = AchievementEditForm()
+        
+        data = {
+                'form': form
+            }
+        return render(request, 'web/page/service_edit.html', data)
+    return redirect('profile')
+
+
+def achievement_edit__page(request, id):
+    achievement = Children_achievement.objects.get(id=id)
+    print(achievement)
+
+    #Проверка на владение записью
+    if achievement.user == request.user:
+        if request.method == 'POST':
+            form = AchievementEditForm(request.POST, request.FILES, instance=achievement)
+            if form.is_valid():
+                form.save()
+                return redirect('profile')
+        else:
+            form = AchievementEditForm(instance=achievement)
+
+        data ={
+            'form': form
+        }
+        return render(request, 'web/page/service_edit.html', data)
+    
 
 def change_favorite(user, service_name, service_id):
     print(user, service_name, service_id)

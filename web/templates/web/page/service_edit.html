@@ -5,7 +5,7 @@
 		<input type="button" onclick="history.back();" value="Назад" class="button-back" />
 	</div>
 	<section class="service_add">
-		<form method="POST" class="service_add_form">
+		<form method="POST" enctype="multipart/form-data" class="service_add_form">
             {% csrf_token %}
 
 			{{form}}
