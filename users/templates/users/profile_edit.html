@@ -26,7 +26,7 @@
 
 				{% if user.profile.account_type == "Пользователь" %}
 
-					<br><br>
+					<!--<br><br>-->
 					<div>
 						<b class="my_profile_about_edit_b">Имя:</b>
 						{{ p_form.name }}
@@ -58,8 +58,20 @@
 
 				{% elif user.profile.account_type == "Детский" %}
 					<div>
+						<b class="my_profile_about_edit_b">Имя:</b>
+						{{ p_form.name }}
+					</div>
+					<div>
+						<b class="my_profile_about_edit_b">Фамилия:</b>
+						{{ p_form.surname }}
+					</div>
+					<div>
 						<b class="my_profile_about_edit_b">Почта:</b>
 						{{ u_form.email }}
+					</div>
+					<div>
+						<b class="my_profile_about_edit_b">Возраст:</b>
+						{{ p_form.age }}
 					</div>
 				{% elif user.profile.account_type == "Работодатель" %}
 					<div>

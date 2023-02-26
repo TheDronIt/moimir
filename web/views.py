@@ -888,6 +888,23 @@ def achievement_edit__page(request, id):
         return render(request, 'web/page/service_edit.html', data)
     
 
+@login_required
+def achievement_delete__page(request, id):
+    if request.user.profile.account_type == "Детский":
+        achievement = Children_achievement.objects.get(id=id)
+        #Проверка на владение записью
+        if achievement.user == request.user:
+            if request.method == "POST" and request.POST['delete_confirmation']:
+                if request.POST['delete_confirmation'] == "delete_accept":
+                    achievement.delete()
+            else:
+                data ={
+                    "achievement": achievement,
+                }
+                return render(request, 'web/page/achievement_delete.html', data)
+    return redirect('profile')
+
+
 def change_favorite(user, service_name, service_id):
     print(user, service_name, service_id)
     service_name_list = ["Специалисты", "Волонтерство", "Нуждаются в помощи", 

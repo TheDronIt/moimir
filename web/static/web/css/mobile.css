@@ -1,0 +1,68 @@
+.mobile-only
+{
+    display: none;
+}
+.desktop-only
+{
+    display: inherit;
+}
+@media screen and (max-width: 980px)
+{
+	#wrapper
+	{
+		margin: 50px 20px;
+	}
+	.desktop-only
+	{
+		display: none;
+	}
+	.mobile-only
+	{
+		display: inherit;
+	}
+	section
+	{
+		margin-bottom: 30px;
+	}
+	section h2
+	{
+		margin-bottom: 5px;
+	}
+
+	.opportunities
+	{
+		display: block;
+	}
+	.opportunities_card
+	{
+		padding: 20px;
+		margin-bottom: 10px;
+	}
+	.index_services
+    {
+    	display: block;
+    	margin-top: 20px;
+    }
+    .index_services_card
+    {
+    	padding: 10px 15px;
+		margin-bottom: 10px;
+    	grid-column-gap: 10px;
+    }
+    .index_services_card img
+    {
+    	width: 25px;
+    }
+	.index_services_card .services_card_right-arrow
+    {
+    	width: 8px;
+    }
+    .index_services_card_contacts
+    {
+    	align-items: flex-start;
+    }
+    .index_services_card_contacts img
+    {
+    	margin-top: 10px;
+    }
+}

@@ -42,11 +42,11 @@
 					</form>
 				{% elif user.profile.account_type == "Работодатель" %}
 					{% if Job.employer.employer == user.profile.employer %}
-					<div class="services_card_employer-button_container">
-						<a href="/job/edit/{{Job.id}}" class="button services_card_employer-button">Редактировать</a>
-						<a href="/job/show-response/{{Job.id}}" class="button services_card_employer-button">Посмотреть отклики</a>
-						<a href="/job/delete/{{Job.id}}" style="color:#F44949; display: block;">Удалить</a>
-					</div>
+						<div class="services_card_employer-button_container">
+							<a href="/job/edit/{{Job.id}}" class="button services_card_employer-button">Редактировать</a>
+							<a href="/job/show-response/{{Job.id}}" class="button services_card_employer-button">Посмотреть отклики</a>
+							<a href="/job/delete/{{Job.id}}" style="color:#F44949; display: block;">Удалить</a>
+						</div>
 					{% endif %}
 				{% endif %}
 			</div>

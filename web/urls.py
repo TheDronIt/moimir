@@ -40,5 +40,6 @@ urlpatterns = [
 	path('portfolio/edit', views.portfolio_edit__page, name='portfolio_edit'),
 	path('achievement/add', views.achievement_add__page, name='achievement_add'),
 	path('achievement/edit/<int:id>', views.achievement_edit__page, name='achievement_edit'),
+	path('achievement/delete/<int:id>', views.achievement_delete__page, name='achievement_delete'),
 	path('search', views.search__page, name='search')
 	]

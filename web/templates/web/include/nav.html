@@ -1,15 +1,18 @@
 {% load static %}
 <nav>
+	<input id="menu__toggle" type="checkbox" />
+	<label class="menu__btn" for="menu__toggle">
+		<span></span>
+	</label>
 	<div class="nav">
 		<div class="nav_top">
 			<div class="nav_top_logo">
 				<a href="/">
 					<b>Мой мир</b><br>
 					Мои возможности
-					
 				</a>
 			</div>
-			<div class="nav_top_link">
+			<div class="nav_top_link desktop-only">
 				<div class="nav_top_contact_container">
 					<span class="link nav_top_contact_text">Контакты</span>
 					<div class="nav_top_contact_block">
@@ -113,12 +116,12 @@
 					</a>
 					{% endif %}
 				{% else %}
-					<a href="{% url 'register' %}" class="button">Регистрация</a>
+					<a href="{% url 'register' %}" class="button desktop-only">Регистрация</a>
 					<a href="{% url 'login' %}" class="button">Войти</a>
 				{% endif %}
 			</div>
 		</div>
-		<div class="nav_menu">
+		<div class="desktop-only nav_menu">
 
 			{% if user.profile.account_type != "Детский" %}
 
@@ -257,5 +260,101 @@
 			{% endif %}
 			-->
 		</div>
+
+		<div class="nav_menu mobile-only">
+			<div class="index_services">
+				<a class="index_services_card" href="{% url 'job' %}">
+					<img src="{% static 'web/img/icons/work_found.svg' %}">
+					<div class="index_services_card_text">
+						<b>Поиск работы</b>
+						<span>Сервис для поиска работы людям с ОВЗ</span>
+					</div>
+					<img src="{% static 'web/img/icons/right_arrow.svg' %}" class="services_card_right-arrow">
+				</a>
+				<a class="index_services_card" href="{% url 'specialist' %}">
+					<img src="{% static 'web/img/icons/education.svg' %}">
+					<div class="index_services_card_text">
+						<b>Поиск специалистов</b>
+						<span>Возможность найти специалиста</span>
+					</div>
+					<img src="{% static 'web/img/icons/right_arrow.svg' %}" class="services_card_right-arrow">
+				</a>
+				<a class="index_services_card" href="{% url 'volunteer' %}">
+					<img src="{% static 'web/img/icons/volunteer.svg' %}">
+					<div class="index_services_card_text">
+						<b>Волонтерство</b>
+						<span>Для тех, кто готов помогать безвозмездно</span>
+					</div>
+					<img src="{% static 'web/img/icons/right_arrow.svg' %}" class="services_card_right-arrow">
+				</a>
+				<a class="index_services_card" href="{% url 'needhelp' %}">
+					<img src="{% static 'web/img/icons/need_help.svg' %}">
+					<div class="index_services_card_text">
+						<b>Нуждаются в помощи</b>
+						<span>Оставьте здесь свою просьбу</span>
+					</div>
+					<img src="{% static 'web/img/icons/right_arrow.svg' %}" class="services_card_right-arrow">
+				</a>
+				<a class="index_services_card" href="{% url 'event' %}">
+					<img src="{% static 'web/img/icons/event.svg' %}">
+					<div class="index_services_card_text">
+						<b>Мероприятия</b>
+						<span>Здесь актуальные мероприятия</span>
+					</div>
+					<img src="{% static 'web/img/icons/right_arrow.svg' %}" class="services_card_right-arrow">
+				</a>
+				<a class="index_services_card" href="{% url 'section' %}">
+					<img src="{% static 'web/img/icons/sections.svg' %}">
+					<div class="index_services_card_text">
+						<b>Секции</b>
+						<span>Раздел с увлечениями для всех</span>
+					</div>
+					<img src="{% static 'web/img/icons/right_arrow.svg' %}" class="services_card_right-arrow">
+				</a>
+				<a class="index_services_card" href="{% url 'section' %}">
+					<img src="{% static 'web/img/icons/news.svg' %}">
+					<div class="index_services_card_text">
+						<b>Новости</b>
+						<span>Будь в курсе всего нового</span>
+					</div>
+					<img src="{% static 'web/img/icons/right_arrow.svg' %}" class="services_card_right-arrow">
+				</a>
+				<!--
+					<a class="index_services_card" href="{% url 'section' %}">
+						<img src="{% static 'web/img/icons/additionally.svg' %}">
+						<div class="index_services_card_text">
+							<b>Полезная информация</b>
+							<span>Раздел с документами</span>
+						</div>
+						<img src="{% static 'web/img/icons/right_arrow.svg' %}" class="services_card_right-arrow">
+					</a>
+				-->
+				<div class="index_services_card index_services_card_contacts">
+					<img src="{% static 'web/img/icons/phone.svg' %}">
+					<div class="index_services_card_text">
+						<b>Контакты</b>
+						<div class="nav_top_contact_mobile_block">
+							<div class="nav_top_contact_mobile_el">
+								<span>Техническая поддержка</span>
+								<a href="#">+7 000 000 00-00</a>
+							</div>
+							<div class="nav_top_contact_mobile_el">
+								<span>Психологическая поддержка</span>
+								<a href="#">+7 000 000 00-00</a>
+							</div>
+							<div class="nav_top_contact_mobile_el">
+								<span>Почта</span>
+								<a href="#">Pochta@mail.ru</a>
+							</div>
+							<div class="nav_top_contact_mobile_el">
+								<span>Наша группа ВК</span>
+								<a href="#">@moimir</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
 	</div>
 </nav>

@@ -73,11 +73,11 @@ class ChildrenProfileUpdateForm(forms.ModelForm):
     surname = forms.CharField(max_length=20, label='Фамилия', widget=forms.TextInput(attrs={'class': 'my_profile_edit_input', 'placeholder': 'Фамилия'}))
     age = forms.IntegerField(label='Возраст', widget=forms.TextInput(attrs={'class': 'my_profile_edit_input', 'placeholder': 'Возраст'}))
     image = forms.ImageField(label='', widget = forms.FileInput(attrs={'class': 'my_profile_edit_file'}))
-    bio = forms.CharField(widget=forms.Textarea(attrs={'class': 'my_profile_edit_textarea', 'placeholder': 'О себе'}))
+    bio = forms.CharField(widget=forms.Textarea(attrs={'class': 'my_profile_edit_textarea', 'placeholder': 'О себе'}), required=False)
 
     class Meta:
         model = Profile
-        fields = ['image','bio']
+        fields = ['name', 'surname', 'age', 'image', 'bio']
 
 
 class PortfolioEditForm(forms.ModelForm):

@@ -21,7 +21,6 @@ section
     display: block;
     margin-bottom: 60px;
 }
-
 #wrapper
 {
     position: relative;
@@ -1112,5 +1111,13 @@ input[type="checkbox"][id^="profile_portfolio"] {
     bottom: 0;
     font-size: 1.4rem;
     color: #3C8BE8;
+}
+.achievement_card_content_delete
+{
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    font-size: 1.4rem;
+    color: #F44949;
 }
 /* END ACHIEVEMENT  */

@@ -11,6 +11,7 @@
 				<span class="achievement_card_content_about">{{achievement.about}}</span>
 				{% if achievement.user.username == user.username %}
 					<a href="/achievement/edit/{{achievement.id}}" class="achievement_card_content_edit">Редактировать</a>
+					<a href="/achievement/delete/{{achievement.id}}" class="achievement_card_content_delete">Удалить</a>
 				{% endif %}
 			</div>
 		</div>

@@ -4,7 +4,8 @@
 {% block content %}
 	<section class="banner">
 		<a href="{% url 'register' %}">
-			<img src="{% static 'web/img/banner.svg' %}">
+			<img src="{% static 'web/img/banner.svg' %}" class="desktop-only">
+			<img src="{% static 'web/img/banner-mobile.svg' %}" class="mobile-only">
 		</a>
 	</section>
 

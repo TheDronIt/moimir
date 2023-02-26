@@ -26,6 +26,7 @@
 					{% endif %}
 				</span>
 			</div>
+			{% if user.profile.account_type != "Детский" %}
 				<div class="my_profile_about_contact">
 					<b>Контакт:</b>
 					<span>
@@ -39,6 +40,7 @@
 						{% endif %}
 					</span>
 				</div>
+			{% endif %}
 		</div>
 		<div class="my_profile_info">
 			<div class="my_profile_info_name">
