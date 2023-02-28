@@ -996,6 +996,10 @@ input[type="checkbox"][id^="profile_portfolio"] {
 #profile_portfolio:checked + label .profile_portfolio_card{ 
     display: grid;
 }
+#profile_portfolio:checked ~ .index_services_card
+{
+    background-color: red;
+}
 
 .profile_portfolio_card
 {

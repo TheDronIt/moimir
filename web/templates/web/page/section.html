@@ -29,19 +29,8 @@
 			<!-- END Добавить пост -->
 		</div>
 		
-
-		<div class="services_filter">
-			<form method="GET">
-				{% csrf_token %}
-
-				{{filter_form}}
-
-				<div class="services_filter_button__container">
-					<button type="submit" class="services_filter_button">Найти</button>
-				</div>
-				
-			</form>
-		</div>
+		{% include 'web/include/service_filter.html' %}
+		
 		<div class="services_content">
 			
 				{% if sections|length == 0 %}

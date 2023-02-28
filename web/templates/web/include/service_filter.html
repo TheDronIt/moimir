@@ -1,0 +1,28 @@
+{% load static %}
+<div class="services_filter desktop-only">
+	<form method="GET">
+		{% csrf_token %}
+		{{filter_form}}
+		<div class="services_filter_button__container">
+			<button type="submit" class="services_filter_button">Найти</button>
+		</div>
+	</form>
+</div>
+
+
+<div class="services_filter_mobile mobile-only">
+	<input id="services_filter_mobile__toggle" type="checkbox" />
+	<label class="services_filter_mobile__btn" for="services_filter_mobile__toggle">
+		<div class="services_filter_mobile_nav">
+			<span><b>Фильтры</b></span>
+			<img src="{% static 'web/img/icons/arrow_down.png' %}" class="services_filter_mobile_nav_arrow">
+		</div>		
+		<form method="GET" class="services_filter_mobile_form">
+			{% csrf_token %}
+			{{filter_form}}
+			<div class="services_filter_button__container">
+				<button type="submit" class="services_filter_mobile_button button">Найти</button>
+			</div>
+		</form>
+	</label>
+</div>

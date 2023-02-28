@@ -10,7 +10,7 @@
 {
 	#wrapper
 	{
-		margin: 50px 20px;
+		margin: 60px 20px;
 	}
 	.desktop-only
 	{
@@ -38,6 +38,10 @@
 		padding: 20px;
 		margin-bottom: 10px;
 	}
+	.opportunities_card img
+	{
+		height: 40%;
+	}
 	.index_services
     {
     	display: block;
@@ -64,5 +68,206 @@
     .index_services_card_contacts img
     {
     	margin-top: 10px;
+    }
+
+
+    .services_block
+    {
+    	display: flex;
+    	flex-direction: column;
+    	grid-gap: 15px;
+    }
+    #services_filter_mobile__toggle, .services_filter_mobile_form
+    {
+    	display: none;
+    }
+    .services_filter_mobile_nav
+    {
+    	display: flex;
+    	justify-content: space-between;
+    	width: 90vw;
+    	margin-bottom: 6px;
+    }
+    .services_filter_mobile_nav img
+    {
+    	width: 20px;
+    	object-fit: cover;
+    }
+    #services_filter_mobile__toggle:checked + label .services_filter_mobile_nav_arrow
+    {
+    	transform: rotate(180deg);
+    }
+    #services_filter_mobile__toggle:checked + label .services_filter_mobile_form
+    {
+    	display: block;
+    }
+    .services_filter_mobile_button
+    {
+    	width: 100%;
+    }
+    .services_card
+    {
+    	padding: 6px 6px 30px 6px;
+    }
+    .services_card_employer, .services_card_user
+    {
+    	grid-template-columns: auto 1fr;
+    	grid-column-gap: 5px;
+    }
+    .services_card_employer_image
+    {
+    	width: 35px;
+    	height: 35px;
+    }
+    .services_card_user_image
+    {
+    	width: 35px;
+    	background: initial;
+    }
+    .services_card_user_image img
+    {
+    	width: 35px;
+    	height: 35px;
+    	border-radius: 100%;
+    }
+    .services_card_user_add-favorite
+    {
+    	left: 0;
+    	top: 40px;
+    }
+    .services_card_user_add-favorite_button img
+    {
+    	border-radius: 0px;
+    }
+    .services_card_employer-button_container
+    {
+    	display: flex;
+    	flex-direction: column;
+    	align-items: inherit;
+    	grid-row-gap: 10px;
+    }
+    .services_card_employer-button
+    {
+    	width: calc(100% - 90px);
+    }
+    .services_search_button
+    {
+    	margin-left: 10px;
+    }
+    .services_search_form
+    {
+    	border-radius: 12px;
+    }
+    .services_search_icon, .services_search_button
+    {
+    	width: 40px;
+    	height: 40px;
+    	border-radius: 12px;	
+    }
+    .news
+    {
+    	grid-gap: 20px;
+    }
+    .news_about_image
+    {
+    	height: auto;
+    }
+    .news_about_image img
+    {
+    	border-radius: 16px;
+    }
+    .news_card img
+    {
+    	height: 220px;
+    }
+
+    .service_add
+    {
+    	display: block;
+    }
+    .service_add_input
+    {
+    	min-width: 0;
+    	max-width: none;
+    	width: auto;
+    }
+    .service_add_form
+    {
+    	display: flex;
+    	padding: 20px;
+    }
+    .job_delete_block, .search__block
+    {
+    	width: auto;
+    	grid-gap: 10px;
+    }
+    .job_responses_title
+    {
+    	margin-bottom: 4px;
+    }
+    .my_profile_block
+    {
+    	grid-template-columns: 1fr;
+    }
+
+    .profile_block
+    {
+    	background: inherit;
+    	margin-top: 120px;
+    	padding: 0;
+    }
+    .my_profile_about_block
+    {
+    	background: #F1F7FF;
+    	padding: 20px;
+    	border-radius: 16px;
+    }
+    .my_profile_about_content
+    {
+    	position: relative;
+    	display: flex;
+    	flex-direction: column;
+    	justify-content: center;
+    }
+    .my_profile_about_block_avatar
+    {
+    	height: 40px;
+    	margin-bottom: 20px;
+    }
+    .my_profile_about_block_avatar img
+    {
+    	position: relative;
+    	left: 30%;
+    	top: -70px;
+    	width: 120px;
+    	height: 120px;
+    	border-radius: 100%;
+    	object-fit: cover;
+    }
+    .my_profile_about_content h2
+    {
+    	font-size: 1.8rem;
+    	font-weight: 600;
+    	text-align: center;
+    	margin: 0;
+    }
+    .my_profile_about_content_username
+    {
+    	text-align: center;
+    	margin-bottom: 10px;
+    }
+
+    .my_profile_service_list
+    {
+    	margin: 30px 0;
+    	height: 50px;
+    }
+    .my_profile_service_list button
+    {
+    	display: none !important;
+    }
+    .my_profile_user_card_input 
+    {
+    	border-radius: 16px;
     }
 }
