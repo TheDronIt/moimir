@@ -18,19 +18,19 @@
 					<div class="nav_top_contact_block">
 						<div class="nav_top_contact_el">
 							<span>Техническая поддержка</span>
-							<a href="#">+7 000 000 00-00</a>
+							<a href="tel:89242275447">+7 924 227-54-47</a>
 						</div>
 						<div class="nav_top_contact_el">
-							<span>Психологическая поддержка</span>
-							<a href="#">+7 000 000 00-00</a>
+							<span>Техническая поддержка</span>
+							<a href="tel:89146872644">+7 914 687-26-44</a>
 						</div>
 						<div class="nav_top_contact_el">
 							<span>Почта</span>
-							<a href="#">Pochta@mail.ru</a>
+							<a href="mailto:moimir-vozmojnosti@internet.ru">moimir-vozmojnosti@internet.ru</a>
 						</div>
 						<div class="nav_top_contact_el">
 							<span>Наша группа ВК</span>
-							<a href="#">@moimir</a>
+							<a href="https://vk.com/vozmojnostiru" target="_blank">@vozmojnostiru</a>
 						</div>
 					</div>
 				</div>
@@ -263,6 +263,10 @@
 	</div>
 
 
+
+
+
+
 	<div class="nav_top mobile-only">
 		<a href="/" class="nav_top_brand_mobile">
 			<b>Мой мир</b><br>
@@ -292,6 +296,40 @@
 								<a href="{% url 'response' %}" class="nav_top_link_profile_menu_personal_el">
 									<img src="{% static 'web/img/icons/response.svg' %}" class="nav_top_link_profile_menu_personal_el_icon">
 									<span class="nav_top_link_profile_menu_personal_el_title">Отклики на вакансии</span>
+									<img src="{% static 'web/img/icons/arrow_right.svg' %}" class="nav_top_link_profile_menu_personal_el_arrow">
+								</a>
+								<a href="{% url 'logout' %}" class="nav_top_link_profile_menu_personal_el">
+									<img src="{% static 'web/img/icons/logout.svg' %}" class="nav_top_link_profile_menu_personal_el_icon">
+									<span class="nav_top_link_profile_menu_personal_el_title" style="color:red;">Выйти</span>
+								</a>
+							</div>
+						{% elif user.profile.account_type == "Работодатель" %}
+							<div class="nav_top_link_profile_menu_personal_block">
+								<a href="{% url 'profile' %}" class="nav_top_link_profile_menu_personal_el">
+									<img src="{% static 'web/img/icons/star.svg' %}" class="nav_top_link_profile_menu_personal_el_icon">
+									<span class="nav_top_link_profile_menu_personal_el_title">Личный кабинет</span>
+									<img src="{% static 'web/img/icons/arrow_right.svg' %}" class="nav_top_link_profile_menu_personal_el_arrow">
+								</a>
+								<a href="{% url 'favorite' %}" class="nav_top_link_profile_menu_personal_el">
+									<img src="{% static 'web/img/icons/save.svg' %}" class="nav_top_link_profile_menu_personal_el_icon">
+									<span class="nav_top_link_profile_menu_personal_el_title">Закладки</span>
+									<img src="{% static 'web/img/icons/arrow_right.svg' %}" class="nav_top_link_profile_menu_personal_el_arrow">
+								</a>
+								<a href="{% url 'logout' %}" class="nav_top_link_profile_menu_personal_el">
+									<img src="{% static 'web/img/icons/logout.svg' %}" class="nav_top_link_profile_menu_personal_el_icon">
+									<span class="nav_top_link_profile_menu_personal_el_title" style="color:red;">Выйти</span>
+								</a>
+							</div>
+						{% elif user.profile.account_type == "Детский" %}
+							<div class="nav_top_link_profile_menu_personal_block">
+								<a href="{% url 'profile' %}" class="nav_top_link_profile_menu_personal_el">
+									<img src="{% static 'web/img/icons/star.svg' %}" class="nav_top_link_profile_menu_personal_el_icon">
+									<span class="nav_top_link_profile_menu_personal_el_title">Личный кабинет</span>
+									<img src="{% static 'web/img/icons/arrow_right.svg' %}" class="nav_top_link_profile_menu_personal_el_arrow">
+								</a>
+								<a href="{% url 'favorite' %}" class="nav_top_link_profile_menu_personal_el">
+									<img src="{% static 'web/img/icons/save.svg' %}" class="nav_top_link_profile_menu_personal_el_icon">
+									<span class="nav_top_link_profile_menu_personal_el_title">Закладки</span>
 									<img src="{% static 'web/img/icons/arrow_right.svg' %}" class="nav_top_link_profile_menu_personal_el_arrow">
 								</a>
 								<a href="{% url 'logout' %}" class="nav_top_link_profile_menu_personal_el">
@@ -384,19 +422,19 @@
 						<div class="nav_top_contact_mobile_block">
 							<div class="nav_top_contact_mobile_el">
 								<span>Техническая поддержка</span>
-								<a href="#">+7 000 000 00-00</a>
+								<a href="tel:89242275447">+7 924 227-54-47</a>
 							</div>
 							<div class="nav_top_contact_mobile_el">
 								<span>Психологическая поддержка</span>
-								<a href="#">+7 000 000 00-00</a>
+								<a href="tel:79146872644">+7 914 687-26-44</a>
 							</div>
 							<div class="nav_top_contact_mobile_el">
 								<span>Почта</span>
-								<a href="#">Pochta@mail.ru</a>
+								<a href="mailto:moimir-vozmojnosti@internet.ru">moimir-vozmojnosti@internet.ru</a>
 							</div>
 							<div class="nav_top_contact_mobile_el">
 								<span>Наша группа ВК</span>
-								<a href="#">@moimir</a>
+								<a href="https://vk.com/vozmojnostiru">@vozmojnostiru</a>
 							</div>
 						</div>
 					</div>

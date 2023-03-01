@@ -6,8 +6,8 @@ nav
 }
 .nav
 {
-	display: grid;
-	grid-gap: 20px;
+	/*display: grid;
+	grid-gap: 20px;*/
 	max-width: 1100px;
 	margin: auto;
 }
@@ -15,6 +15,7 @@ nav
 {
 	display: grid;
 	grid-template-columns: 1fr auto;
+	margin-bottom: 20px;
 }
 .nav_top_logo
 {
@@ -30,8 +31,6 @@ nav
 }
 .nav_menu
 {
-	position: relative;
-	z-index: 100;
 	display: grid;
 	grid-template-columns: repeat(auto-fit, 120px);
 	grid-gap: 20px;
@@ -223,7 +222,7 @@ nav
 	display: flex;
 	align-items: center;
 	position: fixed;
-	top: 14px;
+	top: 5px;
 	left: 10px;
 	width: 35px;
 	height: 36px;
@@ -382,7 +381,7 @@ nav
 	}
 	.nav_top_link_profile_menu_personal_el_icon
 	{
-		width: 20px;
+		height: 20px;
 	}
 	.nav_top_link_profile_menu_personal_el_arrow
 	{

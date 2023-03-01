@@ -270,4 +270,129 @@
     {
     	border-radius: 16px;
     }
+
+
+    #profile_portfolio_mobile{
+    	display: none;
+	}
+	#profile_portfolio_mobile:checked + label .profile_portfolio_arrow_mobile{ 
+	    transform: rotate(180deg);
+	}
+	#profile_portfolio_mobile:checked + label .profile_portfolio_card_mobile{ 
+	    display: grid;
+	}
+	.profile_portfolio_card_mobile
+	{
+		display: none;
+		margin-top: 10px;
+	}
+	.profile_portfolio_arrow_mobile
+	{
+	    cursor: pointer;
+	    height: 15px;
+	}
+
+	.portfolio_block
+	{
+		display: flex;
+		flex-direction: column;
+		grid-gap: 10px;
+		padding: 15px;
+	}
+	.portfolio_side_image
+	{
+		grid-row: 2;
+	}
+	.profile_portfolio
+	{
+		display: flex;
+		flex-direction: column;
+	}
+	.portfolio_side_image
+	{
+		margin: auto;
+	}
+	.portfolio_block h2, .portfolio_block h3
+	{
+		margin: 0;
+		font-size: 1.8rem;
+	}
+	.portfolio_section
+	{
+		margin-bottom: 0;
+	}
+
+	.my_profile_about_contact
+	{
+		background: #F1F7FF;
+		border-radius: 16px;
+		padding: 20px;
+		margin-top: 20px;
+		display: flex;
+		flex-direction: column;
+		grid-row-gap: 10px;
+	}
+	.my_profile_about_contact_el b
+	{
+		display: block;
+	}
+	.profile_block .services_card
+	{
+		margin: 20px 0;
+	}
+	.achievement_card
+	{
+		grid-template-columns: 1fr;
+	}
+	.achievement_card_image 
+	{
+		margin: auto;
+	}
+	.my_profile_user_block .services_card
+	{
+		padding: 10px;
+	}
+	.achievement_card_content_about
+	{
+		margin-bottom: 25px;
+	}
+	.my_profile_edit_input
+	{
+		width: auto;
+		min-width: 100px;
+		max-width: none;
+	}
+	.my_profile_user_card_label
+	{
+		grid-gap: 0;
+	}
+	.auth_base_card
+	{
+		padding: 15px;
+	}
+	.auth_form_input
+	{
+		min-width: 100px;
+		width: auto;
+	}
+	.auth_base_card h1
+	{
+		font-size: 2rem;
+		margin-bottom: 10px;
+	}
+	.auth_form_choise div
+	{
+		font-size: 1.3rem;
+		padding: 0;
+	}
+	#id_account_type div label
+	{
+		padding: 5px 10px;
+		border-radius: 10px;
+	}
+	.auth_form_help_banner
+	{
+		left: -2px;
+		padding: 10px;
+	}
 }
