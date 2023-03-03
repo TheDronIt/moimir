@@ -797,7 +797,6 @@ def response__page(request):
 def portfolio__page(request):
     if request.user.profile.account_type == "Пользователь":
         portfolio = User_portfolio.objects.get(user=request.user)
-        print(portfolio)
         pass
 
 
@@ -852,7 +851,6 @@ def achievement_add__page(request):
     if request.user.profile.account_type == "Детский":
         if request.method == 'POST':
             form = AchievementEditForm(request.POST, request.FILES)
-            print(request.POST, request.FILES)
             if form.is_valid():
                 updated_form = form.save(commit=False)
                 updated_form.user = request.user
@@ -870,7 +868,6 @@ def achievement_add__page(request):
 
 def achievement_edit__page(request, id):
     achievement = Children_achievement.objects.get(id=id)
-    print(achievement)
 
     #Проверка на владение записью
     if achievement.user == request.user:
@@ -905,15 +902,22 @@ def achievement_delete__page(request, id):
     return redirect('profile')
 
 
+def about_project__page(request):
+    data = {}
+    return render(request, 'web/page/about_project.html', data)
+
+
+def privacy__page(request):
+    data = {}
+    return render(request, 'web/page/privacy.html', data)
+
+
 def change_favorite(user, service_name, service_id):
-    print(user, service_name, service_id)
     service_name_list = ["Специалисты", "Волонтерство", "Нуждаются в помощи", 
                         "Мероприятия", "Секции"]
     try:
-        user = User.objects.get(username=user)
-        print(user)
+        user = User.objects.get(username=user) 
         favorite = Favorite.objects.filter(user=user, service_name=service_name, service_id=service_id)
-        print(favorite)
         if service_name in service_name_list:
             if len(favorite) == 0:
                 Favorite(user=user, service_name=service_name, service_id=int(service_id)).save()

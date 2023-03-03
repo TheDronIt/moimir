@@ -37,8 +37,7 @@ def user_register(request):
                 #username = u_form.cleaned_data.get('username')
                 #messages.success(request, f'Создан аккаунт {username}!')
                 return redirect('login')
-            else:
-                print("Error")
+
         else:
             u_form = UserRegisterForm()
             p_form = ProfileRegisterForm()
@@ -61,14 +60,11 @@ def user_login(request):
                 user = authenticate(username=cd['username'], password=cd['password'])
                 if user is not None:
                     if user.is_active:
-                        login(request, user)
-                        print("Авторизация успешна")
+                        login(request, user) 
                         return redirect('profile')
                     else:
-                        print("Не активен")
                         return HttpResponse('Disabled account')     
                 else:
-                    print("Неправильно")
                     return HttpResponse('Invalid login')
         else:
             form = UserLoginForm()
@@ -128,8 +124,6 @@ def profile_edit(request):
             p_form.save()
             #messages.success(request, f'Ваш профиль успешно обновлен.')
             return redirect('profile')
-        else:
-            print(u_form.errors, p_form.errors)
 
     else:
         u_form = UserUpdateForm(instance=request.user)

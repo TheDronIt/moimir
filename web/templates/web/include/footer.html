@@ -30,19 +30,19 @@
 		</div>
 		<div class="footer_for-user">
 			<b class="footer_headline">Пользователям</b>
-			<a href="#">Поиск работы</a>
-			<a href="#">Нуждаются в помощи</a>
-			<a href="#">Поиск специалистов</a>
-			<a href="#">Мероприятия</a>
-			<a href="#">Волонтерство</a>
-			<a href="#">Полезная информация</a>
-			<a href="#">Детские секции</a>
-			<a href="#">Новости</a>
+			<a href="{% url 'job' %}">Поиск работы</a>
+			<a href="{% url 'needhelp' %}">Нуждаются в помощи</a>
+			<a href="{% url 'specialist' %}">Поиск специалистов</a>
+			<a href="{% url 'event' %}">Мероприятия</a>
+			<a href="{% url 'volunteer' %}">Волонтерство</a>
+			<a href="{% url 'section' %}">Детские секции</a>
+			<a href="{% url 'info' %}">Полезная информация</a>
+			<a href="{% url 'news' %}">Новости</a>
 		</div>
 		<div class="footer_about">
 			<b class="footer_headline">О сервисе</b>
-			<a href="#">Информация о проекте</a>
-			<a href="#">Пользовательское соглашение</a>
+			<a href="{% url 'about_project' %}">Информация о проекте</a>
+			<a href="{% url 'privacy' %}">Пользовательское соглашение</a>
 			<a href="" class="footer_site-by">Сайт сделан: <b>WaerGroup</b></a>
 		</div>
 	</section>
